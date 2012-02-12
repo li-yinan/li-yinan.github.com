@@ -22,6 +22,18 @@ function main(){
 		//手动，可玩
 				interret = setInterval('while(!snakePhysics.move()){};', 100);
 		}
+		if(document.addEventListener){
+				document.addEventListener("keydown",switherCtrl,false);
+		}else if(document.attachEvent){
+				document.attachEvent("onkeydown",switherCtrl);
+		}
+
+}
+function switcherCtrl(evt){
+		console.log(evt.keyCode);
+		//if(evt.keyCode == ){
+
+		//}
 
 }
 window.onload = main;
