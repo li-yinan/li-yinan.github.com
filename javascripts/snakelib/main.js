@@ -12,8 +12,8 @@ function main(){
 		snakeRender.drawSnake();
 		snakePhysics.generateFruit();
 
-		var interret;
-		var switcher = 2;
+		//var interret;
+		//switcher = 2;
 
 		if(switcher==1){
 		//自由游走，演示
@@ -31,9 +31,15 @@ function main(){
 }
 function switcherCtrl(evt){
 		console.log(evt.keyCode);
-		//if(evt.keyCode == ){
-
-		//}
+		clearInterval(interret);
+		if(evt.keyCode == 32){
+				if(swither == 1){
+						swither = 2;
+				}else{
+						swither = 1;
+				}
+				main();
+		}
 
 }
 window.onload = main;
