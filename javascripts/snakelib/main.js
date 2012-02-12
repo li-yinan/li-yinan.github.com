@@ -32,10 +32,10 @@ function switcherCtrl(evt){
 		//console.log(evt.keyCode);
 		if(evt.keyCode == 32){
 				clearInterval(interret);
-				if(swither == 1){
-						swither = 2;
+				if(switcher == 1){
+						switcher = 2;
 				}else{
-						swither = 1;
+						switcher = 1;
 				}
 				main();
 		}
