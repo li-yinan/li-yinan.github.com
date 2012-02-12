@@ -1,0 +1,31 @@
+#effect{
+	margin:0px;
+	padding:0px;
+}
+.left{
+	float:left;
+	height:0px;
+	width:0px;
+	border:solid 10px #ffffff;
+	border-right-color:#aaaaaa;
+	border-width:14px 0px 6px 50px;
+}
+
+.right{
+	float:left;
+	height:0px;
+	width:0px;
+	border:solid 10px #ffffff;
+	border-left-color:#aaaaaa;
+	border-width:6px 50px 14px 0px;
+}
+
+:target .left {
+	-webkit-transition:border 0.04s linear;
+	border-width:14px 50px 6px 0px;
+}
+
+:target .right {
+	-webkit-transition:border 0.04s linear;
+	border-width:6px 0px 14px 50px;
+}

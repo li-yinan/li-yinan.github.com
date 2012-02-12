@@ -1,0 +1,14 @@
+body,a,p,div,canvas,span {
+		padding:0px;
+		margin:0px;
+		font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+canvas {
+		margin:20px auto auto auto;
+		display:block;
+}
+
+#controll {
+		margin:0px auto auto auto;
+		width:500px;
+}
