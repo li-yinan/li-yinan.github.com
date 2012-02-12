@@ -29,9 +29,9 @@ function main(){
 
 }
 function switcherCtrl(evt){
-		console.log(evt.keyCode);
-		clearInterval(interret);
+		//console.log(evt.keyCode);
 		if(evt.keyCode == 32){
+				clearInterval(interret);
 				if(swither == 1){
 						swither = 2;
 				}else{
