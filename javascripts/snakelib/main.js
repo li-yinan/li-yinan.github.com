@@ -13,7 +13,7 @@ function main(){
 		snakePhysics.generateFruit();
 
 		var interret;
-		var switcher = 1;
+		var switcher = 2;
 
 		if(switcher==1){
 		//自由游走，演示
