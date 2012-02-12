@@ -13,7 +13,8 @@ function main(){
 		snakePhysics.generateFruit();
 
 		var interret;
-		var switcher = 2;
+		var switcher = 1;
+
 		if(switcher==1){
 		//自由游走，演示
 				interret = setInterval('while(!snakePhysics.move(parseInt(Math.random()*4))){};', 100);
