@@ -13,7 +13,6 @@ function main(){
 		snakePhysics.generateFruit();
 
 		//var interret;
-		//switcher = 2;
 
 		if(switcher==1){
 		//自由游走，演示
@@ -42,4 +41,5 @@ function switcherCtrl(evt){
 		}
 
 }
+switcher = 1;
 window.onload = main;
