@@ -23,9 +23,9 @@ function main(){
 				interret = setInterval('while(!snakePhysics.move()){};', 100);
 		}
 		if(document.addEventListener){
-				document.addEventListener("keydown",switherCtrl,false);
+				document.addEventListener("keydown",switcherCtrl,false);
 		}else if(document.attachEvent){
-				document.attachEvent("onkeydown",switherCtrl);
+				document.attachEvent("onkeydown",switcherCtrl);
 		}
 
 }
