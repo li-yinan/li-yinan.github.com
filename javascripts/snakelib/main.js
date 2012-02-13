@@ -16,7 +16,7 @@ function main(){
 
 		if(switcher==1){
 		//自由游走，演示
-				interret = setInterval('while(!snakePhysics.move(parseInt(Math.random()*4))){};', 100);
+				interret = setInterval('freewalk();', 100);
 		}else if(switcher==2){
 		//手动，可玩
 				interret = setInterval('while(!snakePhysics.move()){};', 100);
@@ -28,6 +28,11 @@ function main(){
 		}
 
 }
+
+function freewalk(){
+	while(!snakePhysics.move(parseInt(Math.random()*4))){};
+}
+
 function switcherCtrl(evt){
 		//console.log(evt.keyCode);
 		if(evt.keyCode == 32){
