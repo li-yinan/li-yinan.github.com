@@ -42,7 +42,7 @@ function freewalk(){
 		direction = directionX>0?1:3;
 	}else{
 		//向y方向移动
-		direction = directionY>0?0:2;
+		direction = directionY>0?2:0;
 	}
 
 	while(!snakePhysics.move(direction)){
