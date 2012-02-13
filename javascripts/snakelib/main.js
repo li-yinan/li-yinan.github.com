@@ -16,7 +16,7 @@ function main(){
 
 		if(switcher==1){
 		//自由游走，演示
-				interret = setInterval('freewalk();', 100);
+				interret = setInterval('snakePhysics.freewalk();', 100);
 		}else if(switcher==2){
 		//手动，可玩
 				interret = setInterval('while(!snakePhysics.move()){};', 100);
@@ -27,29 +27,6 @@ function main(){
 				document.attachEvent("onkeydown",switcherCtrl);
 		}
 
-}
-
-function freewalk(){
-	var fruit = snakePhysics.getFruit();
-	var body = snakePhysics.getBody();
-	var head = body[0];
-
-	var directionX = fruit.x-head.x;
-	var directionY = fruit.y-head.y;
-
-	//if(Math.abs(directionX)>Math.abs(directionY)){
-	//优先x方向移动
-	if(Math.abs(directionX)>0){
-		//向x方向移动
-		direction = directionX>0?1:3;
-	}else{
-		//向y方向移动
-		direction = directionY>0?2:0;
-	}
-
-	while(!snakePhysics.move(direction)){
-		direction = parseInt(Math.random()*4);
-	};
 }
 
 function switcherCtrl(evt){

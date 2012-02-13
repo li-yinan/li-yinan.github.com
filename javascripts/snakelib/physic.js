@@ -294,6 +294,7 @@ physics.snake.prototype.generateFruit = function(){
 		var snakeRender = this.getSnakeRender();
 		snakeRender.drawFruit();
 };
+
 physics.snake.prototype.detectFruit = function(){
 		var body = this.getBody();
 		var fruit = this.getFruit();
@@ -302,3 +303,27 @@ physics.snake.prototype.detectFruit = function(){
 				this.generateFruit();
 		}
 };
+
+physics.snake.prototype.freewalk = function(){
+	var fruit = this.getFruit();
+	var body = this.getBody();
+	var head = body[0];
+
+	var directionX = fruit.x-head.x;
+	var directionY = fruit.y-head.y;
+	var direction;
+
+	//if(Math.abs(directionX)>Math.abs(directionY)){
+	//优先x方向移动
+	if(Math.abs(directionX)>0){
+		//向x方向移动
+		direction = directionX>0?1:3;
+	}else{
+		//向y方向移动
+		direction = directionY>0?2:0;
+	}
+
+	while(!this.move(direction)){
+		direction = parseInt(Math.random()*4);
+	};
+}
