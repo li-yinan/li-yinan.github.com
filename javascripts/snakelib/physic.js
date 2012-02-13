@@ -167,13 +167,13 @@ physics.snake.prototype.collision = function(direction){
 		switch(direction){
 				case('up'):
 				case(0):
-						y--;break;
+						y++;break;
 				case('right'):
 				case(1):
 						x++;break;
 				case('down'):
 				case(2):
-						y++;break;
+						y--;break;
 				case('left'):
 				case(3):
 						x--;break;
@@ -304,6 +304,12 @@ physics.snake.prototype.detectFruit = function(){
 		}
 };
 
+
+/**
+ * @brief 自动寻找果实，向果实方向移动一格
+ *
+ * @return 
+ */
 physics.snake.prototype.freewalk = function(){
 	var fruit = this.getFruit();
 	var body = this.getBody();
@@ -311,7 +317,7 @@ physics.snake.prototype.freewalk = function(){
 
 	var directionX = fruit.x-head.x;
 	var directionY = fruit.y-head.y;
-	var direction;
+	var direction = 0;
 
 	//if(Math.abs(directionX)>Math.abs(directionY)){
 	//优先x方向移动
@@ -324,6 +330,7 @@ physics.snake.prototype.freewalk = function(){
 	}
 
 	while(!this.move(direction)){
+		//碰撞之后的策略
 		direction = parseInt(Math.random()*4);
 	};
 }
