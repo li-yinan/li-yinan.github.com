@@ -33,7 +33,42 @@ function freewalk(){
 	var fruit = snakePhysics.getFruit();
 	var body = snakePhysics.getBody();
 	var head = body[0];
-	while(!snakePhysics.move(parseInt(Math.random()*4))){};
+
+	var directionX = fruit.x-head.x;
+	var directionY = fruit.y-head.y;
+
+	var rand1 = Math.random();
+	var tend = Math.abs(directionX)/(Math.abs(directionX)+Math.abs(directionY));
+	if(rand1>0.3){
+		if(Math.random()<tend){
+			direction = directionX>0?1:3;
+		}else{
+			direction = directionY>0?0:2;
+		}
+	}else{
+		if(Math.random()<0.5){
+			direction = directionX<0?1:3;
+		}else{
+			direction = directionY<0?0:2;
+		}
+	}
+	while(!snakePhysics.move(direction)){
+		var rand1 = Math.random();
+		var tend = Math.abs(directionX)/(Math.abs(directionX)+Math.abs(directionY));
+		if(rand1>0.3){
+			if(Math.random()<tend){
+				direction = directionX>0?1:3;
+			}else{
+				direction = directionY>0?0:2;
+			}
+		}else{
+			if(Math.random()<0.5){
+				direction = directionX<0?1:3;
+			}else{
+				direction = directionY<0?0:2;
+			}
+		}
+	};
 }
 
 function switcherCtrl(evt){
