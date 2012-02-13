@@ -43,13 +43,13 @@ function freewalk(){
 		if(Math.random()<tend){
 			direction = directionX>0?1:3;
 		}else{
-			direction = directionY>0?0:2;
+			direction = directionY<0?0:2;
 		}
 	}else{
 		if(Math.random()<0.5){
 			direction = directionX<0?1:3;
 		}else{
-			direction = directionY<0?0:2;
+			direction = directionY>0?0:2;
 		}
 	}
 	while(!snakePhysics.move(direction)){
@@ -57,15 +57,15 @@ function freewalk(){
 		var tend = Math.abs(directionX)/(Math.abs(directionX)+Math.abs(directionY));
 		if(rand1>0.3){
 			if(Math.random()<tend){
-				direction = directionX<0?1:3;
-			}else{
-				direction = directionY>0?0:2;
-			}
-		}else{
-			if(Math.random()<0.5){
 				direction = directionX>0?1:3;
 			}else{
 				direction = directionY<0?0:2;
+			}
+		}else{
+			if(Math.random()<0.5){
+				direction = directionX<0?1:3;
+			}else{
+				direction = directionY>0?0:2;
 			}
 		}
 	};
