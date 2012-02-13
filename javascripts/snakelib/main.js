@@ -30,6 +30,9 @@ function main(){
 }
 
 function freewalk(){
+	var fruit = snakePhysics.getFruit();
+	var body = snakePhysics.getBody();
+	var head = body[0];
 	while(!snakePhysics.move(parseInt(Math.random()*4))){};
 }
 
