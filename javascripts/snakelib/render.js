@@ -150,7 +150,6 @@ render.snake.prototype.drawBody = function(){
  * @return 
  */
 render.snake.prototype.drawFruit = function(){
-		var body = this.snakePhysics.getBody();
 		var fruit = this.snakePhysics.getFruit();
 		var gridWidth = this.screenRender.gridWidth;
 		this.cxt.fillStyle = "#ff0000";

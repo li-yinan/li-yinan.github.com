@@ -130,6 +130,11 @@ physics.snake.prototype.setFruit = function(fruit){
 		this.fruit = fruit;
 };
 
+physics.snake.prototype.setFruitPtr = function(x,y){
+		this.fruit.x = x;
+		this.fruit.y = y;
+};
+
 physics.snake.prototype.getFruit= function(){
 		return this.fruit;
 };
@@ -296,7 +301,8 @@ physics.snake.prototype.generateFruit = function(){
 						generateSuccess = true;
 				}
 		}
-		this.setFruit({x:x,y:y});
+		this.setFruitPtr(x,y);
+		//this.setFruit({x:x,y:y});
 		//console.log(this.getFruit());
 		var snakeRender = this.getSnakeRender();
 		snakeRender.drawFruit();
