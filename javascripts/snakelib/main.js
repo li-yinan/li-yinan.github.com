@@ -37,7 +37,9 @@ function freewalk(){
 	var directionX = fruit.x-head.x;
 	var directionY = fruit.y-head.y;
 
-	if(Math.abs(directionX)>Math.abs(directionY)){
+	//if(Math.abs(directionX)>Math.abs(directionY)){
+	//优先x方向移动
+	if(Math.abs(directionX)>0){
 		//向x方向移动
 		direction = directionX>0?1:3;
 	}else{
