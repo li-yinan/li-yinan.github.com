@@ -167,13 +167,13 @@ physics.snake.prototype.collision = function(direction){
 		switch(direction){
 				case('up'):
 				case(0):
-						y++;break;
+						y--;break;
 				case('right'):
 				case(1):
 						x++;break;
 				case('down'):
 				case(2):
-						y--;break;
+						y++;break;
 				case('left'):
 				case(3):
 						x--;break;
