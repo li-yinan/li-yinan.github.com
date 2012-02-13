@@ -8,7 +8,7 @@ physics = {};
  */
 physics.snake = function(){
 		//身体坐标
-		snake = this;
+		var snake = this;
 		this.body = [];
 		this.history = {};
 		this.screenRender = {};
@@ -16,9 +16,59 @@ physics.snake = function(){
 		this.collisionTimes = 0;
 		this.initialCoordination = [{x:10,y:10},{x:11,y:10},{x:12,y:10},{x:13,y:10},{x:14,y:10}];
 		this.setBody(this.initialCoordination);
-		this.eventManager();
 		this.direction = "left";
 		this.fruit = {x:0,y:0};
+		/**
+		 * @brief 用户输入回调函数，设置下次刷新时行进方向
+		 *
+		 * @param evt
+		 *
+		 * @return 
+		 */
+		this.keyCtrl = function(evt){
+				var keyCode = evt.keyCode;
+				//console.log(evt.keyCode);
+				//up:38;right:39;down:40;left:37;
+				switch(keyCode){
+						case 38:{
+										//snake.move("up");
+										if(snake.getDirection()=="down"){
+												snake.setDirection("down");
+										}else{
+												snake.setDirection("up");
+										}
+										break;
+								};
+						case 39:{
+										//snake.move("right");
+										if(snake.getDirection()=="left"){
+												snake.setDirection("left");
+										}else{
+												snake.setDirection("right");
+										}
+										break;
+								};
+						case 40:{
+										//snake.move("down");
+										if(snake.getDirection()=="up"){
+												snake.setDirection("up");
+										}else{
+												snake.setDirection("down");
+										}
+										break;
+								};
+						case 37:{
+										//snake.move("left");
+										if(snake.getDirection()=="right"){
+												snake.setDirection("right");
+										}else{
+												snake.setDirection("left");
+										}
+										break;
+								};
+				};
+		};
+		this.eventManager();
 };
 
 /**
@@ -220,49 +270,6 @@ physics.snake.prototype.eventManager = function(){
 
 };
 
-physics.snake.prototype.keyCtrl = function(evt){
-		var keyCode = evt.keyCode;
-		//console.log(evt.keyCode);
-		//up:38;right:39;down:40;left:37;
-		switch(keyCode){
-				case 38:{
-								//snake.move("up");
-								if(snake.getDirection()=="down"){
-										snake.setDirection("down");
-								}else{
-										snake.setDirection("up");
-								}
-								break;
-						};
-				case 39:{
-								//snake.move("right");
-								if(snake.getDirection()=="left"){
-										snake.setDirection("left");
-								}else{
-										snake.setDirection("right");
-								}
-								break;
-						};
-				case 40:{
-								//snake.move("down");
-								if(snake.getDirection()=="up"){
-										snake.setDirection("up");
-								}else{
-										snake.setDirection("down");
-								}
-								break;
-						};
-				case 37:{
-								//snake.move("left");
-								if(snake.getDirection()=="right"){
-										snake.setDirection("right");
-								}else{
-										snake.setDirection("left");
-								}
-								break;
-						};
-		};
-};
 
 /**
  * @brief 随机生成果实
