@@ -172,15 +172,15 @@ physics.snake.prototype.move = function(direction){
 		var body = this.getBody();
 		var history = this.getHistory();
 		var length = body.length;
-		var temp = {};
+		var temp = {x:body[0].x,y:body[0].y};
 
 		this.setHistory(body[length-1]);
-		temp.x = body[0].x;
-		temp.y = body[0].y;
+		//temp.x = body[0].x;
+		//temp.y = body[0].y;
 
-		for(var i=length-1; i>0; i--){
-				body[i] = body[i-1];
-		}
+		//for(var i=length-1; i>0; i--){
+		//		body[i] = body[i-1];
+		//}
 
 		switch(direction){
 				case('up'):
@@ -196,7 +196,9 @@ physics.snake.prototype.move = function(direction){
 				case(3):
 						temp.x--;break;
 		}
-		body[0] = temp;
+		//body[0] = temp;
+		body.unshift(temp);
+		body.length = length;
 
 		//调用render进行渲染
 		var snakeRender = this.getSnakeRender();
