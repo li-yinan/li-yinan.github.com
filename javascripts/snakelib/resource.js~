@@ -1,0 +1,5 @@
+Resource = function(){
+	this.fruit = new Fruit();
+	this.snake = [];
+};
+
