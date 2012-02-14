@@ -69,9 +69,10 @@ render.screen.prototype.drawOneGrid = function(coordinate){
 		var gridWidth = this.gridWidth;
 		var x = coordinate.x*gridWidth;
 		var y = coordinate.y*gridWidth;
+		var cxt = this.cxt;
 		//随机颜色
-		this.cxt.fillStyle = render.toolkit.getRandomColor(1);
-		this.cxt.fillRect(x, y, this.gridWidth*0.7, this.gridWidth*0.7);
+		cxt.fillStyle = render.toolkit.getRandomColor(1);
+		cxt.fillRect(x, y, gridWidth*0.7, gridWidth*0.7);
 };
 
 /**
@@ -133,7 +134,7 @@ render.snake.prototype.drawBody = function(){
 
 		//如果生成的果实不在尾部，就对走过的路线进行复原
 		if(!(fruit.x == history.x && fruit.y == history.y)){
-				this.screenRender.drawOneGrid(history);
+			this.screenRender.drawOneGrid(history);
 		}
 		for(var i=1; i<body.length; i++){
 				var x = body[i].x*gridWidth;

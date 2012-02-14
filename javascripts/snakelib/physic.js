@@ -10,12 +10,12 @@ physics.snake = function(){
 		//身体坐标
 		var snake = this;
 		this.body = [];
-		this.history = {};
 		this.screenRender = {};
 		this.snakeRender = {};
 		this.collisionTimes = 0;
 		this.initialCoordination = [{x:10,y:10},{x:11,y:10},{x:12,y:10},{x:13,y:10},{x:14,y:10}];
 		this.setBody(this.initialCoordination);
+		this.history = this.body[this.body.length-1];
 		this.direction = "left";
 		this.fruit = {x:0,y:0};
 		/**
@@ -175,12 +175,6 @@ physics.snake.prototype.move = function(direction){
 		var temp = {x:body[0].x,y:body[0].y};
 
 		this.setHistory(body[length-1]);
-		//temp.x = body[0].x;
-		//temp.y = body[0].y;
-
-		//for(var i=length-1; i>0; i--){
-		//		body[i] = body[i-1];
-		//}
 
 		switch(direction){
 				case('up'):
