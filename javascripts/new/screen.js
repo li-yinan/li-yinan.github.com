@@ -19,7 +19,9 @@ Screen = function(resource, canvas, numX, numY){
 	var Render = function(){
 		var _x = canvas.width;
 		var _y = canvas.height;
-		var _gridWidth = _x/numX;
+		var _numX = _physics.getNumX();
+		var _numY = _physics.getNumY();
+		var _gridWidth = _x/_numX;
 		var _cxt = canvas.getContext("2d");
 
 		this.getCxt = function(){
@@ -28,7 +30,24 @@ Screen = function(resource, canvas, numX, numY){
 		
 		this.getGridWidth = function(){
 			return _gridWidth;
-		}
+		};
+
+		this.createGrid = function(){
+			for(var i=0; i<_numX; i++){
+				for(var j=0; j<_numY; j++){
+					this.drawOneGrid(i, j);
+				}
+			}
+
+		};
+
+		this.drawOneGrid = function(coordinateX, coordinateY){
+			var x = coordinateX*_gridWidth;
+			var y = coordinateY*_gridWidth;
+			//随机颜色
+			_cxt.fillStyle = toolkit.getRandomColor(1);
+			_cxt.fillRect(x, y, _gridWidth*0.7, _gridWidth*0.7);
+		};
 	};
 	_physics = new Physics(numX, numY);
 	_render = new Render();

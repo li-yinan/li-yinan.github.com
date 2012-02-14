@@ -2,7 +2,7 @@ Resource = function(){
 	var _fruit = new Fruit(this);
 	var _snake = [new Snake(this)];
 	var _canvas = document.getElementById("canvas");
-	var _screen = new Screen(this,canvas,16,12);
+	var _screen = new Screen(this,canvas,40,30);
 	//this.world = new world();
 	
 	//_fruit.setResource(this);
@@ -27,6 +27,7 @@ Resource = function(){
 function main(){
 	var _res = new Resource();
 	///res.getFruit().getRender().generateFruit();
+	_res.getScreen().getRender().createGrid();
 	_res.getFruit().getPhysics().generateFruit();
 };
 
