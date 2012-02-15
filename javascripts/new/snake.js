@@ -9,6 +9,10 @@ Snake = function(resource){
 		var _direction = "left";
 		var _collisionTimes = 0;
 
+		this.bodyReset = function(){
+			_body = [{x:10,y:10},{x:11,y:10},{x:12,y:10},{x:13,y:10},{x:14,y:10}];
+		};
+
 		this.move = function(direction){
 			if(direction==undefined){
 				direction = _direction;
@@ -19,8 +23,14 @@ Snake = function(resource){
 				//检测到超过100次连续的碰撞，肯定进死胡同了
 				if(_collisionTimes>100){
 					//重新定义对象，清空一切
-					_resource = new Resource();
-					return false;
+					this.bodyReset();
+					_direction = "left";
+					_resource.getScreen().getRender().createGrid();
+					_resource.getFruit().getPhysics().generateFruit();
+					_collisionTimes = 0;
+					console.log("die");
+					//throw "die!!!";
+					//return false;
 				}
 				return false;
 			}else{
@@ -84,16 +94,13 @@ Snake = function(resource){
 			}
 			_body.unshift(temp);
 			_body.length--;
-			//向screen矩阵中写入body信息
-			_resource.getScreen().getPhysics().getMatrix().empty();
-			_resource.getScreen().getPhysics().getMatrix().setValues(1,_body);
 
 			//调用render进行渲染
 			_render.drawSnake();
 
 			_resource.getFruit().getPhysics().detectFruit();
 			//将这次的方向记录下来供下次决策
-			_direction = direction;
+			//_direction = direction;
 			return true;
 		};
 
@@ -137,6 +144,14 @@ Snake = function(resource){
 	};
 
 	var Render = function(){
+		var _headColor = "#00ff00";
+		var _bodyColor = "#0000ff";
+
+		this.setColor = function(headColor,bodyColor){
+			_headColor = headColor;
+			_bodyColor = bodyColor;
+		};
+
 		this.drawSnake = function(){
 			this.drawHead();
 			this.drawBody();
@@ -147,7 +162,7 @@ Snake = function(resource){
 			var cxt = _resource.getScreen().getRender().getCxt();
 			var x = _physics.getBody()[0].x*gridWidth;
 			var y = _physics.getBody()[0].y*gridWidth;
-			cxt.fillStyle = "#00ff00";
+			cxt.fillStyle = _headColor;
 			cxt.fillRect(x, y, gridWidth*0.7, gridWidth*0.7);
 		};
 
@@ -168,7 +183,7 @@ Snake = function(resource){
 			for(var i=1; i<body.length; i++){
 				var x = body[i].x*gridWidth;
 				var y = body[i].y*gridWidth;
-				cxt.fillStyle = "#0000ff";
+				cxt.fillStyle = _bodyColor;
 				cxt.fillRect(x, y, gridWidth*0.7, gridWidth*0.7);
 			}
 		};

@@ -22,20 +22,11 @@ Fruit = function(resource){
 			var numY = _resource.getScreen().getPhysics().getNumY();
 			var generateSuccess = false;
 			while(!generateSuccess){
-				var flag = true;
 				_x = parseInt(Math.random()*numX);
 				_y = parseInt(Math.random()*numY);
-				//设置生成果实条件，必须没有碰撞重叠
-				//for(var i=0;i<body.length;i++){
-				//	if(x==body[i].x && y==body[i].y){
-				//		flag = false;
-				//		break;
-				//	}
-				//}
-				//if(flag){
-				//	generateSuccess = true;
-				//}
-				generateSuccess = true;
+				if(_resource.getScreen().getPhysics().getMatrix().getValue(_x, _y)==0){
+					generateSuccess = true;
+				}
 			}
 			_render.drawFruit();
 		};

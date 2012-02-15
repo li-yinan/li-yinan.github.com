@@ -1,6 +1,6 @@
 Resource = function(){
 	var _fruit = new Fruit(this);
-	var _snake = [new Snake(this)];
+	var _snake = [new Snake(this),new Snake(this)];
 	var _canvas = document.getElementById("canvas");
 	var _screen = new Screen(this,canvas,40,30);
 	//this.world = new world();
@@ -23,17 +23,20 @@ Resource = function(){
 		return _screen;
 	};
 };
+function run(){
+	snake0.freewalk();
+	snake1.freewalk();
+};
 
 function main(){
 	var _res = new Resource();
 	///res.getFruit().getRender().generateFruit();
 	_res.getScreen().getRender().createGrid();
 	_res.getFruit().getPhysics().generateFruit();
-	_res.getSnake(0).getRender().drawSnake();
-	snake = _res.getSnake(0).getPhysics();
-	//_res.getSnake(0).getPhysics().move(0);
-	//_res.getSnake(0).getPhysics().move(3);
-	interret = setInterval('snake.freewalk();', 10);
+	_res.getSnake(1).getRender().setColor("#00ff00","#0f0f0f");
+	snake0 = _res.getSnake(0).getPhysics();
+	snake1 = _res.getSnake(1).getPhysics();
+	interret = setInterval('run();', 10);
 };
 
 window.onload = main;
