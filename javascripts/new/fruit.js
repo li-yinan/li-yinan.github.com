@@ -7,6 +7,16 @@ Fruit = function(resource){
 		var _x = 0;
 		var _y = 0;
 
+		this.detectFruit = function(){
+			for(var i=0; i<resource.getSnakes().length; i++){
+				var body = _resource.getSnake(i).getPhysics().getBody();
+				if(_x==body[i].x && _y==body[i].y){
+					_resource.getSnake(i).getPhysics().bodyAdd();
+					this.generateFruit();
+				}
+			}
+		};
+
 		this.generateFruit = function(){
 			var numX = _resource.getScreen().getPhysics().getNumX();
 			var numY = _resource.getScreen().getPhysics().getNumY();
@@ -46,10 +56,11 @@ Fruit = function(resource){
 			var x = _physics.getFruitX(); 
 			var y = _physics.getFruitY(); 
 			var gridWidth = _resource.getScreen().getRender().getGridWidth();
+			cxt.fillStyle = "#ffffff";
+			cxt.fillRect(x*gridWidth, y*gridWidth, gridWidth, gridWidth);
 			cxt.fillStyle = "#ff0000";
 			cxt.fillRect(x*gridWidth, y*gridWidth, gridWidth*0.7, gridWidth*0.7);
 		};
-
 	};
 	_physics = new Physics();
 	_render = new Render();

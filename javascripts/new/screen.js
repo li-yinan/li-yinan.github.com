@@ -44,6 +44,8 @@ Screen = function(resource, canvas, numX, numY){
 		this.drawOneGrid = function(coordinateX, coordinateY){
 			var x = coordinateX*_gridWidth;
 			var y = coordinateY*_gridWidth;
+			_cxt.fillStyle = "#ffffff";
+			_cxt.fillRect(x, y, _gridWidth, _gridWidth);
 			//随机颜色
 			_cxt.fillStyle = toolkit.getRandomColor(1);
 			_cxt.fillRect(x, y, _gridWidth*0.7, _gridWidth*0.7);
