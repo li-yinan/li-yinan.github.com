@@ -1,40 +1,40 @@
 Snake = function(){
-	var physics;
-    var render;
-    var resource;
+	var _physics;
+    var _render;
+    var _resource;
 
 	var Physics = function(){
-		var x;
-		var y;
+		var _x;
+		var _y;
 	};
 
 	var Render = function(){
 
 	};
-	physics = new Physics();
-	render = new Render();
+	_physics = new Physics();
+	_render = new Render();
 
-	this.setResource = function(res){
-		resource = res;
+	this.setResource = function(resource){
+		_resource = resource;
 	};
 
 	this.getResource = function(){
-		return resource;
+		return _resource;
 	};
 
-	this.setPhysics = function(phy){
-		physics = phy;
+	this.setPhysics = function(physics){
+		_physics = physics;
 	};
 
 	this.getPhysics = function(){
-		return physics;
+		return _physics;
 	};
 
-	this.setRender = function(ren){
-		render = ren;
+	this.setRender = function(render){
+		_render = render;
 	};
 
 	this.getRender = function(){
-		return render;
+		return _render;
 	};
 };
