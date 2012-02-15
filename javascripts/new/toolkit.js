@@ -13,4 +13,50 @@ toolkit.getRandomColor = function(depth){
             colorStr += '0123456789abcdef'[Math.floor(Math.random()*16)]
     }
     return colorStr;
+};
+
+toolkit.Matrix = function(x,y){
+	var _matrix = [];
+	var _x = x;
+	var _y = y;
+	for(var i=0;i<_x;i++){
+		var temp = [];
+		for(var j=0;j<_y;j++){ 
+			temp[j] = 0;
+		}
+		_matrix.push(temp);
+	};
+
+	this.getMatrix = function(){
+		return _matrix;
+	};
+
+	this.getValue = function(x,y){
+		return _matrix[x][y];
+	};
+
+	this.clear = function(x,y){
+		_matrix[x][y] = 0;
+	};
+
+	this.setValue = function(value,x,y){
+		_matrix[x][y] = value;
+	};
+
+	this.setValues = function(value,arr){
+		for(var i=0;i<arr.length;i++){
+			_matrix[arr[i].x][arr[i].y] = value;
+		}
+	};
+
+	this.empty = function(){
+		_matrix = [];
+		for(var i=0;i<_x;i++){
+			var temp = []
+				for(var j=0;j<_y;j++){ 
+					temp[j] = 0;
+				}
+			_matrix.push(temp);
+		};
+	};
 }

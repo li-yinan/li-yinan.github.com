@@ -29,6 +29,11 @@ function main(){
 	///res.getFruit().getRender().generateFruit();
 	_res.getScreen().getRender().createGrid();
 	_res.getFruit().getPhysics().generateFruit();
+	_res.getSnake(0).getRender().drawSnake();
+	snake = _res.getSnake(0).getPhysics();
+	//_res.getSnake(0).getPhysics().move(0);
+	//_res.getSnake(0).getPhysics().move(3);
+	interret = setInterval('snake.freewalk();', 10);
 };
 
 window.onload = main;
