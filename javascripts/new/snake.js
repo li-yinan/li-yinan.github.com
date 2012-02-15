@@ -14,25 +14,59 @@ Snake = function(resource){
 				direction = _direction;
 			}
 			//检测碰撞
-			//if(this.collision(direction)){
-			//	_collisionTimes++;
-			//	//检测到超过100次连续的碰撞，肯定进死胡同了
-			//	if(_collisionTimes>100){
-			//		//重新定义对象，清空一切
-			//		_physics = new Physics();
-			//		_render = new Render();
-			//		return false;
-			//	}
-			//	return false;
-			//}else{
-			//	this.collisionTimes = 0;
-			//}
+			if(_resource.getScreen().getPhysics().collision()){
+				_collisionTimes++;
+				//检测到超过100次连续的碰撞，肯定进死胡同了
+				if(_collisionTimes>100){
+					//重新定义对象，清空一切
+					_resource = new Resource();
+					return false;
+				}
+				return false;
+			}else{
+				_collisionTimes = 0;
+			}
 			//检测障碍物
 			//占位，暂无	
 
 			var temp = {x:_body[0].x,y:_body[0].y};
 
 			_history = _body[_body.length-1];
+			//阻止往前进相反方向行进
+			switch(direction){
+				case('up'):
+				case(0):
+					if(_direction=="down"){
+						direction = "down";
+					}else{
+						direction = "up";
+					}
+					break;
+				case('right'):
+				case(1):
+					if(_direction=="left"){
+						direction = "left";
+					}else{
+						direction = "right";
+					}
+					break;
+				case('down'):
+				case(2):
+					if(_direction=="up"){
+						direction = "up";
+					}else{
+						direction = "down";
+					}
+					break;
+				case('left'):
+				case(3):
+					if(_direction=="right"){
+						direction = "right";
+					}else{
+						direction = "left";
+					}
+					break;
+			}
 
 			switch(direction){
 				case('up'):
@@ -55,6 +89,8 @@ Snake = function(resource){
 			_render.drawSnake();
 
 			_resource.getFruit().getPhysics().detectFruit();
+			//将这次的方向记录下来供下次决策
+			_direction = direction;
 			return true;
 		};
 

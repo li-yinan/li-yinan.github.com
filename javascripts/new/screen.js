@@ -6,14 +6,49 @@ Screen = function(resource, canvas, numX, numY){
 	var Physics = function(numX, numY){
 		var _numX = numX;
 		var _numY = numY;
+		//建立一个矩阵，存放各类障碍物用于检测碰撞
+		var _matrix = new toolkit.Matrix(_numX, _numY);
+
+		//for test
+		//var a = _matrix.getMatrix();
 
 		this.getNumX = function(){
 			return _numX;
-		}
+		};
 
 		this.getNumY = function(){
 			return _numY;
-		}
+		};
+		
+		this.collision = function(direction){
+			var snakes = _resource.getSnakes();
+			for(var i=0;i<snakes.length;i++){
+				var body = snakes[i].getPhysics().getBody();
+				var x = body[0].x;
+				var y = body[0].y;
+				switch(direction){
+					case('up'):
+					case(0):
+						y--;break;
+					case('right'):
+					case(1):
+						x++;break;
+					case('down'):
+					case(2):
+						y++;break;
+					case('left'):
+					case(3):
+						x--;break;
+				}
+				if(x<0||x>_numX-1||y<0||y>_numY-1){
+					return true;
+				}
+				if(_matrix.getValue(x, y)!=0){
+					return true;
+				}
+			}
+			return false;
+		};
 	};
 
 	var Render = function(){
