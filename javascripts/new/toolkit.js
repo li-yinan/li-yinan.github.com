@@ -42,7 +42,15 @@ toolkit.Matrix = function(x,y){
 	this.setValue = function(value,x,y){
 		_matrix[x][y] = value;
 	};
+
+	this.setValues = function(value,arr){
+		for(var i=0;i<arr.length;i++){
+			_matrix[arr[i].x][arr[i].y] = value;
+		}
+	};
+
 	this.empty = function(){
+		_matrix = [];
 		for(var i=0;i<_x;i++){
 			var temp = []
 				for(var j=0;j<_y;j++){ 

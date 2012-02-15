@@ -19,6 +19,10 @@ Screen = function(resource, canvas, numX, numY){
 		this.getNumY = function(){
 			return _numY;
 		};
+
+		this.getMatrix = function(){
+			return _matrix;
+		};
 		
 		this.collision = function(direction){
 			var snakes = _resource.getSnakes();

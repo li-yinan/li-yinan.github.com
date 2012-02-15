@@ -14,7 +14,7 @@ Snake = function(resource){
 				direction = _direction;
 			}
 			//检测碰撞
-			if(_resource.getScreen().getPhysics().collision()){
+			if(_resource.getScreen().getPhysics().collision(direction)){
 				_collisionTimes++;
 				//检测到超过100次连续的碰撞，肯定进死胡同了
 				if(_collisionTimes>100){
@@ -84,6 +84,9 @@ Snake = function(resource){
 			}
 			_body.unshift(temp);
 			_body.length--;
+			//向screen矩阵中写入body信息
+			_resource.getScreen().getPhysics().getMatrix().empty();
+			_resource.getScreen().getPhysics().getMatrix().setValues(1,_body);
 
 			//调用render进行渲染
 			_render.drawSnake();
