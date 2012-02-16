@@ -30,9 +30,6 @@ Screen = function(resource, canvas, numX, numY){
 			var snakes = _resource.getSnakes();
 			for(var i=0;i<snakes.length;i++){
 				var body = snakes[i].getPhysics().getBody();
-				if(body[0].x<0||body[0].x>_numX-1||body[0].y<0||body[0].y>_numY-1){
-					return true;
-				}
 				_matrix.setValues(1,body);
 			}
 			for(var i=0;i<snakes.length;i++){
@@ -53,9 +50,25 @@ Screen = function(resource, canvas, numX, numY){
 					case(3):
 						x--;break;
 				}
+
+				if(x<0||x>_numX-1||y<0||y>_numY-1){
+					//console.log("out of screen!!!");
+					return true;
+				}
+
 				if(_matrix.getValue(x, y)!=0){
 					return true;
 				}
+
+				//try{
+				//	if(_matrix.getValue(x, y)!=0){
+				//		return true;
+				//	}
+				//}catch(err){
+				//	console.log(err);
+				//	console.log(x);
+				//	console.log(y);
+				//}
 			}
 			return false;
 		};

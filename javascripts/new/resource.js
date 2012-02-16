@@ -36,7 +36,7 @@ function main(){
 	_res.getSnake(1).getRender().setColor("#00ff00","#0f0f0f");
 	snake0 = _res.getSnake(0).getPhysics();
 	snake1 = _res.getSnake(1).getPhysics();
-	interret = setInterval('run();', 10);
+	interret = setInterval('run();', 100);
 };
 
 window.onload = main;

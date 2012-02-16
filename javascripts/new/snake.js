@@ -10,7 +10,11 @@ Snake = function(resource){
 		var _collisionTimes = 0;
 
 		this.bodyReset = function(){
-			_body = [{x:10,y:10},{x:11,y:10},{x:12,y:10},{x:13,y:10},{x:14,y:10}];
+			//_body = [{x:10,y:10},{x:11,y:10},{x:12,y:10},{x:13,y:10},{x:14,y:10}];
+			var snakes = _resource.getSnakes();
+			for(var i=0;i<snakes.length;i++){
+				var body = snakes[i].getPhysics().setBody([{x:10,y:10},{x:11,y:10},{x:12,y:10},{x:13,y:10},{x:14,y:10}]);
+			}
 		};
 
 		this.move = function(direction){
@@ -100,7 +104,7 @@ Snake = function(resource){
 
 			_resource.getFruit().getPhysics().detectFruit();
 			//将这次的方向记录下来供下次决策
-			//_direction = direction;
+			_direction = direction;
 			return true;
 		};
 
@@ -136,6 +140,10 @@ Snake = function(resource){
 		
 		this.getBody = function(){
 			return _body;
+		}
+
+		this.setBody = function(arr){
+			_body = arr;
 		}
 
 		this.getHistory = function(){
