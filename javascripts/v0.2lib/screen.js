@@ -24,52 +24,42 @@ Screen = function(resource, canvas, numX, numY){
 			return _matrix;
 		};
 		
-		this.collision = function(direction){
+		this.collision = function(head,direction){
 			//向screen矩阵中写入body信息
 			_resource.getScreen().getPhysics().getMatrix().empty();
 			var snakes = _resource.getSnakes();
+			var x = head.x;
+			var y = head.y;
+
 			for(var i=0;i<snakes.length;i++){
 				var body = snakes[i].getPhysics().getBody();
 				_matrix.setValues(1,body);
 			}
-			for(var i=0;i<snakes.length;i++){
-				var body = snakes[i].getPhysics().getBody();
-				var x = body[0].x;
-				var y = body[0].y;
-				switch(direction){
-					case('up'):
-					case(0):
-						y--;break;
-					case('right'):
-					case(1):
-						x++;break;
-					case('down'):
-					case(2):
-						y++;break;
-					case('left'):
-					case(3):
-						x--;break;
-				}
 
-				if(x<0||x>_numX-1||y<0||y>_numY-1){
-					//console.log("out of screen!!!");
-					return true;
-				}
-
-				if(_matrix.getValue(x, y)!=0){
-					return true;
-				}
-
-				//try{
-				//	if(_matrix.getValue(x, y)!=0){
-				//		return true;
-				//	}
-				//}catch(err){
-				//	console.log(err);
-				//	console.log(x);
-				//	console.log(y);
-				//}
+			switch(direction){
+				case('up'):
+				case(0):
+					y--;break;
+				case('right'):
+				case(1):
+					x++;break;
+				case('down'):
+				case(2):
+					y++;break;
+				case('left'):
+				case(3):
+					x--;break;
 			}
+
+			if(x<0||x>_numX-1||y<0||y>_numY-1){
+				//console.log("out of screen!!!");
+				return true;
+			}
+
+			if(_matrix.getValue(x, y)!=0){
+				return true;
+			}
+
 			return false;
 		};
 	};
