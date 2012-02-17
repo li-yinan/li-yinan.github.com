@@ -9,7 +9,7 @@ Snake = function(resource){
 		var _direction = "left";
 		var _collisionTimes = 0;
 
-		this.bodyReset = function(){
+		this.bodyResetAll = function(){
 			//_body = [{x:10,y:10},{x:11,y:10},{x:12,y:10},{x:13,y:10},{x:14,y:10}];
 			var snakes = _resource.getSnakes();
 			for(var i=0;i<snakes.length;i++){
@@ -17,12 +17,16 @@ Snake = function(resource){
 			}
 		};
 
+		this.bodyReset = function(){
+			_body = [{x:10,y:10},{x:11,y:10},{x:12,y:10},{x:13,y:10},{x:14,y:10}];
+		};
+
 		this.move = function(direction){
 			if(direction==undefined){
 				direction = _direction;
 			}
 			//检测碰撞
-			if(_resource.getScreen().getPhysics().collision(direction)){
+			if(_resource.getScreen().getPhysics().collision(_body[0],direction)){
 				_collisionTimes++;
 				//检测到超过100次连续的碰撞，肯定进死胡同了
 				if(_collisionTimes>100){
@@ -43,7 +47,6 @@ Snake = function(resource){
 			//检测障碍物
 			//占位，暂无	
 
-			var temp = {x:_body[0].x,y:_body[0].y};
 
 			_history = _body[_body.length-1];
 			//阻止往前进相反方向行进
@@ -81,6 +84,8 @@ Snake = function(resource){
 					}
 					break;
 			}
+
+			var temp = {x:_body[0].x,y:_body[0].y};
 
 			switch(direction){
 				case('up'):
