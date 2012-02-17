@@ -37,6 +37,8 @@ function main(){
 	snake0 = _res.getSnake(0).getPhysics();
 	snake1 = _res.getSnake(1).getPhysics();
 	interret = setInterval('run();', 100);
+	//interret = setInterval('snake0.freewalk();', 100);
+	//interret = setInterval('snake1.freewalk();', 100);
 };
 
 window.onload = main;
