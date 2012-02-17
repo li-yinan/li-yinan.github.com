@@ -11,3 +11,12 @@ canvas {
 		margin:0px auto auto auto;
 		width:800px;
 }
+#scoretab{
+	position:absolute;
+	left:10px;
+	top:10px;
+}
+#scorer{
+	font-size:24px;
+	list-style:none;
+}

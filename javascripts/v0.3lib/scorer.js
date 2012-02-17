@@ -1,9 +1,21 @@
-Snake = function(){
+Scorer = function(resource,index,callback){
 	var _physics;
     var _render;
-    var _resource;
+    var _resource = resource;
 
 	var Physics = function(){
+		var _score = 0;
+		var _index = index;
+
+		this.eatFruit = function(){
+			_score += 10;
+			callback(_score,_index);
+		};
+		
+		this.die = function(){
+			_score -= 5;
+			callback(_score,_index);
+		};
 
 	};
 

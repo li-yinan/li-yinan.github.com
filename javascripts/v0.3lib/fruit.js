@@ -16,6 +16,7 @@ Fruit = function(resource){
 				var body = _resource.getSnake(i).getPhysics().getBody();
 				if(_x==body[i].x && _y==body[i].y){
 					_resource.getSnake(i).getPhysics().bodyAdd();
+					_resource.getScorer(i).getPhysics().eatFruit();
 					this.generateFruit();
 				}
 			}
