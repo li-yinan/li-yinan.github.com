@@ -32,7 +32,11 @@ toolkit.Matrix = function(x,y){
 	};
 
 	this.getValue = function(x,y){
-		return _matrix[x][y];
+		if(x>0&&y>0){
+			return _matrix[x][y];
+		}else{
+			return 10;//大于0就行
+		}
 	};
 
 	this.clear = function(x,y){
@@ -40,12 +44,16 @@ toolkit.Matrix = function(x,y){
 	};
 
 	this.setValue = function(value,x,y){
-		_matrix[x][y] = value;
+		if(x>0&&y>0){
+			_matrix[x][y] = value;
+		}
 	};
 
 	this.setValues = function(value,arr){
 		for(var i=0;i<arr.length;i++){
-			_matrix[arr[i].x][arr[i].y] = value;
+			if(arr[i].x>0&&arr[i].y>0){
+				_matrix[arr[i].x][arr[i].y] = value;
+			}
 		}
 	};
 
