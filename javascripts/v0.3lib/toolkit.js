@@ -44,14 +44,14 @@ toolkit.Matrix = function(x,y){
 	};
 
 	this.setValue = function(value,x,y){
-		if(x>0&&y>0){
+		if(x>0&&x<_x&&y>0&&y<_y){
 			_matrix[x][y] = value;
 		}
 	};
 
 	this.setValues = function(value,arr){
 		for(var i=0;i<arr.length;i++){
-			if(arr[i].x>0&&arr[i].y>0){
+			if(arr[i].x>0&&arr[i].x<_x&&arr[i].y>0&&arr[i].y<_y){
 				_matrix[arr[i].x][arr[i].y] = value;
 			}
 		}
