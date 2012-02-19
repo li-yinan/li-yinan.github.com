@@ -8,7 +8,8 @@ Scorer = function(resource,index,callback){
 		var _index = index;
 
 		this.eatFruit = function(){
-			_score += 10;
+			var body  =_resource.getSnake(_index).getPhysics().getBody();
+			_score += 10+body.length-6;
 			callback(_score,_index);
 		};
 		
