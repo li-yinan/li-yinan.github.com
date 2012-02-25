@@ -10,6 +10,7 @@ Resource = function(snakeNum){
 	}
 	var _canvas = document.getElementById("canvas");
 	var _screen = new Screen(this,canvas,40,30);
+	var _ticker = new Ticker(this,100);
 	_screen.getRender().createGrid();
 	//_fruit.getPhysics().generateFruit();
 
@@ -36,6 +37,9 @@ Resource = function(snakeNum){
 	this.getScreen = function(){
 		return _screen;
 	};
+	this.getTicker = function(){
+		return _ticker;
+	}
 };
 
 function run(){
@@ -70,9 +74,14 @@ function main(){
 	//snake = _res.getSnake(1);
 	//interret = setInterval('run();', 100);
 	//interret = setInterval('snake0.freewalk();', 50);
-	interret = setInterval('snake0.userCtrl();', 80);
-	interret = setInterval('snake1.freewalk();', 100);
-	interret = setInterval('snake2.freewalk();', 100);
+	var _ticker = _res.getTicker().getPhysics();
+	_ticker.addEvent(snake0.userCtrl);
+	_ticker.addEvent(snake1.freewalk);
+	_ticker.addEvent(snake2.freewalk);
+	_ticker.start();
+	//interret = setInterval('snake0.userCtrl();', 80);
+	//interret = setInterval('snake1.freewalk();', 100);
+	//interret = setInterval('snake2.freewalk();', 100);
 };
 
 window.onload = main;
