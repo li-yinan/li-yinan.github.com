@@ -8,6 +8,7 @@ Snake = function(resource,index){
 		var _index = index;
 		var _direction = "left";
 		var _collisionTimes = 0;
+		var _physics = this;
 
 		this.randomBodyPositon = function(){
 			var numX = _resource.getScreen().getPhysics().getNumX();
@@ -28,7 +29,7 @@ Snake = function(resource,index){
 					cxt.fillStyle = _bodyColor;
 					_resource.getScreen().getRender().drawOneGrid(x,y);
 				}
-				var body = snakes[i].getPhysics().setBody(this.randomBodyPositon());
+				var body = snakes[i].getPhysics().setBody(_physics.randomBodyPositon());
 			}
 		};
 
@@ -37,7 +38,7 @@ Snake = function(resource,index){
 				_resource.getScreen().getRender().drawOneGrid(_body[j].x,_body[j].y);
 			}
 			_direction = "left";
-			_body = this.randomBodyPositon();
+			_body = _physics.randomBodyPositon();
 		};
 
 		this.move = function(direction){
@@ -50,7 +51,7 @@ Snake = function(resource,index){
 				//检测到超过100次连续的碰撞，肯定进死胡同了
 				if(_collisionTimes>100){
 					//重新定义对象，清空一切
-					this.bodyReset();
+					_physics.bodyReset();
 					//_resource.getScreen().getRender().createGrid();
 					_resource.getFruit().getPhysics().reset();
 					_resource.getFruit().getPhysics().generateFruit();
@@ -151,22 +152,22 @@ Snake = function(resource,index){
 				direction = directionY>0?2:0;
 			}
 
-			while(!this.move(direction)){
+			while(!_physics.move(direction)){
 				//碰撞之后的策略
 				direction = parseInt(Math.random()*4);
 			}
 		};
 		
 		this.userCtrl = function(){
-			while(!this.move()){
+			while(!_physics.move()){
 			};
 		};
 		
 		this.eventManager = function(){
 			if(document.addEventListener){
-				document.addEventListener("keydown",this.keyCtrl,false);
+				document.addEventListener("keydown",_physics.keyCtrl,false);
 			}else if(document.attachEvent){
-				document.attachEvent("onkeydown",this.keyCtrl);
+				document.attachEvent("onkeydown",_physics.keyCtrl);
 			}
 
 		};
@@ -240,6 +241,7 @@ Snake = function(resource,index){
 	var Render = function(){
 		var _headColor = "#00ff00";
 		var _bodyColor = "#0000ff";
+		var _render = this;
 
 		this.setColor = function(headColor,bodyColor){
 			_headColor = headColor;
@@ -251,8 +253,8 @@ Snake = function(resource,index){
 		};
 
 		this.drawSnake = function(){
-			this.drawHead();
-			this.drawBody();
+			_render.drawHead();
+			_render.drawBody();
 		};
 
 		this.drawHead = function(){
