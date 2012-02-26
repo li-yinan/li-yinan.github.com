@@ -1,20 +1,25 @@
 Sprite = function(){
 	// image of sprite
 	this.img = undefined;
+	//canvas
+	this.canvas = document.getElementById("canvas"); 
+	this.cxt = this.canvas.getContext("2d");
 	//direction
 	this.direction = 0;
 	// collision R
 	this.collisionR = 100;
 	// move speed
 	this.speed = 100;
+	//scale default = 1
+	this.scale = 1;
 	// destination X
 	this.destX = 0;
 	// destination Y
 	this.destY = 0;
 	// anchor X
-	this.anchorX = 50;
+	this.anchorX = 0;
 	// anchor Y
-	this.anchorY = 50;
+	this.anchorY = 0;
 	//z-index
 	this.zIndex = 1;
 	// whether the sprite is visible,related with collision
@@ -38,17 +43,29 @@ Sprite = function(){
 	}
 
 	/**
-	 * @brief move to someplace
+	 * @brief move to destination coordination
 	 *
 	 * @param destX
 	 * @param destY
 	 *
 	 * @return 
 	 *
-	 * @throw "pleaseoverwrite this function!"
 	 */
-	this.moveTo = function(destX, destY){
-		throw("please overwrite this function!");
+	this.moveTo = function(){
+		var sx = _this.anchorX;
+		var sy = _this.anchorY;
+		var dx = _this.destX;
+		var dy = _this.destY;
+		//if near destination then stop move
+		if(Math.abs(sx-dx)<3&&Math.abs(sy-dy)<3){
+			//ticker.clearEvent(moveptr);
+			return;
+		}
+		var tick = ticker.getTick();
+		var unit = _this.speed/Math.sqrt((dx-sx)*(dx-sx)+(dy-sy)*(dy-sy))*tick/1000;
+		_this.anchorX = unit*(dx-sx)+sx;
+		_this.anchorY = unit*(dy-sy)+sy;
+		console.log("moveto override");
 	};
 
 	/**
@@ -63,25 +80,20 @@ Sprite = function(){
 	};
 
 	/**
-	 * @brief scale the img
-	 *
-	 * @return 
-	 *
-	 * @throw "pleaseoverwrite this function!"
-	 */
-	this.scale = function(){
-		throw("please overwrite this function!");
-	};
-
-	/**
 	 * @brief draw the sprite
 	 *
 	 * @return 
 	 *
-	 * @throw "pleaseoverwrite this function!"
 	 */
 	this.draw = function(){
-		throw("please overwrite this function!");
+		_this.cxt.clearRect(0,0,_this.canvas.width,_this.canvas.height);
+		_this.cxt.drawImage(
+			_this.img,
+			_this.anchorX-_this.collisionR/2*_this.scale,
+			_this.anchorY-_this.collisionR/2*_this.scale,
+			_this.collisionR*_this.scale,
+			_this.collisionR*_this.scale
+		);
 	};
 
 	/**
@@ -89,7 +101,8 @@ Sprite = function(){
 	 *
 	 * @return 
 	 */
-	this.frame = function(){
-		throw("please overwrite this function!");
-	}
+	this.frameCtrl = function(){
+		_this.moveTo();
+		_this.draw();
+	};
 };
