@@ -15,16 +15,18 @@ Ticker = function(resource,tick){
 
 		this.addEvent = function(evt){
 			_evtList.push(evt);
+			return _evtList.length-1;
 		};
 
-		this.clearEvent = function(){
-			_evtList = [];
+		this.clearEvent = function(i){
+			_evtList[i] = undefined; 
 		};
 
 		this.doEvent = function(){
 			for(var i=0;i<_evtList.length;i++){
-				setTimeout(_evtList[i],0);
-				//evtList[i]();
+				if(_evtList[i]){
+					setTimeout(_evtList[i],0);
+				}
 			}
 		}
 
