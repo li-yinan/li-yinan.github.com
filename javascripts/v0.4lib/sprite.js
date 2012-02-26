@@ -4,7 +4,7 @@ Sprite = function(){
 	//direction
 	this.direction = 0;
 	// collision R
-	this.collisionR = 10;
+	this.collisionR = 40;
 	// move speed
 	this.speed = 2000;
 	// destination X
@@ -12,9 +12,9 @@ Sprite = function(){
 	// destination Y
 	this.destY = 0;
 	// anchor X
-	this.anchorX = 0;
+	this.anchorX = 20;
 	// anchor Y
-	this.anchorY = 0;
+	this.anchorY = 20;
 	//z-index
 	this.zIndex = 1;
 	// whether the sprite is visible,related with collision
