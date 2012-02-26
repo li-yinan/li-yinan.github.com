@@ -1,5 +1,5 @@
 ImgLoader = function(sources,callback){
-	images = {};
+	var images = {};
 	var loadedImages = 0;
 	var numImages = 0;
 	for(var src in sources){
@@ -9,7 +9,7 @@ ImgLoader = function(sources,callback){
 		images[src] = new Image();
 		images[src].onload = function(){
 			if(++loadedImages >= numImages){
-				callback();
+				callback(images);
 			}
 		}
 		images[src].src = sources[src];

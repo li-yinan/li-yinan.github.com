@@ -6,11 +6,10 @@ Obj = function(){
 	this.draw = function(){
 		var c=document.getElementById("canvas");
 		var cxt=c.getContext("2d");
-		var img = new Image();
 		var imgresource = {
 			sprite:"resource/spriteimg/images.jpg"
 		}
-		new ImgLoader(imgresource,function(){
+		new ImgLoader(imgresource,function(images){
 			cxt.drawImage(images.sprite,0,0,200,200);
 		});
 	}
