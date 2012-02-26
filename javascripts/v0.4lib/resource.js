@@ -84,4 +84,4 @@ function main(){
 	//interret = setInterval('snake2.freewalk();', 100);
 };
 
-window.onload = main;
+//window.onload = main;

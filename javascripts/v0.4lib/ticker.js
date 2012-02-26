@@ -4,30 +4,36 @@ Ticker = function(resource,tick){
 	var _resource = resource;
 
 	var Physics = function(){
-		var evtList = [];
-		var tickptr;
+		var _evtList = [];
+		var _tickptr;
+		var _tick = tick;
+		var _physic = this;
+
+		this.getTick = function(){
+			return _tick;
+		}
 
 		this.addEvent = function(evt){
-			evtList.push(evt);
+			_evtList.push(evt);
 		};
 
 		this.clearEvent = function(){
-			evtList = [];
+			_evtList = [];
 		};
 
 		this.doEvent = function(){
-			for(var i=0;i<evtList.length;i++){
-				setTimeout(evtList[i],0);
+			for(var i=0;i<_evtList.length;i++){
+				setTimeout(_evtList[i],0);
 				//evtList[i]();
 			}
 		}
 
 		this.start = function(){
-			tickptr = setInterval(this.doEvent,tick);
+			_tickptr = setInterval(_physics.doEvent, _tick);
 		}
 
 		this.stop = function(){
-			clearInterval(tickptr);
+			clearInterval(_tickptr);
 		}
 	};
 
