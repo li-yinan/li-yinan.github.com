@@ -22,6 +22,8 @@ Sprite = function(){
 	this.anchorY = 0;
 	//z-index
 	this.zIndex = 1;
+	//if the sprite is moving
+	this.moving = false;
 	// whether the sprite is visible,related with collision
 	this.visibility = true;
 	// setInterval ptr
@@ -40,6 +42,7 @@ Sprite = function(){
 	this.setDest = function(destX,destY){
 		_this.destX = destX;
 		_this.destY = destY;
+		_this.moving = true;
 	}
 
 	/**
@@ -52,17 +55,24 @@ Sprite = function(){
 	 *
 	 */
 	this.moveTo = function(){
+		if(!_this.moving){
+			return;
+		}
 		var sx = _this.anchorX;
 		var sy = _this.anchorY;
 		var dx = _this.destX;
 		var dy = _this.destY;
-		//if near destination then stop move
-		if(Math.abs(sx-dx)<3&&Math.abs(sy-dy)<3){
-			//ticker.clearEvent(moveptr);
-			return;
-		}
 		var tick = ticker.getTick();
 		var unit = _this.speed/Math.sqrt((dx-sx)*(dx-sx)+(dy-sy)*(dy-sy))*tick/1000;
+		//if abs(unit*(dx-sx))>abs(dx-sx) then stop
+		//if unit>1 then stop
+		if(unit>1){
+			//ticker.clearEvent(moveptr);
+			_this.anchorX = dx;
+			_this.anchorY = dy;
+			_this.moving = false;
+			return;
+		}
 		_this.anchorX = unit*(dx-sx)+sx;
 		_this.anchorY = unit*(dy-sy)+sy;
 		console.log("moveto override");
