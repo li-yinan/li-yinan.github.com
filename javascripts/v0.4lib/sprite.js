@@ -4,23 +4,38 @@ Sprite = function(){
 	//direction
 	this.direction = 0;
 	// collision R
-	this.collisionR = 40;
+	this.collisionR = 100;
 	// move speed
-	this.speed = 2000;
+	this.speed = 100;
 	// destination X
 	this.destX = 0;
 	// destination Y
 	this.destY = 0;
 	// anchor X
-	this.anchorX = 20;
+	this.anchorX = 50;
 	// anchor Y
-	this.anchorY = 20;
+	this.anchorY = 50;
 	//z-index
 	this.zIndex = 1;
 	// whether the sprite is visible,related with collision
 	this.visibility = true;
 	// setInterval ptr
 	this.timer = undefined;
+	//this pointer
+	var _this = this;
+
+	/**
+	 * @brief set destination coordination
+	 *
+	 * @param destX
+	 * @param destY
+	 *
+	 * @return 
+	 */
+	this.setDest = function(destX,destY){
+		_this.destX = destX;
+		_this.destY = destY;
+	}
 
 	/**
 	 * @brief move to someplace
