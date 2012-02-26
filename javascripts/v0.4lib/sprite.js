@@ -68,4 +68,13 @@ Sprite = function(){
 	this.draw = function(){
 		throw("please overwrite this function!");
 	};
+
+	/**
+	 * @brief called by ticker 
+	 *
+	 * @return 
+	 */
+	this.frame = function(){
+		throw("please overwrite this function!");
+	}
 };
