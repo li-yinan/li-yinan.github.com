@@ -26,7 +26,7 @@ EventManager = function(){
 	if(document.attachEvent){
 		document.attachEvent("onkeydown",eventSelector);
 	}else if(document.addEventListener){
-		document.addEventListener("keydown",eventSelector);
+		document.addEventListener("keydown",eventSelector,true);
 	}
 
 };
