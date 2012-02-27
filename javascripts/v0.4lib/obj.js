@@ -42,22 +42,22 @@ function main1(){
 	evtMgr.addKeyEvent(38,function(){
 		obj.direction = 3;
 		obj.eventSource = "key";
-		obj.setDest(400,200);
+		obj.setDest(obj.destX,obj.destY-100);
 	});
 	evtMgr.addKeyEvent(39,function(){
 		obj.direction = 2;
 		obj.eventSource = "key";
-		obj.setDest(500,300);
+		obj.setDest(obj.destX+100,obj.destY);
 	});
 	evtMgr.addKeyEvent(40,function(){
 		obj.direction = 0;
 		obj.eventSource = "key";
-		obj.setDest(400,400);
+		obj.setDest(obj.destX,obj.destY+100);
 	});
 	evtMgr.addKeyEvent(37,function(){
 		obj.direction = 1;
 		obj.eventSource = "key";
-		obj.setDest(300,300);
+		obj.setDest(obj.destX-100,obj.destY);
 	});
 
 	evtMgr.addKeyEvent(32,function(){
