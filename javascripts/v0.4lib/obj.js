@@ -6,9 +6,10 @@ Obj = function(images){
 	this.speed = 200;
 	this.collisionR = 50;
 	this.scale = 4;
-	this.duration = 1000;
-	this.img = images.sprite2;
-	this.spriteList.push([0,0,300,300]);
+	this.duration = 200;
+	this.img = images.sprite4;
+	this.spriteList.push([0,0,226,226]);
+	this.spriteList.push([227,0,226,226]);
 	//this.img = images.sprite2;
 	//this.spriteList.push([22,7,95,95]);
 	//this.spriteList.push([141,7,95,95]);
@@ -27,7 +28,8 @@ function main1(){
 	var imgresource = {
 		sprite1:"resource/spriteimg/images.jpg",
 		sprite2:"resource/spriteimg/sprite.jpg",
-		sprite2:"resource/spriteimg/02.png"
+		sprite3:"resource/spriteimg/02.png",
+		sprite4:"resource/spriteimg/03.png"
 	};
 
 	new ImgLoader(imgresource,start);
