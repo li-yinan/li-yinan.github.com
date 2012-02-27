@@ -1,6 +1,8 @@
 Sprite = function(){
 	// image of sprite
 	this.img = undefined;
+	// draw sprite offset
+	this.offset = -20;
 	// sprite direction
 	this.direction = 0;
 	// controll event source
@@ -200,7 +202,7 @@ Sprite = function(){
 			_this.imgRegionWidth,
 			_this.imgRegionHeight,
 			_this.anchorX-_this.collisionR*_this.scale,
-			_this.anchorY-_this.imgRegionHeight*2*_this.collisionR/_this.imgRegionWidth*_this.scale,
+			_this.anchorY-_this.imgRegionHeight*_this.collisionR/_this.imgRegionWidth*_this.scale+_this.offset,
 			_this.collisionR*2*_this.scale,
 			_this.imgRegionHeight*2*_this.collisionR/_this.imgRegionWidth*_this.scale
 		);
