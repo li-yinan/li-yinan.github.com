@@ -1,11 +1,11 @@
-Ticker = function(resource,tick){
+Ticker = function(resource,freq){
 	var _evtList = [];
 	var _tickptr;
-	var _tick = tick;
+	var _freq = freq;
 	var _this = this;
 
-	this.getTick = function(){
-		return _tick;
+	this.getFreq = function(){
+		return _freq;
 	};
 
 	this.addEvent = function(evt){
@@ -26,7 +26,7 @@ Ticker = function(resource,tick){
 	};
 
 	this.start = function(){
-		_tickptr = setInterval(_this.doEvent, _tick);
+		_tickptr = setInterval(_this.doEvent, 1000/_freq);
 	};
 
 	this.stop = function(){

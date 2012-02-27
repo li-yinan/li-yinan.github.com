@@ -2,6 +2,7 @@ Obj = function(images){
 	Sprite.call(this);
 	var _this = this;
 	this.speed = 100;
+	this.scale = 1.5;
 	this.img = images.sprite;
 };
 
@@ -9,7 +10,7 @@ function main1(){
 
 	function start(images){
 		obj = new Obj(images);
-		ticker = new Ticker("",1000/60);//frequency
+		ticker = new Ticker("",60);//frequency
 		ticker.addEvent(obj.frameCtrl);
 		ticker.start();
 	}
