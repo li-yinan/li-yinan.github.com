@@ -6,7 +6,7 @@ Obj = function(images){
 	this.speed = 200;
 	this.collisionR = 50;
 	this.scale = 4;
-	this.duration = 200;
+	this.duration = 300;
 	this.img = images.sprite4;
 	this.spriteList.push([0,0,226,226]);
 	this.spriteList.push([227,0,226,226]);
