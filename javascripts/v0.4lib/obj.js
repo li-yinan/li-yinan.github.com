@@ -5,12 +5,14 @@ Obj = function(images){
 	this.anchorY = 300;
 	this.speed = 200;
 	this.collisionR = 50;
-	this.scale = 2;
+	this.scale = 4;
 	this.duration = 1000;
 	this.img = images.sprite2;
-	this.spriteList.push([22,7,95,95]);
-	this.spriteList.push([141,7,95,95]);
-	this.spriteList.push([261,7,95,95]);
+	this.spriteList.push([0,0,300,300]);
+	//this.img = images.sprite2;
+	//this.spriteList.push([22,7,95,95]);
+	//this.spriteList.push([141,7,95,95]);
+	//this.spriteList.push([261,7,95,95]);
 };
 
 function main1(){
@@ -24,7 +26,8 @@ function main1(){
 
 	var imgresource = {
 		sprite1:"resource/spriteimg/images.jpg",
-		sprite2:"resource/spriteimg/sprite.jpg"
+		sprite2:"resource/spriteimg/sprite.jpg",
+		sprite2:"resource/spriteimg/02.png"
 	};
 
 	new ImgLoader(imgresource,start);
