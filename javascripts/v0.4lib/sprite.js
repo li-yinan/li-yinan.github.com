@@ -172,7 +172,11 @@ Sprite = function(){
 		var freq = ticker.getFreq();
 		var times = parseInt(_this.duration/1000*freq);
 		if(ticker.getCounter()%times==0){
-			_this.setSpriteRegion(direction, _this.currentSprite+1);
+			if(_this.moving){
+				_this.setSpriteRegion(direction, _this.currentSprite+1);
+			}else{
+				_this.setSpriteRegion(direction, 0);
+			}
 		}
 	};
 
