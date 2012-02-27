@@ -3,7 +3,10 @@ Obj = function(images){
 	var _this = this;
 	this.speed = 100;
 	this.scale = 1;
-	this.img = images.sprite;
+	this.img = images.sprite2;
+	this.spriteList.push([22,7,95,95]);
+	this.spriteList.push([141,7,95,95]);
+	this.spriteList.push([261,7,95,95]);
 };
 
 function main1(){
@@ -16,7 +19,8 @@ function main1(){
 	}
 
 	var imgresource = {
-		sprite:"resource/spriteimg/images.jpg"
+		sprite1:"resource/spriteimg/images.jpg",
+		sprite2:"resource/spriteimg/sprite.jpg"
 	};
 
 	new ImgLoader(imgresource,start);

@@ -4,6 +4,11 @@ Ticker = function(resource,freq){
 	var _freq = freq;
 	var _this = this;
 	var _active = false;
+	var _counter = 0;
+
+	this.getCounter = function(){
+		return _counter;
+	}
 
 	this.getFreq = function(){
 		return _freq;
@@ -23,6 +28,7 @@ Ticker = function(resource,freq){
 	};
 
 	this.doEvent = function(){
+		_counter++;
 		for(var i=0;i<_evtList.length;i++){
 			if(_evtList[i]){
 				setTimeout(_evtList[i],0);

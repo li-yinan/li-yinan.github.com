@@ -1,6 +1,20 @@
 Sprite = function(){
 	// image of sprite
 	this.img = undefined;
+	// region of img
+	this.spriteList = [];
+	//current sprite
+	this.currentSprite = 0;
+	// animation duration
+	this.duration = 500;
+	//image region left
+	this.imgRegionLeft = 0;
+	//image region right 
+	this.imgRegionRight = 0;
+	//image region width 
+	this.imgRegionWidth = 100;
+	//image region height 
+	this.imgRegionHeight = 100;
 	//canvas
 	this.canvas = document.getElementById("canvas"); 
 	this.cxt = this.canvas.getContext("2d");
@@ -90,6 +104,31 @@ Sprite = function(){
 	};
 
 	/**
+	 * @brief set the region of sprite
+	 *
+	 * @return 
+	 */
+	this.setSpriteRegion = function(i){
+		if(i>=_this.spriteList.length){
+			i = 0;
+		}
+		_this.imgRegionLeft = _this.spriteList[i][0];
+		_this.imgRegionRight = _this.spriteList[i][1];
+		_this.imgRegionWidth = _this.spriteList[i][2];
+		_this.imgRegionHeight = _this.spriteList[i][3];
+		_this.currentSprite = i;
+	};
+
+	this.switchSpriteRegion = function(){
+		var freq = ticker.getFreq();
+		var times = parseInt(_this.duration/1000*freq);
+		if(ticker.getCounter()%times==0){
+			_this.setSpriteRegion(_this.currentSprite+1);
+		}
+
+	};
+
+	/**
 	 * @brief draw the sprite
 	 *
 	 * @return 
@@ -99,6 +138,10 @@ Sprite = function(){
 		_this.cxt.clearRect(0,0,_this.canvas.width,_this.canvas.height);
 		_this.cxt.drawImage(
 			_this.img,
+			_this.imgRegionLeft,
+			_this.imgRegionRight,
+			_this.imgRegionWidth,
+			_this.imgRegionHeight,
 			_this.anchorX-_this.collisionR/2*_this.scale,
 			_this.anchorY-_this.collisionR/2*_this.scale,
 			_this.collisionR*_this.scale,
@@ -112,6 +155,7 @@ Sprite = function(){
 	 * @return 
 	 */
 	this.frameCtrl = function(){
+		_this.switchSpriteRegion();
 		_this.moveTo();
 		_this.draw();
 	};
