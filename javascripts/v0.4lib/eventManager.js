@@ -1,10 +1,10 @@
 EventManager = function(){
-	var evtList = [];
+	var keyEvtList = [];
 
 	var eventSelector = function(evt){
 		console.log("keycode is "+evt.keyCode);
-		if(evtList[evt.keyCode]){
-			evtList[evt.keyCode]();
+		if(keyEvtList[evt.keyCode]){
+			keyEvtList[evt.keyCode]();
 		}
 		//if (evt&&evt.stopPropagation ){
 		//	evt.stopPropagation();
@@ -19,8 +19,8 @@ EventManager = function(){
         //return false;
 	};
 
-	this.addEvent = function(value,callback){
-			evtList[value] = callback;
+	this.addKeyEvent = function(value,callback){
+			keyEvtList[value] = callback;
 	}
 
 	if(document.attachEvent){
