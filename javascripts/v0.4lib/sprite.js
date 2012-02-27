@@ -113,7 +113,7 @@ Sprite = function(){
 	 * @return 
 	 */
 	this.setSpriteRegion = function(direction,i){
-		if(direction){
+		if(_this.eventSource!="key"){
 			_this.direction = direction;
 		}
 		if(i>=_this.spriteList[_this.direction].length){
@@ -162,6 +162,11 @@ Sprite = function(){
 					}
 				}
 			}
+			if(direction != _this.direction){
+				_this.setSpriteRegion(direction, _this.currentSprite);
+			}
+		}else{
+			//event source is keyboard
 		}
 		//decide direction end
 		var freq = ticker.getFreq();
