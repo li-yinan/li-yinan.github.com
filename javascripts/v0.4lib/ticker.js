@@ -3,9 +3,14 @@ Ticker = function(resource,freq){
 	var _tickptr;
 	var _freq = freq;
 	var _this = this;
+	var _active = false;
 
 	this.getFreq = function(){
 		return _freq;
+	};
+
+	this.isActive = function(){
+		return _active;
 	};
 
 	this.addEvent = function(evt){
@@ -26,10 +31,12 @@ Ticker = function(resource,freq){
 	};
 
 	this.start = function(){
+		_active = true;
 		_tickptr = setInterval(_this.doEvent, 1000/_freq);
 	};
 
 	this.stop = function(){
+		_active = false;
 		clearInterval(_tickptr);
 	}
 };
