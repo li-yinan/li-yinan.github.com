@@ -62,8 +62,8 @@ Sprite = function(){
 		var sy = _this.anchorY;
 		var dx = _this.destX;
 		var dy = _this.destY;
-		var tick = ticker.getTick();
-		var unit = _this.speed/Math.sqrt((dx-sx)*(dx-sx)+(dy-sy)*(dy-sy))*tick/1000;
+		var freq = ticker.getFreq();
+		var unit = _this.speed/Math.sqrt((dx-sx)*(dx-sx)+(dy-sy)*(dy-sy))/freq;
 		//if abs(unit*(dx-sx))>abs(dx-sx) then stop
 		//if unit>1 then stop
 		if(unit>1){
