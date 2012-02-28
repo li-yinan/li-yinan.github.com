@@ -6,18 +6,11 @@ Obj = function(images){
 	this.destX = 400;
 	this.destY = 300;
 	this.speed = 200;
-	this.collisionR = 20;
+	this.collisionR = 16;
 	this.scale = 1;
 	this.duration = 100;
 	//this.movable = false;
 	this.img = images.sprite5;
-	//this.spriteList.push([0,0,120,120]);
-	//this.spriteList.push([227,0,226,226]);
-	//this.img = images.sprite2;
-	//this.spriteList.push([22,7,95,95]);
-	//this.spriteList.push([141,7,95,95]);
-	//this.spriteList.push([261,7,95,95]);
-	
 };
 
 function main1(){

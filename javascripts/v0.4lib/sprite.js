@@ -9,8 +9,6 @@ Sprite = function(){
 	this.spriteList = [];
 	//current sprite
 	this.currentSprite = 0;
-	// animation duration
-	this.duration = 500;
 	//image region left
 	this.imgRegionLeft = 0;
 	//image region right 
@@ -28,6 +26,8 @@ Sprite = function(){
 	this.collisionR = 100;
 	// move speed
 	this.speed = 100;
+	// animation duration
+	this.duration = 500;
 	//scale default = 1
 	this.scale = 1;
 	// destination X
@@ -38,6 +38,10 @@ Sprite = function(){
 	this.anchorX = 0;
 	// anchor Y
 	this.anchorY = 0;
+	//boundary X
+	this.boundaryX = 800;
+	//boundary Y
+	this.boundaryY = 600;
 	//z-index
 	this.zIndex = 1;
 	//if the sprite is moving
@@ -46,8 +50,6 @@ Sprite = function(){
 	this.movable = true;
 	// whether the sprite is visible,related with collision
 	this.visibility = true;
-	// setInterval ptr
-	this.timer = undefined;
 	//this pointer
 	var _this = this;
 
@@ -60,6 +62,10 @@ Sprite = function(){
 	 * @return 
 	 */
 	this.setDest = function(destX,destY){
+		if(destX<0){ destX = 0; }
+		if(destY<0){ destY = 0; }
+		if(destX>_this.boundaryX){ destX = _this.boundaryX; }
+		if(destY>_this.boundaryY){ destY = _this.boundaryY; }
 		_this.destX = destX;
 		_this.destY = destY;
 		_this.moving = true;
@@ -163,7 +169,9 @@ Sprite = function(){
 		}
 		// if direction changed ,call function immediatly
 		if(direction != _this.direction){
-			_this.setSpriteRegion(direction, _this.currentSprite);
+			if(_this.movable){
+				_this.setSpriteRegion(direction, _this.currentSprite);
+			}
 		}
 		//decide direction end
 		var freq = ticker.getFreq();
