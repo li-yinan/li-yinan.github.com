@@ -3,6 +3,8 @@ Obj = function(images){
 	var _this = this;
 	this.anchorX = 400;
 	this.anchorY = 300;
+	this.destX = 400;
+	this.destY = 300;
 	this.speed = 200;
 	this.collisionR = 20;
 	this.scale = 1;
@@ -41,23 +43,15 @@ function main1(){
 	var evtMgr = new EventManager();
 
 	evtMgr.addKeyEvent(38,function(){
-		obj.direction = 3;
-		obj.eventSource = "key";
 		obj.setDest(obj.destX,obj.destY-100);
 	});
 	evtMgr.addKeyEvent(39,function(){
-		obj.direction = 2;
-		obj.eventSource = "key";
 		obj.setDest(obj.destX+100,obj.destY);
 	});
 	evtMgr.addKeyEvent(40,function(){
-		obj.direction = 0;
-		obj.eventSource = "key";
 		obj.setDest(obj.destX,obj.destY+100);
 	});
 	evtMgr.addKeyEvent(37,function(){
-		obj.direction = 1;
-		obj.eventSource = "key";
 		obj.setDest(obj.destX-100,obj.destY);
 	});
 
