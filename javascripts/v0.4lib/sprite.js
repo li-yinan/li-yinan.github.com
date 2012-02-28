@@ -44,6 +44,8 @@ Sprite = function(){
 	this.zIndex = 1;
 	//if the sprite is moving
 	this.moving = false;
+	// if the sprite is movable
+	this.movable = true;
 	// whether the sprite is visible,related with collision
 	this.visibility = true;
 	// setInterval ptr
@@ -174,10 +176,15 @@ Sprite = function(){
 		var freq = ticker.getFreq();
 		var times = parseInt(_this.duration/1000*freq);
 		if(ticker.getCounter()%times==0){
-			if(_this.moving){
-				_this.setSpriteRegion(direction, _this.currentSprite+1);
+			if(_this.movable){
+				if(_this.moving){
+					_this.setSpriteRegion(direction, _this.currentSprite+1);
+				}else{
+					_this.setSpriteRegion(direction, 0);
+				}
 			}else{
-				_this.setSpriteRegion(direction, 0);
+				_this.direction = 0;
+				_this.setSpriteRegion(0, _this.currentSprite+1);
 			}
 		}
 	};
@@ -235,7 +242,9 @@ Sprite = function(){
 	 */
 	this.frameCtrl = function(){
 		_this.switchSpriteRegion();
-		_this.moveTo();
+		if(_this.movable){
+			_this.moveTo();
+		}
 		_this.draw();
 	};
 };
