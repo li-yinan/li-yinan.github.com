@@ -7,6 +7,7 @@ Obj = function(images){
 	this.collisionR = 20;
 	this.scale = 1;
 	this.duration = 100;
+	//this.movable = false;
 	this.img = images.sprite5;
 	//this.spriteList.push([0,0,120,120]);
 	//this.spriteList.push([227,0,226,226]);
@@ -28,10 +29,10 @@ function main1(){
 	}
 
 	var imgresource = {
-		sprite1:"resource/spriteimg/images.jpg",
-		sprite2:"resource/spriteimg/sprite.jpg",
-		sprite3:"resource/spriteimg/02.png",
-		sprite4:"resource/spriteimg/03.png",
+		//sprite1:"resource/spriteimg/images.jpg",
+		//sprite2:"resource/spriteimg/sprite.jpg",
+		//sprite3:"resource/spriteimg/02.png",
+		//sprite4:"resource/spriteimg/03.png",
 		sprite5:"resource/spriteimg/012-Lancer04.png"
 	};
 
