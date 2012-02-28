@@ -5,8 +5,6 @@ Sprite = function(){
 	this.offset = -20;
 	// sprite direction
 	this.direction = 0;
-	// controll event source
-	this.eventSource = "";
 	// region of img
 	this.spriteList = [];
 	//current sprite
@@ -117,9 +115,7 @@ Sprite = function(){
 	 * @return 
 	 */
 	this.setSpriteRegion = function(direction,i){
-		if(_this.eventSource!="key"){
-			_this.direction = direction;
-		}
+		_this.direction = direction;
 		if(i>=_this.spriteList[_this.direction].length){
 			i = 0;
 		}
@@ -144,33 +140,30 @@ Sprite = function(){
 		//decide direction
 		// if event source is keyboard,direction = input arrow
 		// else calulate the direction 
-		if(_this.eventSource!="key"){
-			var movex = Math.abs(dx-sx)>Math.abs(dy-sy)?true:false;
-			if(!_this.moving){
-				//sprite is stoped
-				direction = 0;
-			}else{
-				//sprite move on x axis
-				if(movex){
-					if(dx>sx){
-						direction = 2;//move to right
-					}else{
-						direction = 1;//move to left
-					}
+		var movex = Math.abs(dx-sx)>Math.abs(dy-sy)?true:false;
+		if(!_this.moving){
+			//sprite is stoped
+			direction = _this.direction;
+		}else{
+			//sprite move on x axis
+			if(movex){
+				if(dx>sx){
+					direction = 2;//move right
 				}else{
-				//sprite move on y axis
-					if(dy>sy){
-						direction = 0;//move to right
-					}else{
-						direction = 3;//move to left
-					}
+					direction = 1;//move left
+				}
+			}else{
+			//sprite move on y axis
+				if(dy>sy){
+					direction = 0;//move down 
+				}else{
+					direction = 3;//move up 
 				}
 			}
-			if(direction != _this.direction){
-				_this.setSpriteRegion(direction, _this.currentSprite);
-			}
-		}else{
-			//event source is keyboard
+		}
+		// if direction changed ,call function immediatly
+		if(direction != _this.direction){
+			_this.setSpriteRegion(direction, _this.currentSprite);
 		}
 		//decide direction end
 		var freq = ticker.getFreq();
