@@ -10,8 +10,8 @@ Obj = function(images){
 	this.scale = 1;
 	this.duration = 100;
 	this.alpha = 0.5;
-	//this.movable = false;
 	this.img = images.sprite5;
+	//this.movable = false;
 };
 
 function main1(){
