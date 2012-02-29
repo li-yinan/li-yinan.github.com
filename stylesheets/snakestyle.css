@@ -5,6 +5,7 @@ body,a,p,div,canvas,span {
 }
 canvas {
 		margin:20px auto auto auto;
+		border:solid 1px #555555;
 		display:block;
 }
 #instruction {
