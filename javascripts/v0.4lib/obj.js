@@ -49,6 +49,10 @@ function main1(){
 		obj.setDest(obj.destX-100,obj.destY);
 	});
 
+	evtMgr.addMouseEvent(function(x,y){
+		obj.setDest(x,y);
+	});
+
 	evtMgr.addKeyEvent(32,function(){
 		if(ticker.isActive()){
 			ticker.stop();
