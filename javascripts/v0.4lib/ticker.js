@@ -4,6 +4,7 @@ Ticker = function(freq){
 	}
 	var _evtList = [];
 	var _tickptr;
+	var _frametimer;
 	var _freq = freq;
 	var _this = this;
 	var _active = false;
@@ -46,7 +47,7 @@ Ticker = function(freq){
 		var lastcnt = 0;
 		var score = document.getElementById("scorer");
 		//add a 1min timer to count ticks
-		setInterval(function(){
+		_frametimer = setInterval(function(){
 			var frame = _counter-lastcnt;
 			//console.log("ticks in 1min is"+(_counter-lastcnt));
 			score.innerHTML = frame;
@@ -69,6 +70,7 @@ Ticker = function(freq){
 
 	this.stop = function(){
 		_active = false;
+		clearInterval(_frametimer);
 		clearInterval(_tickptr);
 	}
 };
