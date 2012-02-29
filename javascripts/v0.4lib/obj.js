@@ -9,6 +9,7 @@ Obj = function(images){
 	this.collisionR = 16;
 	this.scale = 1;
 	this.duration = 100;
+	this.alpha = 0.5;
 	//this.movable = false;
 	this.img = images.sprite5;
 };

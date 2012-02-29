@@ -1,6 +1,8 @@
 Sprite = function(){
 	// image of sprite
 	this.img = undefined;
+	// alpha
+	this.alpha = 1;
 	// draw sprite offset
 	this.offset = -20;
 	// sprite direction
@@ -198,6 +200,8 @@ Sprite = function(){
 	 */
 	this.draw = function(){
 		_this.cxt.clearRect(0,0,_this.canvas.width,_this.canvas.height);
+		//set alpha 
+		_this.cxt.globalAlpha = _this.alpha;
 		//draw collison circle
 		_this.cxt.beginPath();
 		_this.cxt.arc(_this.anchorX,_this.anchorY,_this.collisionR,0,Math.PI*2,true);
@@ -214,6 +218,8 @@ Sprite = function(){
 			_this.collisionR*2*_this.scale,
 			_this.imgRegionHeight*2*_this.collisionR/_this.imgRegionWidth*_this.scale
 		);
+		//restore alpha
+		_this.cxt.globalAlpha = 1;
 	};
 
 	/**
