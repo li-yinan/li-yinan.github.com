@@ -19,7 +19,7 @@ function main1(){
 	function start(images){
 		obj = new Obj(images);
 		obj.calRegionCoord(4,4);
-		ticker = new Ticker(60);//frequency
+		ticker = new Ticker();//frequency
 		ticker.addEvent(obj.frameCtrl);
 		ticker.start();
 	}

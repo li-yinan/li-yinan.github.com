@@ -1,4 +1,7 @@
 Ticker = function(freq){
+	if(!freq){
+		freq = 60;
+	}
 	var _evtList = [];
 	var _tickptr;
 	var _freq = freq;
