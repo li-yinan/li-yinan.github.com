@@ -21,8 +21,9 @@ EventManager = function(){
         //return false;
 	};
 	var eventMouse = function(evt){
-		var coordX = evt.offsetX;
-		var coordY = evt.offsetY;
+		var canvas = document.getElementById("canvas");
+		var coordX = evt.pageX - canvas.offsetLeft;
+		var coordY = evt.pageY - canvas.offsetTop;
 		mouseEvt(coordX,coordY);
 	}
 	this.addMouseEvent = function(callback){
