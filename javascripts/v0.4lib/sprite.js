@@ -303,7 +303,21 @@ Sprite = function(){
 	 *
 	 * @return 
 	 */
+	var lastState = true;
 	this.frameCtrl = function(){
+		//if movable sprite is not in moving state,and is not the first frame turn into unmoving from moving state,then sleep
+		if((!_this.moving)&&_this.movable&&(lastState==_this.moving)){
+			lastState = _this.moving;
+			return;
+		}else if((!_this.moving)&&_this.movable&&(lastState!=_this.moving)){
+			//if sprite turn into unmoving state,then go on moving once to set the animation correct
+			//set animation in stop state
+			_this.setSpriteRegion(_this.direction, 0);
+			_this.clear();
+			_this.draw();
+		}
+		lastState = _this.moving;
+
 		_this.switchSpriteRegion();
 		_this.clear();
 		if(_this.movable){
