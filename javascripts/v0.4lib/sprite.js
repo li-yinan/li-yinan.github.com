@@ -40,6 +40,10 @@ Sprite = function(){
 	this.anchorX = 0;
 	// anchor Y
 	this.anchorY = 0;
+	// prev anchor X
+	this.prevX = 0;
+	// prev anchor Y
+	this.prevY = 0;
 	//boundary X
 	this.boundaryX = 800;
 	//boundary Y
@@ -101,9 +105,11 @@ Sprite = function(){
 			_this.moving = false;
 			return;
 		}
+		_this.prevX = _this.anchorX;
+		_this.prevY = _this.anchorY;
 		_this.anchorX = unit*(dx-sx)+sx;
 		_this.anchorY = unit*(dy-sy)+sy;
-		console.log("moveto override");
+		//console.log("moveto override");
 	};
 
 	/**
@@ -199,25 +205,51 @@ Sprite = function(){
 	 *
 	 */
 	this.draw = function(){
-		_this.cxt.clearRect(0,0,_this.canvas.width,_this.canvas.height);
-		//set alpha 
+		var spriteLeft = _this.anchorX-_this.collisionR*_this.scale;
+		var spriteTop = _this.anchorY-_this.imgRegionHeight*_this.collisionR/_this.imgRegionWidth*_this.scale+_this.offset;
+		 
+		var prevLeft = _this.prevX-_this.collisionR*_this.scale;
+		var prevTop = _this.prevY-_this.imgRegionHeight*_this.collisionR/_this.imgRegionWidth*_this.scale+_this.offset;
+
+		var spriteWidth = _this.collisionR*2*_this.scale;
+		var spriteHeight = _this.imgRegionHeight*2*_this.collisionR/_this.imgRegionWidth*_this.scale;
+
+		// clear screen
+		//_this.cxt.clearRect(0,0,_this.canvas.width,_this.canvas.height);
+		_this.cxt.clearRect(prevLeft-1,prevTop,spriteWidth+2,spriteHeight+_this.collisionR);
+
+		//set alpha, reset to 1 at the end of this function
 		_this.cxt.globalAlpha = _this.alpha;
+
 		//draw collison circle
+		_this.cxt.save();
 		_this.cxt.beginPath();
 		_this.cxt.arc(_this.anchorX,_this.anchorY,_this.collisionR,0,Math.PI*2,true);
+		_this.cxt.closePath();
+		_this.cxt.clip();
 		_this.cxt.stroke();
+		_this.cxt.restore();
 		//draw collison circle end
+
+		//clip screen
+		_this.cxt.save();
+		_this.cxt.beginPath();
+		_this.cxt.rect(spriteLeft,spriteTop,spriteWidth,spriteHeight);
+		_this.cxt.closePath();
+		_this.cxt.clip();
+
 		_this.cxt.drawImage(
 			_this.img,
 			_this.imgRegionLeft,
 			_this.imgRegionRight,
 			_this.imgRegionWidth,
 			_this.imgRegionHeight,
-			_this.anchorX-_this.collisionR*_this.scale,
-			_this.anchorY-_this.imgRegionHeight*_this.collisionR/_this.imgRegionWidth*_this.scale+_this.offset,
-			_this.collisionR*2*_this.scale,
-			_this.imgRegionHeight*2*_this.collisionR/_this.imgRegionWidth*_this.scale
+			spriteLeft,
+			spriteTop,
+			spriteWidth,
+			spriteHeight
 		);
+		_this.cxt.restore();
 		//restore alpha
 		_this.cxt.globalAlpha = 1;
 	};
