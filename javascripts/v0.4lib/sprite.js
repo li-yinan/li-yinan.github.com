@@ -4,7 +4,7 @@ Sprite = function(){
 	// alpha
 	this.alpha = 1;
 	// draw sprite offset
-	this.offset = -20;
+	this.offset = 0;
 	// sprite direction
 	this.direction = 0;
 	// sprite radian
@@ -207,8 +207,8 @@ Sprite = function(){
 	 * @return 
 	 */
 	this.clear = function(){
-		var spriteLeft = _this.anchorX-_this.collisionR*_this.scale;
-		var spriteTop = _this.anchorY-_this.imgRegionHeight*_this.collisionR/_this.imgRegionWidth*_this.scale+_this.offset;
+		var spriteLeft = -_this.collisionR*_this.scale;
+		var spriteTop = -_this.imgRegionHeight*_this.collisionR/_this.imgRegionWidth*_this.scale+_this.offset;
 		var spriteWidth = _this.collisionR*2*_this.scale;
 		var spriteHeight = _this.imgRegionHeight*2*_this.collisionR/_this.imgRegionWidth*_this.scale;
 		_this.cxt.save();
@@ -216,7 +216,7 @@ Sprite = function(){
 		_this.cxt.rotate(_this.radian);
 		if(_this.drawCollisionCircle){
 			// clear screen
-			_this.cxt.clearRect(-spriteWidth/2-1,-spriteHeight-1,spriteWidth+2,spriteHeight+_this.collisionR+2);
+			_this.cxt.clearRect(spriteLeft-1,spriteTop-1,spriteWidth+2,spriteHeight+_this.collisionR+2);
 		}else{
 			// clear screen
 			_this.cxt.clearRect(-spriteWidth/2-1,-spriteHeight-1,spriteWidth+2,spriteHeight+2);
@@ -230,13 +230,14 @@ Sprite = function(){
 	 *
 	 */
 	this.draw = function(){
-		var spriteLeft = _this.anchorX-_this.collisionR*_this.scale;
-		var spriteTop = _this.anchorY-_this.imgRegionHeight*_this.collisionR/_this.imgRegionWidth*_this.scale+_this.offset;
+		var spriteLeft = -_this.collisionR*_this.scale;
+		var spriteTop = -_this.imgRegionHeight*_this.collisionR/_this.imgRegionWidth*_this.scale+_this.offset;
 		var spriteWidth = _this.collisionR*2*_this.scale;
 		var spriteHeight = _this.imgRegionHeight*2*_this.collisionR/_this.imgRegionWidth*_this.scale;
 
 		//set alpha, reset to 1 at the end of this function
 		_this.cxt.globalAlpha = _this.alpha;
+		//draw Collision Circle
 		if(_this.drawCollisionCircle){
 			//draw collison circle
 			_this.cxt.save();
@@ -257,7 +258,7 @@ Sprite = function(){
 		//clip screen
 		_this.cxt.beginPath();
 		//_this.cxt.rect(spriteLeft,spriteTop,spriteWidth,spriteHeight);
-		_this.cxt.rect(-spriteWidth/2,-spriteHeight,spriteWidth,spriteHeight);
+		_this.cxt.rect(spriteLeft,spriteTop,spriteWidth,spriteHeight);
 		_this.cxt.closePath();
 		_this.cxt.clip();
 
@@ -267,8 +268,8 @@ Sprite = function(){
 			_this.imgRegionRight,
 			_this.imgRegionWidth,
 			_this.imgRegionHeight,
-			-spriteWidth/2,
-			-spriteHeight,
+			spriteLeft,
+			spriteTop,
 			spriteWidth,
 			spriteHeight
 		);

@@ -1,17 +1,19 @@
 Obj = function(images){
 	Sprite.call(this);
 	var _this = this;
+	this.img = images.sprite5;
 	this.anchorX = 400;
 	this.anchorY = 300;
 	this.destX = 400;
 	this.destY = 300;
 	this.speed = 200;
 	this.collisionR = 16;
-	this.scale = 1;
-	//this.radian = Math.PI*2/2;
 	this.duration = 100;
-	this.alpha = 0.5;
-	this.img = images.sprite5;
+	this.drawCollisionCircle = true;
+	//this.offset = -20;
+	//this.scale = 1;
+	//this.radian = Math.PI*2/2;
+	//this.alpha = 0.5;
 	//this.movable = false;
 };
 
