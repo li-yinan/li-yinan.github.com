@@ -7,6 +7,8 @@ Sprite = function(){
 	this.offset = -20;
 	// sprite direction
 	this.direction = 0;
+	// sprite radian
+	this.radian = 0;
 	// region of img
 	this.spriteList = [];
 	//current sprite
@@ -21,9 +23,8 @@ Sprite = function(){
 	this.imgRegionHeight = 100;
 	// whether draw the collision circle
 	this.drawCollisionCircle = false;
-	//canvas
-	this.canvas = document.getElementById("canvas"); 
-	this.cxt = this.canvas.getContext("2d");
+	//canvas cxt
+	this.cxt = document.getElementById("canvas").getContext("2d");
 	//direction
 	this.direction = 0;
 	// collision R
@@ -201,6 +202,28 @@ Sprite = function(){
 	};
 
 	/**
+	 * @brief clear sprite draw
+	 *
+	 * @return 
+	 */
+	this.clear = function(){
+		var spriteLeft = _this.anchorX-_this.collisionR*_this.scale;
+		var spriteTop = _this.anchorY-_this.imgRegionHeight*_this.collisionR/_this.imgRegionWidth*_this.scale+_this.offset;
+		var spriteWidth = _this.collisionR*2*_this.scale;
+		var spriteHeight = _this.imgRegionHeight*2*_this.collisionR/_this.imgRegionWidth*_this.scale;
+		_this.cxt.save();
+		_this.cxt.translate(_this.anchorX,_this.anchorY);
+		_this.cxt.rotate(_this.radian);
+		if(_this.drawCollisionCircle){
+			// clear screen
+			_this.cxt.clearRect(-spriteWidth/2-1,-spriteHeight-1,spriteWidth+2,spriteHeight+_this.collisionR+2);
+		}else{
+			// clear screen
+			_this.cxt.clearRect(-spriteWidth/2-1,-spriteHeight-1,spriteWidth+2,spriteHeight+2);
+		}
+		_this.cxt.restore();
+	}
+	/**
 	 * @brief draw the sprite
 	 *
 	 * @return 
@@ -209,21 +232,12 @@ Sprite = function(){
 	this.draw = function(){
 		var spriteLeft = _this.anchorX-_this.collisionR*_this.scale;
 		var spriteTop = _this.anchorY-_this.imgRegionHeight*_this.collisionR/_this.imgRegionWidth*_this.scale+_this.offset;
-		 
-		var prevLeft = _this.prevX-_this.collisionR*_this.scale;
-		var prevTop = _this.prevY-_this.imgRegionHeight*_this.collisionR/_this.imgRegionWidth*_this.scale+_this.offset;
-
 		var spriteWidth = _this.collisionR*2*_this.scale;
 		var spriteHeight = _this.imgRegionHeight*2*_this.collisionR/_this.imgRegionWidth*_this.scale;
 
 		//set alpha, reset to 1 at the end of this function
 		_this.cxt.globalAlpha = _this.alpha;
-
 		if(_this.drawCollisionCircle){
-			// clear screen
-			_this.cxt.clearRect(prevLeft-1,prevTop-1,spriteWidth+2,spriteHeight+_this.collisionR+2);
-
-
 			//draw collison circle
 			_this.cxt.save();
 			_this.cxt.beginPath();
@@ -233,14 +247,17 @@ Sprite = function(){
 			_this.cxt.stroke();
 			_this.cxt.restore();
 			//draw collison circle end
-		}else{
-			// clear screen
-			_this.cxt.clearRect(prevLeft-1,prevTop-1,spriteWidth+2,spriteHeight+2);
 		}
-		//clip screen
+
 		_this.cxt.save();
+		//rotate test
+		_this.cxt.translate(_this.anchorX,_this.anchorY);
+		_this.cxt.rotate(_this.radian);
+		//rotate test end
+		//clip screen
 		_this.cxt.beginPath();
-		_this.cxt.rect(spriteLeft,spriteTop,spriteWidth,spriteHeight);
+		//_this.cxt.rect(spriteLeft,spriteTop,spriteWidth,spriteHeight);
+		_this.cxt.rect(-spriteWidth/2,-spriteHeight,spriteWidth,spriteHeight);
 		_this.cxt.closePath();
 		_this.cxt.clip();
 
@@ -250,8 +267,8 @@ Sprite = function(){
 			_this.imgRegionRight,
 			_this.imgRegionWidth,
 			_this.imgRegionHeight,
-			spriteLeft,
-			spriteTop,
+			-spriteWidth/2,
+			-spriteHeight,
 			spriteWidth,
 			spriteHeight
 		);
@@ -287,6 +304,7 @@ Sprite = function(){
 	 */
 	this.frameCtrl = function(){
 		_this.switchSpriteRegion();
+		_this.clear();
 		if(_this.movable){
 			_this.moveTo();
 		}

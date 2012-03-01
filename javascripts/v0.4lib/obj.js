@@ -8,6 +8,7 @@ Obj = function(images){
 	this.speed = 200;
 	this.collisionR = 16;
 	this.scale = 1;
+	//this.radian = Math.PI*2/2;
 	this.duration = 100;
 	this.alpha = 0.5;
 	this.img = images.sprite5;
@@ -19,7 +20,7 @@ function main1(){
 	function start(images){
 		obj = new Obj(images);
 		obj.calRegionCoord(4,4);
-		ticker = new Ticker();//frequency
+		ticker = new Ticker(60,false);//frequency
 		ticker.addEvent(obj.frameCtrl);
 		ticker.start();
 	}
