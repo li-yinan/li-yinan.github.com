@@ -15,13 +15,15 @@ Obj = function(images){
 	//this.radian = Math.PI*2/2;
 	//this.alpha = 0.5;
 	//this.movable = false;
+	
+	//call sperate img into sprite function
+	this.calRegionCoord(4,4);
 };
 
 function main1(){
 
 	function start(images){
 		obj = new Obj(images);
-		obj.calRegionCoord(4,4);
 		ticker = new Ticker(60,false);//frequency
 		ticker.addEvent(obj.frameCtrl);
 		ticker.start();
