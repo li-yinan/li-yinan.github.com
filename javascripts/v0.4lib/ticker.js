@@ -11,11 +11,13 @@ Ticker = function(freq,auto){
 		freq = 60;
 	}
 	var _evtList = [];
+	var _spriteList = [];
 	var _tickptr;
 	var _frametimer;
 	var _freq = freq;
 	var _this = this;
 	var _active = false;
+	var _sleep = false;
 	var _counter = 0;
 
 	this.getCounter = function(){
@@ -39,8 +41,31 @@ Ticker = function(freq,auto){
 		_evtList[i] = undefined; 
 	};
 
+	this.addSprite = function(sprite){
+		_spriteList.push(sprite);
+		return _spriteList.length-1;
+	};
+
+	this.clearSprite = function(i){
+		_spriteList[i] = undefined; 
+		return _spriteList.length-1;
+	};
+
 	this.doEvent = function(){
 		_counter++;
+		//do sprite clear
+		for(var i=0;i<_spriteList.length;i++){
+			if(_spriteList[i]&&(_spriteList[i].moving||!_sleep)){
+				_spriteList[i].clear();
+			}
+		}
+		//do sprite frameControll 
+		for(var i=0;i<_spriteList.length;i++){
+			if(_spriteList[i]&&(_spriteList[i].moving||!_sleep)){
+				_spriteList[i].frameCtrl();
+			}
+		}
+		//do event list
 		for(var i=0;i<_evtList.length;i++){
 			if(_evtList[i]){
 				_evtList[i]();
