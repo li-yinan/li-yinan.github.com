@@ -106,6 +106,8 @@ Sprite = function(){
 			_this.anchorX = dx;
 			_this.anchorY = dy;
 			_this.moving = false;
+			_this.setSpriteRegion(_this.direction, 0);
+			//_this.draw();
 			return;
 		}
 		_this.prevX = _this.anchorX;
@@ -216,7 +218,7 @@ Sprite = function(){
 		_this.cxt.rotate(_this.radian);
 		if(_this.drawCollisionCircle){
 			// clear screen
-			_this.cxt.clearRect(spriteLeft-1,spriteTop-1,spriteWidth+2,spriteHeight+_this.collisionR+2);
+			_this.cxt.clearRect(spriteLeft-1,spriteTop-1,spriteWidth+2,spriteHeight+_this.offset+2);
 		}else{
 			// clear screen
 			_this.cxt.clearRect(-spriteWidth/2-1,-spriteHeight-1,spriteWidth+2,spriteHeight+2);
@@ -303,23 +305,26 @@ Sprite = function(){
 	 *
 	 * @return 
 	 */
-	var lastState = true;
+	//var lastState = true;
 	this.frameCtrl = function(){
 		//if movable sprite is not in moving state,and is not the first frame turn into unmoving from moving state,then sleep
-		if((!_this.moving)&&_this.movable&&(lastState==_this.moving)){
-			lastState = _this.moving;
-			return;
-		}else if((!_this.moving)&&_this.movable&&(lastState!=_this.moving)){
-			//if sprite turn into unmoving state,then go on moving once to set the animation correct
-			//set animation in stop state
-			_this.setSpriteRegion(_this.direction, 0);
-			_this.clear();
-			_this.draw();
-		}
-		lastState = _this.moving;
+		//if((!_this.moving)&&_this.movable&&(lastState==_this.moving)){
+		//	lastState = _this.moving;
+		//	return;
+		//}else if((!_this.moving)&&_this.movable&&(lastState!=_this.moving)){
+		//	//if sprite turn into unmoving state,then go on moving once to set the animation correct
+		//	//set animation in stop state
+		//	_this.setSpriteRegion(_this.direction, 0);
+		//	_this.clear();
+		//	_this.draw();
+		//	lastState = _this.moving;
+		//	_this.render = false;
+		//	return;
+		//}
+		//lastState = _this.moving;
 
+		//_this.clear();
 		_this.switchSpriteRegion();
-		_this.clear();
 		if(_this.movable){
 			_this.moveTo();
 		}

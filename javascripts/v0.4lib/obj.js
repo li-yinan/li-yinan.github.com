@@ -24,8 +24,11 @@ function main1(){
 
 	function start(images){
 		obj = new Obj(images);
+		obj1 = new Obj(images);
 		ticker = new Ticker(60,false);//frequency
-		ticker.addEvent(obj.frameCtrl);
+		//ticker.addEvent(obj.frameCtrl);
+		ticker.addSprite(obj);
+		ticker.addSprite(obj1);
 		ticker.start();
 	}
 
@@ -55,7 +58,7 @@ function main1(){
 	});
 
 	evtMgr.addMouseEvent(function(x,y){
-		obj.setDest(x,y);
+		obj1.setDest(x,y);
 	});
 
 	evtMgr.addKeyEvent(32,function(){
