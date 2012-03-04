@@ -40,8 +40,7 @@ World = function(){
 		if(distance<(sprite.collisionR+10)*(sprite.collisionR+10)){
 			_this.selectedSprite = sprite;
 			sprite.drawCollisionCircle = true;
-		}else{
-			_this.selectedSprite = undefined;
 		}
+		_this.selectedSprite.drawCollisionCircle = true;
 	};
 }
