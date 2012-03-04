@@ -12,6 +12,15 @@ World = function(){
 	this.frameCtrl = function(){
 		//do sprite clear
 		//console.log("in world framectrl");
+		_this.spriteList.sort(function(a,b){
+			if(a.anchorY<b.anchorY){
+				return -1;
+			}else if(a.anchorY>b.anchorY){
+				return 1;
+			}else{
+				return 0;
+			}
+		});
 		for(var i=0;i<_this.spriteList.length;i++){
 			if(_this.spriteList[i]&&(_this.spriteList[i].moving||!_this.sleep)){
 				_this.spriteList[i].clear();
