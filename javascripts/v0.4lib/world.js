@@ -1,7 +1,10 @@
-World = function(){
+World = function(images){
 	this.spriteList = [];
 	this.selectedSprite;
 	this.sleep = false;
+	this.img = images.world1;
+	this.canvas = document.getElementById("canvas");
+	this.cxt = this.canvas.getContext("2d");
 	var _this = this;
 	this.addSprite = function(sprite){
 		_this.spriteList.push(sprite);
@@ -9,6 +12,11 @@ World = function(){
 	this.removeSprite = function(i){
 		_this.spriteList[i] = undefined; 
 	};
+	/**
+	 * @brief called by ticker
+	 *
+	 * @return 
+	 */
 	this.frameCtrl = function(){
 		//do sprite clear
 		//console.log("in world framectrl");
@@ -21,11 +29,27 @@ World = function(){
 				return 0;
 			}
 		});
+
+		//save state
+		_this.cxt.save();
+		//clip sprite
+		_this.cxt.beginPath();
 		for(var i=0;i<_this.spriteList.length;i++){
 			if(_this.spriteList[i]&&(_this.spriteList[i].moving||!_this.sleep)){
-				_this.spriteList[i].clear();
+				//_this.spriteList[i].clear();
+				var region = _this.spriteList[i].getClearRegion();
+				_this.cxt.rect(region.left,region.top,region.width,region.height);
 			}
 		}
+		_this.cxt.closePath();
+		_this.cxt.clip();
+		//add world render code,now test with draw a rectagle
+		//_this.cxt.fillStyle = "#999999";
+		//_this.cxt.fillRect(0,0,_this.canvas.width,_this.canvas.height);
+		_this.draw();
+		//clip sprite end
+		//restore state
+		_this.cxt.restore();
 		//do sprite frameControll 
 		for(var i=0;i<_this.spriteList.length;i++){
 			if(_this.spriteList[i]&&(_this.spriteList[i].moving||!_this.sleep)){
@@ -33,6 +57,14 @@ World = function(){
 			}
 		}
 	};
+	/**
+	 * @brief select sprite nearest of (x,y) in 10 pixel
+	 *
+	 * @param x
+	 * @param y
+	 *
+	 * @return 
+	 */
 	this.selectSprite = function(x,y){
 		var distance = Number.MAX_VALUE;
 		var sprite;
@@ -52,4 +84,11 @@ World = function(){
 		}
 		_this.selectedSprite.drawCollisionCircle = true;
 	};
+	this.draw = function(){
+		_this.cxt.drawImage(_this.img,0,0,_this.canvas.width,_this.canvas.height);
+		//_this.cxt.fillStyle = "#999999";
+		//_this.cxt.fillRect(0,0,_this.canvas.width,_this.canvas.height);
+	};
+	//call once to draw global pic
+	this.draw();
 }
