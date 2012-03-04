@@ -6,20 +6,68 @@ World = function(images){
 	this.canvas = document.getElementById("canvas");
 	this.cxt = this.canvas.getContext("2d");
 	var _this = this;
+
+	/**
+	 * @brief 
+	 *
+	 * @param obj1 collide source
+	 * @param obj2 be collided
+	 *
+	 * @return 
+	 */
+	this.collisionCallBack = function(obj1,obj2){
+		//obj1.setDest(obj1.anchorX,obj1.anchorY);
+		console.log("collisionCallBack ");
+		//console.log(obj1);
+		//console.log(obj2);
+	};
+	/**
+	 * @brief detect collision on moving sprites
+	 *
+	 * @return 
+	 */
+	this.collision = function(callback){
+		for(var i=0;i<_this.spriteList.length;i++){
+			if(_this.spriteList[i]&&_this.spriteList[i].moving){
+				var sx = _this.spriteList[i].anchorX;
+				var sy = _this.spriteList[i].anchorY;
+				var sr = _this.spriteList[i].collisionR;
+				for(var j=0;j<_this.spriteList.length;j++){
+					//if not self
+					if(i!=j){
+						var dx = _this.spriteList[j].anchorX;
+						var dy = _this.spriteList[j].anchorY;
+						var dr = _this.spriteList[j].collisionR;
+						var distance = (sx-dx)*(sx-dx)+(sy-dy)*(sy-dy);
+						//if collide
+						if(distance<(sr+dr)*(sr+dr)){
+							callback(_this.spriteList[i],_this.spriteList[j]);
+						}
+					}
+				}
+			}
+		}
+	};
+	/**
+	 * @brief add sprite
+	 *
+	 * @param sprite
+	 *
+	 * @return 
+	 */
 	this.addSprite = function(sprite){
 		_this.spriteList.push(sprite);
 	};
-	this.removeSprite = function(i){
-		_this.spriteList[i] = undefined; 
-	};
+
 	/**
 	 * @brief called by ticker
 	 *
 	 * @return 
 	 */
 	this.frameCtrl = function(){
+		_this.collision(_this.collisionCallBack);
 		//do sprite clear
-		//console.log("in world framectrl");
+		//sort the sprite list by anchorY 
 		_this.spriteList.sort(function(a,b){
 			if(a.anchorY<b.anchorY){
 				return -1;
@@ -30,7 +78,7 @@ World = function(images){
 			}
 		});
 
-		//save state
+		//save state, ready to clip, then call this.draw to cover the sprite pic
 		_this.cxt.save();
 		//clip sprite
 		_this.cxt.beginPath();
@@ -57,6 +105,7 @@ World = function(images){
 			}
 		}
 	};
+
 	/**
 	 * @brief select sprite nearest of (x,y) in 10 pixel
 	 *
@@ -84,11 +133,17 @@ World = function(images){
 		}
 		_this.selectedSprite.drawCollisionCircle = true;
 	};
+
+	/**
+	 * @brief render background
+	 *
+	 * @return 
+	 */
 	this.draw = function(){
 		_this.cxt.drawImage(_this.img,0,0,_this.canvas.width,_this.canvas.height);
 		//_this.cxt.fillStyle = "#999999";
 		//_this.cxt.fillRect(0,0,_this.canvas.width,_this.canvas.height);
 	};
-	//call once to draw global pic
+	//call once to draw background 
 	this.draw();
 }
