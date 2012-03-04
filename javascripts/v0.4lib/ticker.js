@@ -13,11 +13,10 @@ Ticker = function(freq,auto){
 	var _evtList = [];
 	var _spriteList = [];
 	var _tickptr;
-	var _frametimer;
+	var _framecnt;
 	var _freq = freq;
 	var _this = this;
 	var _active = false;
-	var _sleep = false;
 	var _counter = 0;
 
 	this.getCounter = function(){
@@ -41,30 +40,10 @@ Ticker = function(freq,auto){
 		_evtList[i] = undefined; 
 	};
 
-	this.addSprite = function(sprite){
-		_spriteList.push(sprite);
-		return _spriteList.length-1;
-	};
 
-	this.clearSprite = function(i){
-		_spriteList[i] = undefined; 
-		return _spriteList.length-1;
-	};
 
 	this.doEvent = function(){
 		_counter++;
-		//do sprite clear
-		for(var i=0;i<_spriteList.length;i++){
-			if(_spriteList[i]&&(_spriteList[i].moving||!_sleep)){
-				_spriteList[i].clear();
-			}
-		}
-		//do sprite frameControll 
-		for(var i=0;i<_spriteList.length;i++){
-			if(_spriteList[i]&&(_spriteList[i].moving||!_sleep)){
-				_spriteList[i].frameCtrl();
-			}
-		}
 		//do event list
 		for(var i=0;i<_evtList.length;i++){
 			if(_evtList[i]){
@@ -81,7 +60,7 @@ Ticker = function(freq,auto){
 			var lastcnt = 0;
 			var score = document.getElementById("scorer");
 			//add a 1min timer to count ticks
-			_frametimer = setInterval(function(){
+			_framecnt= setInterval(function(){
 				var frame = _counter-lastcnt;
 				//console.log("ticks in 1min is"+(_counter-lastcnt));
 				score.innerHTML = frame;
@@ -106,7 +85,7 @@ Ticker = function(freq,auto){
 
 	this.stop = function(){
 		_active = false;
-		clearInterval(_frametimer);
+		clearInterval(_framecnt);
 		clearInterval(_tickptr);
 	}
 };
