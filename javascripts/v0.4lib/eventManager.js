@@ -1,6 +1,7 @@
 EventManager = function(){
 	var keyEvtList = [];
-	var mouseEvt;
+	var leftClickEvt;
+	var rightClickEvt;
 	var canvas = document.getElementById("canvas");
 
 	var eventSelector = function(evt){
@@ -21,13 +22,23 @@ EventManager = function(){
         //return false;
 	};
 	var eventMouse = function(evt){
+		//console.log("mouse event");
 		var canvas = document.getElementById("canvas");
 		var coordX = evt.pageX - canvas.offsetLeft;
 		var coordY = evt.pageY - canvas.offsetTop;
-		mouseEvt(coordX,coordY);
+		if(evt.button == 2){
+			//right button
+			//console.log("right click");
+			rightClickEvt(coordX,coordY);
+		}else{
+			leftClickEvt(coordX,coordY);
+		}
 	}
-	this.addMouseEvent = function(callback){
-		mouseEvt = callback;
+	this.addRightClickEvent= function(callback){
+		rightClickEvt = callback;
+	}
+	this.addLeftClickEvent= function(callback){
+		leftClickEvt = callback;
 	}
 
 	this.addKeyEvent = function(value,callback){
@@ -36,10 +47,12 @@ EventManager = function(){
 
 	if(document.attachEvent){
 		document.attachEvent("onkeydown",eventSelector);
-		canvas.attachEvent("onclick",eventMouse);
+		canvas.attachEvent("onmousedown",eventMouse);
+		canvas.oncontextmenu = function(){return false;};
 	}else if(document.addEventListener){
 		document.addEventListener("keydown",eventSelector,true);
-		canvas.addEventListener("click",eventMouse,true);
+		canvas.addEventListener("mousedown",eventMouse,true);
+		canvas.addEventListener("contextmenu",function(){return false;},true);
+		canvas.oncontextmenu = function(){return false;};
 	}
-
 };

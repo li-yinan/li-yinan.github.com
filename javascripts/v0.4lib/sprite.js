@@ -221,7 +221,9 @@ Sprite = function(){
 			_this.cxt.clearRect(spriteLeft-1,spriteTop-1,spriteWidth+2,spriteHeight+_this.offset+2);
 		}else{
 			// clear screen
-			_this.cxt.clearRect(-spriteWidth/2-1,-spriteHeight-1,spriteWidth+2,spriteHeight+2);
+			//_this.cxt.clearRect(-spriteWidth/2-1,-spriteHeight-1,spriteWidth+2,spriteHeight+2);
+			//_this.cxt.clearRect(-spriteLeft-1,-spriteTop-1,spriteWidth+2,spriteHeight+2);
+			_this.cxt.clearRect(spriteLeft-1,spriteTop-1,spriteWidth+2,spriteHeight+2);
 		}
 		_this.cxt.restore();
 	}
