@@ -4,7 +4,7 @@ function main(){
 		obj1 = new Obj2(images);
 		ticker = new Ticker(60,false);//frequency
 		//ticker.addEvent(obj.frameCtrl);
-		world = new World();
+		world = new World(images);
 		world.addSprite(obj);
 		world.addSprite(obj1);
 		ticker.addEvent(world.frameCtrl);
@@ -13,7 +13,8 @@ function main(){
 
 	var imgresource = {
 		sprite1:"resource/spriteimg/012-Lancer04.png",
-		sprite2:"resource/spriteimg/040-Mage08.png"
+		sprite2:"resource/spriteimg/040-Mage08.png",
+		world1:"resource/worldimg/011-PortTown01.jpg"
 	};
 
 	new ImgLoader(imgresource,start);
@@ -52,4 +53,5 @@ function main(){
 		}
 	});
 };
-window.addEventListener("load",main);
+//window.addEventListener("load",main);
+window.onload = main;

@@ -118,17 +118,6 @@ Sprite = function(){
 	};
 
 	/**
-	 * @brief rotato the sprite
-	 *
-	 * @return 
-	 *
-	 * @throw "pleaseoverwrite this function!"
-	 */
-	this.rotate = function(){
-		throw("please overwrite this function!");
-	};
-
-	/**
 	 * @brief set the region of sprite
 	 *
 	 * @return 
@@ -202,6 +191,18 @@ Sprite = function(){
 			}
 		}
 	};
+	this.getClearRegion = function(){
+		var ret = {};
+		ret.left = _this.anchorX-_this.collisionR*_this.scale-1;
+		ret.top = _this.anchorY-_this.imgRegionHeight*_this.collisionR/_this.imgRegionWidth*_this.scale+_this.offset-1;
+		ret.width = _this.collisionR*2*_this.scale+2;
+		if(_this.drawCollisionCircle){
+			ret.height = _this.imgRegionHeight*2*_this.collisionR/_this.imgRegionWidth*_this.scale+_this.offset+2;
+		}else{
+			ret.height = _this.imgRegionHeight*2*_this.collisionR/_this.imgRegionWidth*_this.scale;
+		}
+		return ret;
+	};
 
 	/**
 	 * @brief clear sprite draw
@@ -221,8 +222,6 @@ Sprite = function(){
 			_this.cxt.clearRect(spriteLeft-1,spriteTop-1,spriteWidth+2,spriteHeight+_this.offset+2);
 		}else{
 			// clear screen
-			//_this.cxt.clearRect(-spriteWidth/2-1,-spriteHeight-1,spriteWidth+2,spriteHeight+2);
-			//_this.cxt.clearRect(-spriteLeft-1,-spriteTop-1,spriteWidth+2,spriteHeight+2);
 			_this.cxt.clearRect(spriteLeft-1,spriteTop-1,spriteWidth+2,spriteHeight+2);
 		}
 		_this.cxt.restore();
