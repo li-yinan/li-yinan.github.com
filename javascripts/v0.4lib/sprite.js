@@ -81,6 +81,39 @@ Sprite = function(){
 	}
 
 	/**
+	 * @brief before move,after calculate the next coordination
+	 *
+	 * @param nx  next X
+	 * @param ny  next Y
+	 *
+	 * @return 
+	 */
+	this.beforeMove = function(next){
+		var collide = false;
+		var sr = _this.collisionR;
+		for(var i=0;i<_this.world.spriteList.length;i++){
+			var dx = _this.world.spriteList[i].anchorX;
+			var dy = _this.world.spriteList[i].anchorY;
+			var dr = _this.world.spriteList[i].collisionR;
+			//if is self continue
+			if(_this.anchorX==dx&&_this.anchorY==dy){
+				continue;
+			}
+			var distance = (next.x-dx)*(next.x-dx)+(next.y-dy)*(next.y-dy);
+			//if collide
+			if(distance<(sr+dr)*(sr+dr)){
+				collide = true;
+			}
+		}
+		if(collide){
+			next.x = _this.anchorX;
+			next.y = _this.anchorY;
+			_this.moving = false;
+			_this.setSpriteRegion(_this.direction, 0);
+		}
+	};
+
+	/**
 	 * @brief move to destination coordination
 	 *
 	 * @param destX
@@ -110,10 +143,14 @@ Sprite = function(){
 			//_this.draw();
 			return;
 		}
+		var next = {};
+		next.x = unit*(dx-sx)+sx;
+		next.y = unit*(dy-sy)+sy;
+		_this.beforeMove(next);
 		_this.prevX = _this.anchorX;
 		_this.prevY = _this.anchorY;
-		_this.anchorX = unit*(dx-sx)+sx;
-		_this.anchorY = unit*(dy-sy)+sy;
+		_this.anchorX = next.x;
+		_this.anchorY = next.y;
 		//console.log("moveto override");
 	};
 
