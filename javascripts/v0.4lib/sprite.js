@@ -101,16 +101,19 @@ Sprite = function(){
 			}
 			var distance = (next.x-dx)*(next.x-dx)+(next.y-dy)*(next.y-dy);
 			//if collide
-			if(distance<(sr+dr)*(sr+dr)){
+			var unit = (sr+dr)*(sr+dr)/distance;
+			if(unit>1){
 				collide = true;
+				next.x = (next.x-dx)*unit+dx;
+				next.y = (next.y-dy)*unit+dy;
 			}
 		}
-		if(collide){
-			next.x = _this.anchorX;
-			next.y = _this.anchorY;
-			_this.moving = false;
-			_this.setSpriteRegion(_this.direction, 0);
-		}
+		//if(collide){
+		//	//next.x = _this.anchorX;
+		//	//next.y = _this.anchorY;
+		//	_this.moving = false;
+		//	_this.setSpriteRegion(_this.direction, 0);
+		//}
 	};
 
 	/**
