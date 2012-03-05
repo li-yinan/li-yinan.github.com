@@ -18,6 +18,7 @@ World = function(images){
 	this.collisionCallBack = function(obj1,obj2){
 		//obj1.setDest(obj1.anchorX,obj1.anchorY);
 		console.log("collisionCallBack ");
+		//obj1.moving = false;
 		//console.log(obj1);
 		//console.log(obj2);
 	};
@@ -56,6 +57,7 @@ World = function(images){
 	 * @return 
 	 */
 	this.addSprite = function(sprite){
+		sprite.world = _this;
 		_this.spriteList.push(sprite);
 	};
 
@@ -65,7 +67,7 @@ World = function(images){
 	 * @return 
 	 */
 	this.frameCtrl = function(){
-		_this.collision(_this.collisionCallBack);
+		//_this.collision(_this.collisionCallBack);
 		//do sprite clear
 		//sort the sprite list by anchorY 
 		_this.spriteList.sort(function(a,b){
