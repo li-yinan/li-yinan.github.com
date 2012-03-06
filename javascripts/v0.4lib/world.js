@@ -1,5 +1,11 @@
 World = function(images){
 	this.spriteList = [];
+
+	this.imgRegionLeft = 0;
+	this.imgRegionTop= 0;
+	this.imgRegionWidth = 400;
+	this.imgRegionHeight = 300;
+
 	this.selectedSprite;
 	this.sleep = false;
 	this.img = images.world1;
@@ -137,12 +143,56 @@ World = function(images){
 	};
 
 	/**
+	 * @brief roll map
+	 *
+	 * @param relateX offset X of prev coordinate
+	 * @param relateY offset Y of prev coordinate
+	 *
+	 * @return 
+	 */
+	this.rollMap = function(relateX,relateY){
+		_this.cxt.save();
+		_this.cxt.rect(0,0,_this.canvas.width,_this.canvas.height);
+		_this.cxt.clip();
+		if(_this.imgRegionLeft+relateX<0||_this.imgRegionLeft+relateX+_this.imgRegionWidth>_this.img.width){
+			return;
+		}
+		if(_this.imgRegionTop+relateY<0||_this.imgRegionTop+relateY+_this.imgRegionHeight>_this.img.height){
+			return;
+		}
+		_this.imgRegionLeft += relateX;
+		_this.imgRegionTop += relateY;
+		_this.cxt.drawImage(
+			_this.img,
+			_this.imgRegionLeft,
+			_this.imgRegionTop,
+			_this.imgRegionWidth,
+			_this.imgRegionHeight,
+			0,0,_this.canvas.width,_this.canvas.height
+		);
+		_this.cxt.restore();
+		for(var i=0;i<_this.spriteList.length;i++){
+			_this.spriteList[i].anchorX -= relateX;
+			_this.spriteList[i].anchorY -= relateY;
+			_this.spriteList[i].destX -= relateX;
+			_this.spriteList[i].destY -= relateY;
+		}
+	};
+	/**
 	 * @brief render background
 	 *
 	 * @return 
 	 */
 	this.draw = function(){
-		_this.cxt.drawImage(_this.img,0,0,_this.canvas.width,_this.canvas.height);
+		//_this.cxt.drawImage(_this.img,0,0,_this.canvas.width,_this.canvas.height);
+		_this.cxt.drawImage(
+			_this.img,
+			_this.imgRegionLeft,
+			_this.imgRegionTop,
+			_this.imgRegionWidth,
+			_this.imgRegionHeight,
+			0,0,_this.canvas.width,_this.canvas.height
+		);
 		//_this.cxt.fillStyle = "#999999";
 		//_this.cxt.fillRect(0,0,_this.canvas.width,_this.canvas.height);
 	};

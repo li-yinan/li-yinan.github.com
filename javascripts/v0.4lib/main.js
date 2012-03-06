@@ -21,18 +21,22 @@ function main(){
 
 	var evtMgr = new EventManager();
 
-	evtMgr.addKeyEvent(38,function(){
-		obj.setDest(obj.destX,obj.destY-100);
-	});
-	evtMgr.addKeyEvent(39,function(){
-		obj.setDest(obj.destX+100,obj.destY);
-	});
-	evtMgr.addKeyEvent(40,function(){
-		obj.setDest(obj.destX,obj.destY+100);
-	});
-	evtMgr.addKeyEvent(37,function(){
-		obj.setDest(obj.destX-100,obj.destY);
-	});
+	//evtMgr.addKeyEvent(38,function(){
+	//	//obj.setDest(obj.destX,obj.destY-100);
+	//	world.rollMap(0,10);
+	//});
+	//evtMgr.addKeyEvent(39,function(){
+	//	//obj.setDest(obj.destX+100,obj.destY);
+	//	world.rollMap(-10,0);
+	//});
+	//evtMgr.addKeyEvent(40,function(){
+	//	//obj.setDest(obj.destX,obj.destY+100);
+	//	world.rollMap(0,-10);
+	//});
+	//evtMgr.addKeyEvent(37,function(){
+	//	//obj.setDest(obj.destX-100,obj.destY);
+	//	world.rollMap(10,0);
+	//});
 
 	evtMgr.addLeftClickEvent(function(x,y){
 		//obj1.setDest(x,y);
