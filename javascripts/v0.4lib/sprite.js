@@ -104,8 +104,12 @@ Sprite = function(){
 			var unit = (sr+dr)*(sr+dr)/distance;
 			if(unit>1){
 				collide = true;
-				next.x = (next.x-dx)*unit+dx;
-				next.y = (next.y-dy)*unit+dy;
+				next.x = (next.x-dx)*Math.sqrt(unit)+dx;
+				next.y = (next.y-dy)*Math.sqrt(unit)+dy;
+				//var freq = ticker.getFreq();
+				////var unit = _this.speed/Math.sqrt((dx-nx)*(dx-nx)+(dy-ny)*(dy-ny))/freq;
+				//next.x += _this.speed/freq*(dy-ny)/(dr+sr);
+				//next.y += _this.speed/freq*(dx-nx)/(dr+sr);
 			}
 		}
 		//if(collide){
