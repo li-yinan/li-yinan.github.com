@@ -4,6 +4,9 @@ World = function(images){
 	this.top = 0;
 	this.left = 0;
 
+	this.containerHeight = 0;
+	this.containerWidth = 0;
+
 	this.selectedSprite;
 	this.sleep = false;
 	this.img = images.world1;
@@ -150,12 +153,10 @@ World = function(images){
 	 * @return 
 	 */
 	this.rollMap = function(relateX,relateY){
-		var containerHeight = parseInt(document.defaultView.getComputedStyle(_this.container, null)["height"]);
-		var containerWidth = parseInt(document.defaultView.getComputedStyle(_this.container, null)["width"]);
-		if(_this.top+relateY>0||_this.top+relateY<containerHeight-_this.canvas.height){
+		if(_this.top+relateY>0||_this.top+relateY<_this.containerHeight-_this.canvas.height){
 			return;
 		}
-		if(_this.left+relateX>0||_this.left+relateX<containerWidth-_this.canvas.width){
+		if(_this.left+relateX>0||_this.left+relateX<_this.containerWidth-_this.canvas.width){
 			return;
 		}
 		_this.top += relateY;
@@ -217,6 +218,8 @@ World = function(images){
 	 */
 	this.init = function(){
 		//_this.
+		this.containerHeight = parseInt(document.defaultView.getComputedStyle(_this.container, null)["height"]);
+		this.containerWidth = parseInt(document.defaultView.getComputedStyle(_this.container, null)["width"]);
 		_this.draw();
 	};
 	this.init();
