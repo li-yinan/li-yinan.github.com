@@ -1,15 +1,14 @@
 World = function(images){
 	this.spriteList = [];
 
-	this.imgRegionLeft = 0;
-	this.imgRegionTop= 0;
-	this.imgRegionWidth = 400;
-	this.imgRegionHeight = 300;
+	this.top = 0;
+	this.left = 0;
 
 	this.selectedSprite;
 	this.sleep = false;
 	this.img = images.world1;
 	this.canvas = document.getElementById("canvas");
+	this.container = document.getElementById("container");
 	this.cxt = this.canvas.getContext("2d");
 	var _this = this;
 
@@ -151,6 +150,19 @@ World = function(images){
 	 * @return 
 	 */
 	this.rollMap = function(relateX,relateY){
+		var containerHeight = parseInt(document.defaultView.getComputedStyle(_this.container, null)["height"]);
+		var containerWidth = parseInt(document.defaultView.getComputedStyle(_this.container, null)["width"]);
+		if(_this.top+relateY>0||_this.top+relateY<containerHeight-_this.canvas.height){
+			return;
+		}
+		if(_this.left+relateX>0||_this.left+relateX<containerWidth-_this.canvas.width){
+			return;
+		}
+		_this.top += relateY;
+		_this.left += relateX;
+		_this.canvas.style.top = _this.top+"px";
+		_this.canvas.style.left = _this.left+"px";
+		/*
 		_this.cxt.save();
 		_this.cxt.rect(0,0,_this.canvas.width,_this.canvas.height);
 		_this.cxt.clip();
@@ -177,6 +189,7 @@ World = function(images){
 			_this.spriteList[i].destX -= relateX;
 			_this.spriteList[i].destY -= relateY;
 		}
+		*/
 	};
 	/**
 	 * @brief render background
@@ -184,18 +197,27 @@ World = function(images){
 	 * @return 
 	 */
 	this.draw = function(){
-		//_this.cxt.drawImage(_this.img,0,0,_this.canvas.width,_this.canvas.height);
-		_this.cxt.drawImage(
-			_this.img,
-			_this.imgRegionLeft,
-			_this.imgRegionTop,
-			_this.imgRegionWidth,
-			_this.imgRegionHeight,
-			0,0,_this.canvas.width,_this.canvas.height
-		);
+		_this.cxt.drawImage(_this.img,0,0,_this.canvas.width,_this.canvas.height);
+		//_this.cxt.drawImage(
+		//	_this.img,
+		//	_this.imgRegionLeft,
+		//	_this.imgRegionTop,
+		//	_this.imgRegionWidth,
+		//	_this.imgRegionHeight,
+		//	0,0,_this.canvas.width,_this.canvas.height
+		//);
 		//_this.cxt.fillStyle = "#999999";
 		//_this.cxt.fillRect(0,0,_this.canvas.width,_this.canvas.height);
 	};
 	//call once to draw background 
-	this.draw();
+	/**
+	 * @brief init ,call once on start
+	 *
+	 * @return 
+	 */
+	this.init = function(){
+		//_this.
+		_this.draw();
+	};
+	this.init();
 }

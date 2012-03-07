@@ -23,8 +23,10 @@ Sprite = function(){
 	this.imgRegionHeight = 100;
 	// whether draw the collision circle
 	this.drawCollisionCircle = false;
+	//canvas 
+	this.canvas = document.getElementById("canvas"); 
 	//canvas cxt
-	this.cxt = document.getElementById("canvas").getContext("2d");
+	this.cxt = this.canvas.getContext("2d");
 	//direction
 	this.direction = 0;
 	// collision R
@@ -375,4 +377,9 @@ Sprite = function(){
 		}
 		_this.draw();
 	};
+	this.init = function(){
+		this.boundaryX = this.canvas.width;
+		this.boundaryY = this.canvas.height;
+	}
+	this.init();
 };
