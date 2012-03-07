@@ -17,7 +17,10 @@ Obj1 = function(images){
 	//this.movable = false;
 	
 	//call sperate img into sprite function
-	this.calRegionCoord(4,4);
+	this.init = function(){
+		this.calRegionCoord(4,4);
+	};
+	this.init();
 };
 
 Obj2 = function(images){

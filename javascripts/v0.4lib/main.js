@@ -9,6 +9,44 @@ function main(){
 		world.addSprite(obj1);
 		ticker.addEvent(world.frameCtrl);
 		ticker.start();
+
+		var evtMgr = new EventManager(world);
+
+		evtMgr.addKeyEvent(38,function(){
+			//obj.setDest(obj.destX,obj.destY-100);
+			world.rollMap(0,50);
+		});
+		evtMgr.addKeyEvent(39,function(){
+			//obj.setDest(obj.destX+100,obj.destY);
+			world.rollMap(-50,0);
+		});
+		evtMgr.addKeyEvent(40,function(){
+			//obj.setDest(obj.destX,obj.destY+100);
+			world.rollMap(0,-50);
+		});
+		evtMgr.addKeyEvent(37,function(){
+			//obj.setDest(obj.destX-100,obj.destY);
+			world.rollMap(50,0);
+		});
+
+		evtMgr.addLeftClickEvent(function(x,y){
+			//obj1.setDest(x,y);
+			world.selectSprite(x,y);
+		});
+		evtMgr.addRightClickEvent(function(x,y){
+			//obj1.setDest(x,y);
+			if(world.selectedSprite){
+				world.selectedSprite.setDest(x,y);
+			}
+		});
+
+		evtMgr.addKeyEvent(32,function(){
+			if(ticker.isActive()){
+				ticker.stop();
+			}else{
+				ticker.start();
+			}
+		});
 	}
 
 	var imgresource = {
@@ -19,43 +57,6 @@ function main(){
 
 	new ImgLoader(imgresource,start);
 
-	var evtMgr = new EventManager();
-
-	//evtMgr.addKeyEvent(38,function(){
-	//	//obj.setDest(obj.destX,obj.destY-100);
-	//	world.rollMap(0,10);
-	//});
-	//evtMgr.addKeyEvent(39,function(){
-	//	//obj.setDest(obj.destX+100,obj.destY);
-	//	world.rollMap(-10,0);
-	//});
-	//evtMgr.addKeyEvent(40,function(){
-	//	//obj.setDest(obj.destX,obj.destY+100);
-	//	world.rollMap(0,-10);
-	//});
-	//evtMgr.addKeyEvent(37,function(){
-	//	//obj.setDest(obj.destX-100,obj.destY);
-	//	world.rollMap(10,0);
-	//});
-
-	evtMgr.addLeftClickEvent(function(x,y){
-		//obj1.setDest(x,y);
-		world.selectSprite(x,y);
-	});
-	evtMgr.addRightClickEvent(function(x,y){
-		//obj1.setDest(x,y);
-		if(world.selectedSprite){
-			world.selectedSprite.setDest(x,y);
-		}
-	});
-
-	evtMgr.addKeyEvent(32,function(){
-		if(ticker.isActive()){
-			ticker.stop();
-		}else{
-			ticker.start();
-		}
-	});
 };
 //window.addEventListener("load",main);
 window.onload = main;
