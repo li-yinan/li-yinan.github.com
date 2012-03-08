@@ -27,13 +27,19 @@ EventManager = function(wd){
 		var canvas = document.getElementById("canvas");
 		//var coordX = evt.pageX - canvas.offsetLeft - _world.left;
 		//var coordY = evt.pageY - canvas.offsetTop - _world.top;
+		if(!evt.pageX){
+			evt.pageX = evt.clientX+document.body.scrollLeft;
+		}
+		if(!evt.pageY){
+			evt.pageY = evt.clientY+document.body.scrollTop;
+		}
 		var container = document.getElementById("container");
 		var containerX = evt.pageX - container.offsetLeft;
 		var containerY = evt.pageY - container.offsetTop;
 		var coordX = containerX - _world.left;
 		var coordY = containerY - _world.top;
-		console.log("coordx is "+coordX+",coordy is "+coordY);
-		console.log("containerX is "+containerX+",containerY is "+containerY);
+		//console.log("coordx is "+coordX+",coordy is "+coordY);
+		//console.log("containerX is "+containerX+",containerY is "+containerY);
 		if(evt.button == 2){
 			//right button
 			//console.log("right click");

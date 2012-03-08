@@ -36,6 +36,12 @@ function main(){
 		evtMgr.addRightClickEvent(function(x,y){
 			//obj1.setDest(x,y);
 			if(world.selectedSprite){
+				var sprite = world.pointOnSprite(x,y);
+				if(sprite){
+					world.selectedSprite.setFollower(sprite);
+				}else{
+					world.selectedSprite.setFollower();
+				}
 				world.selectedSprite.setDest(x,y);
 			}
 		});

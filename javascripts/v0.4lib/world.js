@@ -30,33 +30,33 @@ World = function(images){
 		//console.log(obj1);
 		//console.log(obj2);
 	};
-	/**
-	 * @brief detect collision on moving sprites
-	 *
-	 * @return 
-	 */
-	this.collision = function(callback){
-		for(var i=0;i<_this.spriteList.length;i++){
-			if(_this.spriteList[i]&&_this.spriteList[i].moving){
-				var sx = _this.spriteList[i].anchorX;
-				var sy = _this.spriteList[i].anchorY;
-				var sr = _this.spriteList[i].collisionR;
-				for(var j=0;j<_this.spriteList.length;j++){
-					//if not self
-					if(i!=j){
-						var dx = _this.spriteList[j].anchorX;
-						var dy = _this.spriteList[j].anchorY;
-						var dr = _this.spriteList[j].collisionR;
-						var distance = (sx-dx)*(sx-dx)+(sy-dy)*(sy-dy);
-						//if collide
-						if(distance<(sr+dr)*(sr+dr)){
-							callback(_this.spriteList[i],_this.spriteList[j]);
-						}
-					}
-				}
-			}
-		}
-	};
+	///////**
+	////// * @brief detect collision on moving sprites
+	////// *
+	////// * @return 
+	////// */
+	//////this.collision = function(callback){
+	//////	for(var i=0;i<_this.spriteList.length;i++){
+	//////		if(_this.spriteList[i]&&_this.spriteList[i].moving){
+	//////			var sx = _this.spriteList[i].anchorX;
+	//////			var sy = _this.spriteList[i].anchorY;
+	//////			var sr = _this.spriteList[i].collisionR;
+	//////			for(var j=0;j<_this.spriteList.length;j++){
+	//////				//if not self
+	//////				if(i!=j){
+	//////					var dx = _this.spriteList[j].anchorX;
+	//////					var dy = _this.spriteList[j].anchorY;
+	//////					var dr = _this.spriteList[j].collisionR;
+	//////					var distance = (sx-dx)*(sx-dx)+(sy-dy)*(sy-dy);
+	//////					//if collide
+	//////					if(distance<(sr+dr)*(sr+dr)){
+	//////						callback(_this.spriteList[i],_this.spriteList[j]);
+	//////					}
+	//////				}
+	//////			}
+	//////		}
+	//////	}
+	//////};
 	/**
 	 * @brief add sprite
 	 *
@@ -115,6 +115,30 @@ World = function(images){
 			}
 		}
 	};
+
+	/**
+	 * @brief whether the mouse is in sprite
+	 *
+	 * @param x
+	 * @param y
+	 */
+	this.pointOnSprite = function(x,y){
+		var distance = Number.MAX_VALUE;
+		var sprite;
+		for(var i=0;i<_this.spriteList.length;i++){
+			var sx = _this.spriteList[i].anchorX;
+			var sy = _this.spriteList[i].anchorY;
+			var sd = (sx-x)*(sx-x)+(sy-y)*(sy-y);
+			if(sd<distance){
+				distance=sd;
+				sprite = _this.spriteList[i];
+			}
+		}
+		if(distance<(sprite.collisionR+10)*(sprite.collisionR+10)){
+			return sprite;
+		}
+		return undefined;
+	}
 
 	/**
 	 * @brief select sprite nearest of (x,y) in 10 pixel

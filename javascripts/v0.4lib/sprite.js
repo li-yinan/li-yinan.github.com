@@ -11,6 +11,8 @@ Sprite = function(){
 	this.radian = 0;
 	// region of img
 	this.spriteList = [];
+	// follow somebody;
+	this.follower = undefined;
 	//current sprite
 	this.currentSprite = 0;
 	//image region left
@@ -83,16 +85,52 @@ Sprite = function(){
 	}
 
 	/**
-	 * @brief before move,after calculate the next coordination
+	 * @brief set follower
+	 */
+	this.setFollower = function(sprite){
+		//console.log(sprite===_this);
+		if(sprite!==_this){
+			_this.follower = sprite;
+		}
+	}
+
+	/**
+	 * @brief follow one sprite
+	 */
+	this.follow = function(){
+		if(!_this.follower){
+			return;
+		}
+		//console.log("follow");
+		var sprite = _this.follower;
+		//var dx = sprite.anchorX;
+		//var dy = sprite.anchorY;
+		//var dr = sprite.collisionR;
+		//var sx = _this.anchorX;
+		//var sy = _this.anchorY;
+		//var sr = _this.collisionR;
+		//var distance = Math.sqrt((sx-dx)*(sx-dx)+(sy-dy)*(sy-dy));
+		//if(parseInt(distance)==(sr+dr)){
+		//	_this.moving = false;
+		//}
+		//_this.destX = (sx-dx)*(dr+sr)/distance+dx;
+		//_this.destY = (sx-dx)*(dr+sr)/distance+dy;
+		_this.destX = sprite.anchorX;
+		_this.destY = sprite.anchorY;
+	}
+
+	/**
+	 * @brief  detect collison
 	 *
 	 * @param nx  next X
 	 * @param ny  next Y
 	 *
 	 * @return 
 	 */
-	this.beforeMove = function(next){
-		var collide = false;
+	this.detectCollision = function(next){
 		var sr = _this.collisionR;
+		var sx = next.x;
+		var sy = next.y;
 		for(var i=0;i<_this.world.spriteList.length;i++){
 			var dx = _this.world.spriteList[i].anchorX;
 			var dy = _this.world.spriteList[i].anchorY;
@@ -101,25 +139,25 @@ Sprite = function(){
 			if(_this.anchorX==dx&&_this.anchorY==dy){
 				continue;
 			}
-			var distance = (next.x-dx)*(next.x-dx)+(next.y-dy)*(next.y-dy);
+			var distance = (sx-dx)*(sx-dx)+(sy-dy)*(sy-dy);
 			//if collide
 			var unit = (sr+dr)*(sr+dr)/distance;
 			if(unit>1){
-				collide = true;
-				next.x = (next.x-dx)*Math.sqrt(unit)+dx;
-				next.y = (next.y-dy)*Math.sqrt(unit)+dy;
-				//var freq = ticker.getFreq();
-				////var unit = _this.speed/Math.sqrt((dx-nx)*(dx-nx)+(dy-ny)*(dy-ny))/freq;
-				//next.x += _this.speed/freq*(dy-ny)/(dr+sr);
-				//next.y += _this.speed/freq*(dx-nx)/(dr+sr);
+				next.x = (sx-dx)*Math.sqrt(unit)+dx;
+				next.y = (sy-dy)*Math.sqrt(unit)+dy;
 			}
 		}
-		//if(collide){
-		//	//next.x = _this.anchorX;
-		//	//next.y = _this.anchorY;
-		//	_this.moving = false;
-		//	_this.setSpriteRegion(_this.direction, 0);
-		//}
+	};
+
+	/**
+	 * @brief before move,after calculate the next coordination
+	 *
+	 * @param next next coordinate
+	 *
+	 * @return 
+	 */
+	this.beforeMove = function(next){
+		_this.detectCollision(next);
 	};
 
 	/**
@@ -160,6 +198,10 @@ Sprite = function(){
 		_this.prevY = _this.anchorY;
 		_this.anchorX = next.x;
 		_this.anchorY = next.y;
+		moveDistance = Math.sqrt((_this.anchorX-_this.prevX)*(_this.anchorX-_this.prevX)+(_this.anchorY-_this.prevY)*(_this.anchorY-_this.prevY));
+		if(moveDistance<1){
+			_this.setSpriteRegion(_this.direction, 0);
+		}
 		//console.log("moveto override");
 	};
 
@@ -354,6 +396,7 @@ Sprite = function(){
 	 */
 	//var lastState = true;
 	this.frameCtrl = function(){
+		_this.follow();
 		//if movable sprite is not in moving state,and is not the first frame turn into unmoving from moving state,then sleep
 		//if((!_this.moving)&&_this.movable&&(lastState==_this.moving)){
 		//	lastState = _this.moving;
