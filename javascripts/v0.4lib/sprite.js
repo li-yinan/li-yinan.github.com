@@ -57,6 +57,8 @@ Sprite = function(){
 	this.boundaryY = 600;
 	//z-index
 	this.zIndex = 1;
+	//if the sprite is selectable
+	this.selectable = true;
 	//if the sprite is moving
 	this.moving = false;
 	// if the sprite is movable
@@ -91,6 +93,7 @@ Sprite = function(){
 		//console.log(sprite===_this);
 		if(sprite!==_this){
 			_this.follower = sprite;
+			_this.moving = true;
 		}
 	}
 
@@ -185,7 +188,10 @@ Sprite = function(){
 			//ticker.clearEvent(moveptr);
 			_this.anchorX = dx;
 			_this.anchorY = dy;
-			_this.moving = false;
+			//if follower exist the never stop
+			if(!_this.follower){
+				_this.moving = false;
+			}
 			_this.setSpriteRegion(_this.direction, 0);
 			//_this.draw();
 			return;
