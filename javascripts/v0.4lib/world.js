@@ -152,6 +152,9 @@ World = function(images){
 		var distance = Number.MAX_VALUE;
 		var sprite;
 		for(var i=0;i<_this.spriteList.length;i++){
+			if(!_this.spriteList[i].selectable){
+				continue;
+			}
 			var sx = _this.spriteList[i].anchorX;
 			var sy = _this.spriteList[i].anchorY;
 			var sd = (sx-x)*(sx-x)+(sy-y)*(sy-y);
