@@ -1,4 +1,6 @@
 Sprite = function(){
+	//sprite No. in world
+	this.No = 0;
 	// image of sprite
 	this.img = undefined;
 	// alpha

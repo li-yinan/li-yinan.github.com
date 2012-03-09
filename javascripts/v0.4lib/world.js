@@ -66,6 +66,7 @@ World = function(images){
 	 */
 	this.addSprite = function(sprite){
 		sprite.world = _this;
+		sprite.No = _this.spriteList.length;
 		_this.spriteList.push(sprite);
 	};
 
@@ -138,6 +139,23 @@ World = function(images){
 			return sprite;
 		}
 		return undefined;
+	}
+	/**
+	 * @brief selectSpriteByKeyboard 
+	 *
+	 * @param No No. of sprite
+	 *
+	 * @return 
+	 */
+	this.selectSpriteByKeyboard = function(No){
+		for(var i=0;i<_this.spriteList.length;i++){
+			_this.spriteList[i].drawCollisionCircle = false;
+			if(_this.spriteList[i].No==No&&_this.spriteList[i].selectable){
+				_this.selectedSprite = _this.spriteList[i];
+				//_this.selectedSprite.drawCollisionCircle = true;
+			}
+		}
+		_this.selectedSprite.drawCollisionCircle = true;
 	}
 
 	/**

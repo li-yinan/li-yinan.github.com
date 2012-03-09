@@ -35,6 +35,15 @@ function main(){
 			//obj.setDest(obj.destX-100,obj.destY);
 			world.rollMap(50,0);
 		});
+		//select sprite using keyboard number
+		for(var i=0;i<10;i++){
+			(function(cnt){
+				evtMgr.addKeyEvent(49+cnt,function(){
+					//console.log("select sprite using keyboard");
+					world.selectSpriteByKeyboard(cnt);
+				});
+			})(i);
+		}
 
 		evtMgr.addLeftClickEvent(function(x,y){
 			//obj1.setDest(x,y);
