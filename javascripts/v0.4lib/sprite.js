@@ -134,6 +134,8 @@ Sprite = function(){
 		var sr = _this.collisionR;
 		var sx = next.x;
 		var sy = next.y;
+		var collideSprite;
+		var collideCount = 0;
 		for(var i=0;i<_this.world.spriteList.length;i++){
 			var dx = _this.world.spriteList[i].anchorX;
 			var dy = _this.world.spriteList[i].anchorY;
@@ -146,9 +148,23 @@ Sprite = function(){
 			//if collide
 			var unit = (sr+dr)*(sr+dr)/distance;
 			if(unit>1){
-				next.x = (sx-dx)*Math.sqrt(unit)+dx;
-				next.y = (sy-dy)*Math.sqrt(unit)+dy;
+				collideSprite = _this.world.spriteList[i];
+				collideCount++;
+				//next.x = (sx-dx)*Math.sqrt(unit)+dx;
+				//next.y = (sy-dy)*Math.sqrt(unit)+dy;
 			}
+		}
+		if(collideCount == 1){
+			var dx = collideSprite.anchorX;
+			var dy = collideSprite.anchorY;
+			var dr = collideSprite.collisionR;
+			var distance = (sx-dx)*(sx-dx)+(sy-dy)*(sy-dy);
+			var unit = (sr+dr)*(sr+dr)/distance;
+			next.x = (sx-dx)*Math.sqrt(unit)+dx;
+			next.y = (sy-dy)*Math.sqrt(unit)+dy;
+		}else if(collideCount>1){
+			next.x = _this.anchorX;
+			next.y = _this.anchorY;
 		}
 	};
 
