@@ -1,16 +1,19 @@
 function main(){
 	function start(images){
+		ticker = new Ticker(60,false);//frequency
+		world = new World(images);
 		obj1 = new Obj1(images);
 		obj2 = new Obj2(images);
-		obj3 = new Obj3(images);
+		obj3 = new Obj2(images);
+		obj4 = new Obj2(images);
 		obj2.setFollower(obj1);
 		obj3.setFollower(obj2);
-		ticker = new Ticker(60,false);//frequency
+		obj4.setFollower(obj3);
 		//ticker.addEvent(obj.frameCtrl);
-		world = new World(images);
 		world.addSprite(obj1);
 		world.addSprite(obj2);
 		world.addSprite(obj3);
+		world.addSprite(obj4);
 		ticker.addEvent(world.frameCtrl);
 		ticker.start();
 

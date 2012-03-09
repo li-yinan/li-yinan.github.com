@@ -168,7 +168,7 @@ World = function(images){
 			_this.selectedSprite = sprite;
 			sprite.drawCollisionCircle = true;
 		}
-		_this.selectedSprite.drawCollisionCircle = true;
+	//	_this.selectedSprite.drawCollisionCircle = true;
 	};
 
 	/**

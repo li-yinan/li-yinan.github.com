@@ -2,10 +2,10 @@ Obj1 = function(images){
 	Sprite.call(this);
 	var _this = this;
 	this.img = images.sprite1;
-	this.anchorX = 400;
-	this.anchorY = 300;
-	this.destX = 400;
-	this.destY = 300;
+	this.anchorX = Math.random()*800;
+	this.anchorY = Math.random()*600;
+	this.destX = this.anchorX;
+	this.destY = this.anchorY;
 	this.speed = 200;
 	this.collisionR = 16;
 	this.duration = 100;
@@ -27,30 +27,12 @@ Obj2 = function(images){
 	Sprite.call(this);
 	var _this = this;
 	this.img = images.sprite2;
-	this.selectable = false;
-	this.anchorX = 200;
-	this.anchorY = 100;
-	this.destX = 200;
-	this.destY = 100;
+	//this.selectable = false;
+	this.anchorX = Math.random()*800;
+	this.anchorY = Math.random()*600;
+	this.destX = this.anchorX;
+	this.destY = this.anchorY;
 	this.speed = 300;
-	this.collisionR = 16;
-	this.duration = 100;
-	this.drawCollisionCircle = false;
-	
-	//call sperate img into sprite function
-	this.calRegionCoord(4,4);
-};
-
-Obj3 = function(images){
-	Sprite.call(this);
-	var _this = this;
-	this.img = images.sprite2;
-	this.selectable = false;
-	this.anchorX = 500;
-	this.anchorY = 600;
-	this.destX = 500;
-	this.destY = 600;
-	this.speed = 250;
 	this.collisionR = 16;
 	this.duration = 100;
 	this.drawCollisionCircle = false;
