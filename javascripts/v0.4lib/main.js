@@ -6,7 +6,7 @@ function main(){
 		obj2 = new Obj2(images);
 		obj3 = new Obj2(images);
 		obj4 = new Obj2(images);
-		obj2.setFollower(obj1);
+		//obj2.setFollower(obj1);
 		obj3.setFollower(obj2);
 		obj4.setFollower(obj3);
 		//ticker.addEvent(obj.frameCtrl);

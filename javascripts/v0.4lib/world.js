@@ -184,9 +184,9 @@ World = function(images){
 		}
 		if(distance<(sprite.collisionR+10)*(sprite.collisionR+10)){
 			_this.selectedSprite = sprite;
-			sprite.drawCollisionCircle = true;
+			//sprite.drawCollisionCircle = true;
 		}
-	//	_this.selectedSprite.drawCollisionCircle = true;
+		_this.selectedSprite.drawCollisionCircle = true;
 	};
 
 	/**
