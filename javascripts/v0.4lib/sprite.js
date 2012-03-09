@@ -1,6 +1,8 @@
 Sprite = function(){
 	//sprite No. in world
 	this.No = 0;
+	//world
+	this.world = undefined;
 	// image of sprite
 	this.img = undefined;
 	// alpha
@@ -34,11 +36,11 @@ Sprite = function(){
 	//direction
 	this.direction = 0;
 	// collision R
-	this.collisionR = 100;
+	this.collisionR = 16;
 	// move speed
-	this.speed = 100;
+	this.speed = 300;
 	// animation duration
-	this.duration = 500;
+	this.duration = 100;
 	//scale default = 1
 	this.scale = 1;
 	// destination X
