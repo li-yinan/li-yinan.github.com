@@ -4,6 +4,7 @@ Obj1 = function(images){
 	this.img = images.sprite1;
 	this.ATK = 20;
 	this.DEF = 20;
+	this.attackR = 300;
 	this.anchorX = Math.random()*800;
 	this.anchorY = Math.random()*600;
 	this.destX = this.anchorX;

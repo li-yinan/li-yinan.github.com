@@ -1,5 +1,6 @@
 World = function(images){
 	this.spriteList = [];
+	this.effectList = [];
 
 	this.top = 0;
 	this.left = 0;
@@ -71,6 +72,20 @@ World = function(images){
 	};
 
 	/**
+	 * @brief add effect
+	 *
+	 * @param effect
+	 *
+	 * @return 
+	 */
+	this.addEffect = function(effectClass,callback,unit1,unit2){
+		//var effect = new FtEffect(images,unit1,unit2,callback);
+		var effect = new effectClass(images,callback,unit1,unit2);
+		effect.world = _this;
+		_this.effectList.push(effect);
+	};
+
+	/**
 	 * @brief called by ticker
 	 *
 	 * @return 
@@ -100,11 +115,12 @@ World = function(images){
 				_this.cxt.rect(region.left,region.top,region.width,region.height);
 			}
 		}
+		for(var i=0;i<_this.effectList.length;i++){
+			var region = _this.effectList[i].getClearRegion();
+			_this.cxt.rect(region.left,region.top,region.width,region.height);
+		}
 		_this.cxt.closePath();
 		_this.cxt.clip();
-		//add world render code,now test with draw a rectagle
-		//_this.cxt.fillStyle = "#999999";
-		//_this.cxt.fillRect(0,0,_this.canvas.width,_this.canvas.height);
 		_this.draw();
 		//clip sprite end
 		//restore state
@@ -114,6 +130,25 @@ World = function(images){
 			if(_this.spriteList[i]&&(_this.spriteList[i].moving||!_this.sleep)){
 				_this.spriteList[i].frameCtrl();
 			}
+		}
+		var needsClear = false;
+		for(var i=0;i<_this.effectList.length;i++){
+			if(_this.effectList[i].end){
+				needsClear = true;
+			}
+		}
+		if(needsClear){
+			var tempEffectList = [];
+			for(var i=0;i<_this.effectList.length;i++){
+				if(!_this.effectList[i].end){
+					tempEffectList.push(_this.effectList[i]);
+				}
+			}
+			_this.effectList = tempEffectList;
+			console.log("effect list length is "+_this.effectList.length);
+		}
+		for(var i=0;i<_this.effectList.length;i++){
+			_this.effectList[i].frameCtrl();
 		}
 	};
 
