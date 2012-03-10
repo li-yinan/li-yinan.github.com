@@ -390,6 +390,18 @@ Sprite = function(){
 			spriteWidth,
 			spriteHeight
 		);
+		//draw life
+		_this.cxt.textAlign = "center";
+		_this.cxt.textBaseLine= "middle";
+		_this.cxt.fillStyle = "#ffffff";
+		_this.cxt.font = "bold 10px sans-serif";
+		_this.cxt.fillText(
+			_this.life,
+			//"hello",
+			//spriteLeft,
+			//spriteTop
+			0,0
+		);
 		_this.cxt.restore();
 		//restore alpha
 		_this.cxt.globalAlpha = 1;
