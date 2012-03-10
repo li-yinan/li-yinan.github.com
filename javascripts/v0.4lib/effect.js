@@ -93,7 +93,7 @@ Effect = function(){
 		//if unit>1 then stop
 		if(unit>1){
 			_this.end = true;
-			_this.endCallback();
+			_this.endCallback(_this.toUnit);
 			return;
 		}
 		var next = {};

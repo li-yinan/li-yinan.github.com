@@ -125,19 +125,37 @@ World = function(images){
 		//clip sprite end
 		//restore state
 		_this.cxt.restore();
+		//do death sprite clear
+		var spriteNeedsClear = false;
+		for(var i=0;i<_this.spriteList.length;i++){
+			if(_this.spriteList[i].die){
+				spriteNeedsClear = true;
+			}
+		}
+		if(spriteNeedsClear){
+			var tempSpriteList = [];
+			for(var i=0;i<_this.spriteList.length;i++){
+				if(!_this.spriteList[i].die){
+					tempSpriteList.push(_this.spriteList[i]);
+				}
+			}
+			_this.spriteList = tempSpriteList;
+			//console.log("effect list length is "+_this.effectList.length);
+		}
+		//do death sprite clear end
 		//do sprite frameControll 
 		for(var i=0;i<_this.spriteList.length;i++){
 			if(_this.spriteList[i]&&(_this.spriteList[i].moving||!_this.sleep)){
 				_this.spriteList[i].frameCtrl();
 			}
 		}
-		var needsClear = false;
+		var effectNeedsClear = false;
 		for(var i=0;i<_this.effectList.length;i++){
 			if(_this.effectList[i].end){
-				needsClear = true;
+				effectNeedsClear = true;
 			}
 		}
-		if(needsClear){
+		if(effectNeedsClear){
 			var tempEffectList = [];
 			for(var i=0;i<_this.effectList.length;i++){
 				if(!_this.effectList[i].end){

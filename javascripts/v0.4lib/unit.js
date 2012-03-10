@@ -4,13 +4,18 @@ Unit = function(images){
 	this.img = images.sprite1;
 	this.group = 0;
 	this.attackR = 200;
-	this.ATK = 13;
+	this.ATKUpper = 13;
+	this.ATKLower = 1;
 	this.DEF = 1;
 	this.attackSpeed = 1000;
 	this.life = 100;
+	this.die = false;
 
 	this.attack = function(unit){
-		unit.life -= parseInt(_this.ATK/(unit.DEF*0.06+1));
+		unit.life -= parseInt((_this.ATKLower+Math.random()*(_this.ATKUpper-_this.ATKLower))/(unit.DEF*0.06+1));
+		if(unit.life<0){
+			unit.die = true;
+		}
 		console.log("unit "+_this.No+" attack unit "+unit.No+", unit "+unit.No+"'s life is"+unit.life);
 	};
 
@@ -46,7 +51,8 @@ Unit = function(images){
 		}
 		if(enemys.length){
 			var decidedEnemy = enemys[parseInt(Math.random()*enemys.length)];
-			_this.world.addEffect(FtEffect,(function(unit){_this.attack(unit)})(decidedEnemy),_this,decidedEnemy);
+			//_this.world.addEffect(FtEffect,(function(unit){_this.attack(unit)})(decidedEnemy),_this,decidedEnemy);
+			_this.world.addEffect(FtEffect,_this.attack,_this,decidedEnemy);
 		}
 	};
 	this.spriteFrameCtrl = this.frameCtrl;

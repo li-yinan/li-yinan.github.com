@@ -60,8 +60,7 @@ function main(){
 					if(world.selectedSprite.group==sprite.group){
 						world.selectedSprite.setFollower(sprite);
 					}else{
-						//effect1.setUnit(world.selectedSprite,sprite,effCB);
-						world.addEffect(FtEffect,effCB,world.selectedSprite,sprite);
+						world.addEffect(FtEffect,world.selectedSprite.attack,world.selectedSprite,sprite);
 					}
 				}else{
 					world.selectedSprite.setFollower();
