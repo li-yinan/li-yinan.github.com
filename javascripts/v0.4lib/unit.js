@@ -8,6 +8,7 @@ Unit = function(images){
 	this.DEF = 1;
 	this.attackSpeed = 1000;
 	this.life = 100;
+
 	this.attack = function(unit){
 		unit.life -= parseInt(_this.ATK/(unit.DEF*0.06+1));
 		console.log("unit "+_this.No+" attack unit "+unit.No+", unit "+unit.No+"'s life is"+unit.life);
@@ -30,7 +31,9 @@ Unit = function(images){
 			var dy = list[i].anchorY;
 			var distance = Math.sqrt((sx-dx)*(sx-dx)+(sy-dy)*(sy-dy));
 			if(distance<sr){
-				_this.attack(list[i]);
+				//_this.attack(list[i]);
+				//effect1.setUnit(_this,list[i],(function(unit){_this.attack(unit)})(list[i]));
+				_this.world.addEffect(FtEffect,null,_this,list[i]);
 			}
 		}
 	};

@@ -50,15 +50,24 @@ function main(){
 			world.selectSprite(x,y);
 		});
 		evtMgr.addRightClickEvent(function(x,y){
+			var effCB = function(){
+				console.log("effCB");
+			};
 			//obj1.setDest(x,y);
 			if(world.selectedSprite){
 				var sprite = world.pointOnSprite(x,y);
 				if(sprite){
-					world.selectedSprite.setFollower(sprite);
+					if(world.selectedSprite.group==sprite.group){
+						world.selectedSprite.setFollower(sprite);
+					}else{
+						//effect1.setUnit(world.selectedSprite,sprite,effCB);
+						world.addEffect(FtEffect,effCB,world.selectedSprite,sprite);
+					}
 				}else{
 					world.selectedSprite.setFollower();
+					world.selectedSprite.setDest(x,y);
 				}
-				world.selectedSprite.setDest(x,y);
+				//world.selectedSprite.setDest(x,y);
 			}
 		});
 
@@ -74,7 +83,8 @@ function main(){
 	var imgresource = {
 		sprite1:"resource/spriteimg/012-Lancer04.png",
 		sprite2:"resource/spriteimg/040-Mage08.png",
-		world1:"resource/worldimg/011-PortTown01.jpg"
+		world1:"resource/worldimg/011-PortTown01.jpg",
+		effect1:"resource/effectimg/Sword2.png"
 	};
 
 	new ImgLoader(imgresource,start);
