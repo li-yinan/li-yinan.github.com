@@ -145,7 +145,7 @@ World = function(images){
 				}
 			}
 			_this.effectList = tempEffectList;
-			console.log("effect list length is "+_this.effectList.length);
+			//console.log("effect list length is "+_this.effectList.length);
 		}
 		for(var i=0;i<_this.effectList.length;i++){
 			_this.effectList[i].frameCtrl();
