@@ -13,6 +13,12 @@ Unit = function(images){
 		unit.life -= parseInt(_this.ATK/(unit.DEF*0.06+1));
 		console.log("unit "+_this.No+" attack unit "+unit.No+", unit "+unit.No+"'s life is"+unit.life);
 	};
+
+	/**
+	 * @brief find enemy
+	 *
+	 * @return 
+	 */
 	this.findEnemy = function(){
 		var freq = ticker.getFreq();
 		var times = parseInt(_this.attackSpeed/1000*freq);
@@ -23,6 +29,7 @@ Unit = function(images){
 		var sx = _this.anchorX;
 		var sy = _this.anchorY;
 		var sr = _this.attackR;
+		var enemys = [];
 		for(var i=0;i<list.length;i++){
 			if(_this.group==list[i].group){
 				continue;
@@ -33,8 +40,13 @@ Unit = function(images){
 			if(distance<sr){
 				//_this.attack(list[i]);
 				//effect1.setUnit(_this,list[i],(function(unit){_this.attack(unit)})(list[i]));
-				_this.world.addEffect(FtEffect,null,_this,list[i]);
+				//_this.world.addEffect(FtEffect,(function(unit){_this.attack(unit)})(list[i]),_this,list[i]);
+				enemys.push(list[i]);
 			}
+		}
+		if(enemys.length){
+			var decidedEnemy = enemys[parseInt(Math.random()*enemys.length)];
+			_this.world.addEffect(FtEffect,(function(unit){_this.attack(unit)})(decidedEnemy),_this,decidedEnemy);
 		}
 	};
 	this.spriteFrameCtrl = this.frameCtrl;
