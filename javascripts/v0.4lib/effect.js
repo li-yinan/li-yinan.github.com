@@ -15,6 +15,8 @@ Effect = function(){
 	// sprite radian
 	//this.radian = 0;
 	this.radian = 0;
+	//this.radian = 0;
+	this.radianFix = 0;
 	// region of img
 	this.spriteList = [];
 	//current sprite
@@ -99,6 +101,13 @@ Effect = function(){
 		next.y = unit*(dy-sy)+sy;
 		_this.anchorX = next.x;
 		_this.anchorY = next.y;
+		if(sy-dy>0){
+			_this.radian = Math.atan((dx-sx)/(sy-dy));
+		}else{
+			_this.radian = Math.atan((dx-sx)/(sy-dy))+Math.PI;
+		}
+		//var a = (dx-sx)/(dy-sy);
+		//_this.radian = Math.asin(0.5);
 		//console.log("moveto override");
 	};
 
@@ -175,7 +184,7 @@ Effect = function(){
 		_this.cxt.save();
 		//rotate test
 		_this.cxt.translate(_this.anchorX,_this.anchorY);
-		_this.cxt.rotate(_this.radian);
+		_this.cxt.rotate(_this.radian+_this.radianFix);
 		//rotate test end
 		//clip screen
 		_this.cxt.beginPath();
