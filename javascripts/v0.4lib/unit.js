@@ -52,7 +52,7 @@ Unit = function(images){
 		if(enemys.length){
 			var decidedEnemy = enemys[parseInt(Math.random()*enemys.length)];
 			//_this.world.addEffect(FtEffect,(function(unit){_this.attack(unit)})(decidedEnemy),_this,decidedEnemy);
-			_this.world.addEffect(FtEffect,_this.attack,_this,decidedEnemy);
+			_this.world.addEffect(FireEffect,_this.attack,_this,decidedEnemy);
 		}
 	};
 	this.spriteFrameCtrl = this.frameCtrl;
