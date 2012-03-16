@@ -32,3 +32,8 @@ many thing has done,such as
 world,sprite,attack effect,framecontroll(ticker),eventManager,imageLoader
 wow,so many~
 version 0.4 is a big version,this version number will last much longer...
+
+today's 2012.3.16
+These days I have many new ideas, and this version already has a big change,so I decided to end this version, and start v0.5
+In version 0.5,there's new designed frame frequency independency ticker and import phisical model to simulate the real world, more about collide detection, I want a accurate and effcient collide detection algorithm
+In version 0.4 I found whether I use clip function or not,the canvas render efficiency doesn't change much, so I will don't care so much on region render.maybe oneday canvas can use opengl to render 2d.
