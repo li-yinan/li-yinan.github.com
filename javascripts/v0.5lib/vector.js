@@ -67,10 +67,18 @@ Vector2.prototype.add = function(x,y){
 	return this;
 };
 
+Vector2.prototype.addNew = function(x,y){
+	return new Vector2(this.x+x,this.y+y);
+};
+
 Vector2.prototype.addV = function(v){
 	this.x += v.x;
 	this.y += v.y;
 	return this;
+};
+
+Vector2.prototype.addVNew = function(v){
+	return new Vector2(this.x+v.x,this.y+v.y);
 };
 
 /**
@@ -87,10 +95,18 @@ Vector2.prototype.sub = function(x,y){
 	return this;
 };
 
+Vector2.prototype.subNew = function(x,y){
+	return new Vector2(this.x-x,this.y-y);
+};
+
 Vector2.prototype.subV = function(v){
 	this.x -= v.x;
 	this.y -= v.y;
 	return this;
+};
+
+Vector2.prototype.subVNew = function(v){
+	return new Vector2(this.x-v.x,this.y-v.y);
 };
 
 /**
@@ -106,6 +122,10 @@ Vector2.prototype.mul = function(ratio){
 	return this;
 };
 
+Vector2.prototype.mulNew = function(ratio){
+	return new Vector2(this.x*ratio,this.y*ratio);
+};
+
 /**
  * @brief nomalization
  *
@@ -116,6 +136,10 @@ Vector2.prototype.mul = function(ratio){
 Vector2.prototype.nomalize = function(){
 	this.mul(1/this.scalar());
 	return this;
+};
+
+Vector2.prototype.nomalizeNew = function(){
+	return this.mulNew(1/this.scalar());
 };
 
 /**
