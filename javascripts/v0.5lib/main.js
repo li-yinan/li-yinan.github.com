@@ -1,8 +1,9 @@
 function main(){
+	var t = 1000/60;
 	var sprt = new Sprite();
 	setInterval(function(){
-		sprt.move(1000/60);
+		sprt.move(t);
 		sprt.draw();
-	},1000/60);
+	},t);
 }
 window.onload = main;
