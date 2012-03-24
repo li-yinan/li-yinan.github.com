@@ -53,6 +53,16 @@ Vector2.prototype.negative = function(){
 	return this;
 };
 
+Vector2.prototype.negativeX = function(){
+	this.x = -this.x;
+	return this;
+};
+
+Vector2.prototype.negativeY = function(){
+	this.y = -this.y;
+	return this;
+};
+
 /**
  * @brief add 2 vectors
  *
@@ -118,6 +128,16 @@ Vector2.prototype.subVNew = function(v){
  */
 Vector2.prototype.mul = function(ratio){
 	this.x *= ratio;
+	this.y *= ratio;
+	return this;
+};
+
+Vector2.prototype.mulX = function(ratio){
+	this.x *= ratio;
+	return this;
+};
+
+Vector2.prototype.mulY = function(ratio){
 	this.y *= ratio;
 	return this;
 };

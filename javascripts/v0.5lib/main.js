@@ -1,9 +1,18 @@
 function main(){
-	var t = 1000/60;
-	var sprt = new Sprite();
-	setInterval(function(){
-		sprt.move(t);
-		sprt.draw();
-	},t);
-}
+	resource = {};
+
+	var ticker = new Ticker(60);
+	var world = new World();
+	world.addSprite(new Sprite());
+	//world.addSprite(new Sprite());
+	//world.addSprite(new Sprite());
+	ticker.addTickEvent(function(t){
+	//ticker.addTimeEvent(200,10,function(t){
+		world.frameCtrl(t);
+	});
+	ticker.start();
+
+	resource.ticker = ticker;
+	resource.world = world;
+};
 window.onload = main;
