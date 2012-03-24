@@ -53,6 +53,10 @@ Vector2.prototype.negative = function(){
 	return this;
 };
 
+Vector2.prototype.negativeNew = function(){
+	return new Vector2(-this.x,-this.y);
+};
+
 Vector2.prototype.negativeX = function(){
 	this.x = -this.x;
 	return this;
@@ -208,10 +212,6 @@ Vector2.prototype.getRadian = function(){
  *
  * @return 
  */
-Vector2.prototype.copy = function(x, y){
-	return new Vector(x, y);
-};
-
-Vector2.prototype.copyV = function(v){
-	return new Vector(v.x, v.y);
+Vector2.prototype.copy = function(){
+	return new Vector2(this.x, this.y);
 };

@@ -1,9 +1,10 @@
 ﻿var Sprite = function(){
 	this.no = 0;
+	this.state = 1;
 	this.anchor = new Vector2(Math.random()*800,Math.random()*600);
 	this.dest = new Vector2(0,0);
 	this.velocity = new Vector2(100,0);
-	this.r = 10;
+	this.r = 50;
 	this.mass = 400;
 	this.canvas = document.getElementById("canvas"); 
 	this.cxt = this.canvas.getContext("2d");
