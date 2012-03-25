@@ -69,6 +69,7 @@ World.prototype.frameCtrl = function(t){
 	for(var i=0;i<this.spriteList.length;i++){
 		for(var j=0;j<i;j++){
 			Collision.circleCircle(this.spriteList[i],this.spriteList[j],t);
+			//console.log("sprite "+i+" and sprite"+j);
 		}
 	}
 };
