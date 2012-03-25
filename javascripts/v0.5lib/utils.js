@@ -1,7 +1,9 @@
 Collision = {};
 Collision.circleCircle = function(sprite1,sprite2,t){
-	var vector1 = sprite1.anchor.addVNew(sprite1.velocity.mulNew(t/1000));
-	var vector2 = sprite2.anchor.addVNew(sprite2.velocity.mulNew(t/1000));
+	//var vector1 = sprite1.anchor.addVNew(sprite1.velocity.mulNew(t/1000));
+	//var vector2 = sprite2.anchor.addVNew(sprite2.velocity.mulNew(t/1000));
+	var vector1 = sprite1.anchor;
+	var vector2 = sprite2.anchor;
 	var sx = vector1.x;
 	var sy = vector1.y;
 	var sr = sprite1.r;
@@ -12,8 +14,12 @@ Collision.circleCircle = function(sprite1,sprite2,t){
 	var distance = (sx-dx)*(sx-dx)+(sy-dy)*(sy-dy);
 	if((sr+dr)*(sr+dr)>distance){
 		collision = true;
+		var sqrtdist = Math.sqrt(distance);
+		var overlap = sr+dr-sqrtdist;
 		var vct1 = sprite2.velocity.copy();
 		var vct2 = sprite1.velocity.copy();
+		vct1.addV(vct2.negativeNew().mul(sr/(sr+dr)*(overlap/sqrtdist)));
+		vct2.addV(vct1.negativeNew().mul(dr/(sr+dr)*(overlap/sqrtdist)));
 		sprite1.velocity.setV(vct1);
 		sprite2.velocity.setV(vct2);
 		console.log("collision");
@@ -38,14 +44,13 @@ Collision.circleEdge = function(sprite,t){
 		collision = true;
 		sprite.velocity.negativeX();
 		//var vector = new Vector2().setV(sprite.velocity.negativeX());
-		//sprite.velocity.setV(vector);
 		sprite.velocity.mulX(reduction);
 	// y direction collide
 	}else if(sy-r<0||height-sy<r){
 		collision = true;
 		sprite.velocity.negativeY();
 		//var vector = new Vector2().setV(sprite.velocity.negativeY());
-		//sprite.velocity.setV(vector);
+		//sprite.velocity.setZeroY();
 		sprite.velocity.mulY(reduction);
 	}
 	return collision;

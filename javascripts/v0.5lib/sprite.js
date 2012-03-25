@@ -1,10 +1,11 @@
 ﻿var Sprite = function(){
 	this.no = 0;
 	this.state = 1;
-	this.anchor = new Vector2(Math.random()*800,Math.random()*600);
+	this.r = 50;
+	this.selected = false;
+	this.anchor = new Vector2(Math.random()*(800-this.r*2),Math.random()*(600-this.r*2));
 	this.dest = new Vector2(0,0);
 	this.velocity = new Vector2(100,0);
-	this.r = 50;
 	this.mass = 400;
 	this.canvas = document.getElementById("canvas"); 
 	this.cxt = this.canvas.getContext("2d");
@@ -21,6 +22,12 @@ Sprite.prototype.draw = function(){
 	this.cxt.arc(this.anchor.x,this.anchor.y,this.r,0,Math.PI*2,true);
 	this.cxt.closePath();
 	this.cxt.stroke();
+	if(this.selected){
+		this.cxt.beginPath();
+		this.cxt.arc(this.anchor.x,this.anchor.y,this.r-10,0,Math.PI*2,true);
+		this.cxt.closePath();
+		this.cxt.stroke();
+	}
 };
 Sprite.prototype.frameCtrl = function(t){
 	Collision.circleEdge(this,t);

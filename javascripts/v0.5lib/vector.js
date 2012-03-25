@@ -22,6 +22,16 @@ Vector2.prototype.setZero = function(){
 	return this;
 };
 
+Vector2.prototype.setZeroX = function(){
+	this.x = 0.0;
+	return this;
+};
+
+Vector2.prototype.setZeroY = function(){
+	this.y = 0.0;
+	return this;
+};
+
 /**
  * @brief set value
  *
