@@ -27,5 +27,13 @@ function main(){
 		//obj1.setDest(x,y);
 		world.pointOnSprite(x,y);
 	});
+	evtMgr.addRightClickEvent(function(x,y){
+		if(world.selectedSprite){
+			var sprite = world.selectedSprite;
+			var sx = sprite.anchor.x;
+			var sy = sprite.anchor.y;
+			world.selectedSprite.velocity.add((x-sx)/3,(y-sy)/3);
+		}
+	});
 };
 window.onload = main;
