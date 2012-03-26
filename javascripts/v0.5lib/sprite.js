@@ -3,7 +3,7 @@
 	this.state = 1;
 	this.r = 50;
 	this.selected = false;
-	this.anchor = new Vector2(Math.random()*(800-this.r*2),Math.random()*(600-this.r*2));
+	this.anchor = new Vector2(Math.random()*(800-this.r*2)+this.r,Math.random()*(600-this.r*2)+this.r);
 	this.dest = new Vector2(0,0);
 	this.velocity = new Vector2(100,0);
 	this.mass = 100+Math.random()*300;

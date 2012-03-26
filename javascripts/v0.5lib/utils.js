@@ -74,9 +74,8 @@ Collision.circleEdge = function(sprite,t){
 	}else if(sy-r<0||height-sy<r){
 		collision = true;
 		sprite.velocity.negativeY();
-		//var vector = new Vector2().setV(sprite.velocity.negativeY());
-		//sprite.velocity.setZeroY();
 		sprite.velocity.mulY(reduction);
+		//sprite.velocity.setZeroY();
 	}
 	return collision;
 };
