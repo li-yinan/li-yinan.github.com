@@ -64,6 +64,7 @@ World.prototype.frameCtrl = function(t){
 		var sprite = this.spriteList[i];
 		sprite.velocity.addV(this.velocity.mulNew(t/1000));
 		sprite.frameCtrl(t);
+		animation.play(sprite,"effect1");
 	}
 	//collision controll
 	for(var i=0;i<this.spriteList.length;i++){

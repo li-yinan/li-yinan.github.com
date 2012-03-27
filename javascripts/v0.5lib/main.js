@@ -4,7 +4,7 @@ function main(){
 	var ticker = new Ticker(60);
 	var world = new World();
 	var evtMgr = new EventManager();
-	var animation = new Animation();
+	animation = new Animation();
 	animation.loadImg();
 	world.addSprite(new Sprite());
 	world.addSprite(new Sprite());
