@@ -3,12 +3,17 @@ World = function(){
 	this.height = 600;
 	this.velocity =  new Vector2(0,100);
 	this.spriteList = [];
+	this.effectList = [];
 	this.canvas = document.getElementById("canvas"); 
 	this.cxt = this.canvas.getContext("2d");
 };
 
 World.prototype.addSprite = function(sprite){
 	sprite.no = this.spriteList.length;
+	this.spriteList.push(sprite);
+};
+
+World.prototype.addEffect = function(sprite){
 	this.spriteList.push(sprite);
 };
 
@@ -51,15 +56,17 @@ World.prototype.pointOnSprite = function(x,y){
 
 World.prototype.frameCtrl = function(t){
 	this.cxt.clearRect(0,0,this.width,this.height);
-	this.spriteList.sort(function(a,b){
-		if(a.anchorY<b.anchorY){
-			return -1;
-		}else if(a.anchorY>b.anchorY){
-			return 1;
-		}else{
-			return 0;
-		}
-	});
+	//this.spriteList.sort(function(a,b){
+	//	if(a.anchorY<b.anchorY){
+	//		return -1;
+	//	}else if(a.anchorY>b.anchorY){
+	//		return 1;
+	//	}else{
+	//		return 0;
+	//	}
+	//});
+
+	//sprite
 	for(var i=0;i<this.spriteList.length;i++){
 		var sprite = this.spriteList[i];
 		if(!sprite.sleep){
@@ -83,6 +90,31 @@ World.prototype.frameCtrl = function(t){
 				continue;
 			}
 			Collision.circleCircle(this.spriteList[i],this.spriteList[j],t);
+		}
+	}
+	//effect
+	for(var i=0;i<this.effectList.length;i++){
+		var sprite = this.effectList[i];
+		if(!sprite.sleep){
+			sprite.velocity.addV(this.velocity.mulNew(t/1000));
+		}
+		sprite.frameCtrl(t);
+		animation.play(sprite);
+	}
+	//collision controll
+	for(var i=0;i<this.effectList.length;i++){
+		Collision.circleEdge(this.effectList[i]);
+		if(!this.effectList[i].collidable){
+			continue;
+		}
+		for(var j=0;j<i;j++){
+			if(!this.effectList[j].collidable){
+				continue;
+			}
+			if((this.effectList[i].mask&this.effectList[j].group)==0){
+				continue;
+			}
+			Collision.circleCircle(this.effectList[i],this.effectList[j],t);
 		}
 	}
 };

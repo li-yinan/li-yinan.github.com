@@ -1,8 +1,9 @@
 ﻿var Sprite = function(){
+	this.config = [resource.img.sprite3,320,96,32,16,-16,-8,32,16];
 	this.no = 0;
 	this.state = 1;
 	this.condition = 1;
-	this.r = 50;
+	this.r = 16;
 	this.selected = false;
 	this.collidable = true;
 	this.sleep = false;

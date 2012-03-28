@@ -1,11 +1,9 @@
 function main(){
-	resource = {};
-
 	var ticker = new Ticker(60);
 	var world = new World();
 	var evtMgr = new EventManager();
 	animation = new Animation();
-	animation.loadImg();
+	//animation.loadImg();
 	stateMachine = new StateMachine();
 	world.addSprite(new Sprite());
 	world.addSprite(new Sprite());
@@ -39,4 +37,18 @@ function main(){
 		}
 	});
 };
-window.onload = main;
+
+window.onload = function(){
+	var imgresource = {
+		sprite1:"resource/spriteimg/012-Lancer04.png",
+		sprite2:"resource/spriteimg/040-Mage08.png",
+		sprite3:"resource/spriteimg/chr01_01_02_1.png",
+		world1:"resource/worldimg/011-PortTown01.jpg",
+		effect1:"resource/effectimg/Sword2.png"
+	};
+	new ImgLoader(imgresource,function(images){
+		resource = {};
+		resource.img = images;
+		main();
+	});
+}
