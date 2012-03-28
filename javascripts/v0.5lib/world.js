@@ -62,15 +62,27 @@ World.prototype.frameCtrl = function(t){
 	});
 	for(var i=0;i<this.spriteList.length;i++){
 		var sprite = this.spriteList[i];
-		sprite.velocity.addV(this.velocity.mulNew(t/1000));
+		if(!sprite.sleep){
+			sprite.velocity.addV(this.velocity.mulNew(t/1000));
+		}
 		sprite.frameCtrl(t);
-		animation.play(sprite,"effect1");
+		stateMachine.transfer(sprite);
+		animation.play(sprite);
 	}
 	//collision controll
 	for(var i=0;i<this.spriteList.length;i++){
+		Collision.circleEdge(this.spriteList[i]);
+		if(!this.spriteList[i].collidable){
+			continue;
+		}
 		for(var j=0;j<i;j++){
+			if(!this.spriteList[j].collidable){
+				continue;
+			}
+			if((this.spriteList[i].mask&this.spriteList[j].group)==0){
+				continue;
+			}
 			Collision.circleCircle(this.spriteList[i],this.spriteList[j],t);
-			//console.log("sprite "+i+" and sprite"+j);
 		}
 	}
 };

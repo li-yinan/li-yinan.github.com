@@ -1,6 +1,7 @@
 Animation = function(){
 	this.img = null;
 	this.radianFix = Math.PI/180*215;
+	this.cxt = document.getElementById("canvas").getContext("2d"); 
 };
 
 Animation.prototype.loadImg = function(){
@@ -13,19 +14,10 @@ Animation.prototype.loadImg = function(){
 	};
 	new ImgLoader(imgresource,function(images){
 		_this.img = images;
-		_this.setFrame();
 	});
 };
 
-Animation.prototype.setFrame = function(){
-	console.log("setFrame");
-};
-
-Animation.prototype.setActions = function(){
-};
-
-Animation.prototype.play = function(sprite,imgstr){
-	var cxt = document.getElementById("canvas").getContext("2d"); 
+Animation.prototype.play = function(sprite){
 	var r = sprite.r;
 	var spriteLeft = -r;
 	var spriteTop = -r;
@@ -39,12 +31,12 @@ Animation.prototype.play = function(sprite,imgstr){
 	}else{
 		radian = Math.atan(velocity.y/velocity.x)+Math.PI;
 	}
-	cxt.save();
+	this.cxt.save();
 	//rotate test
-	cxt.translate(anchor.x,anchor.y);
-	cxt.rotate(radian+this.radianFix);
-	cxt.drawImage(
-			this.img[imgstr],
+	this.cxt.translate(anchor.x,anchor.y);
+	this.cxt.rotate(radian+this.radianFix);
+	this.cxt.drawImage(
+			this.img["effect1"],
 			//_this.imgRegionLeft,
 			//_this.imgRegionRight,
 			//_this.imgRegionWidth,
@@ -55,5 +47,5 @@ Animation.prototype.play = function(sprite,imgstr){
 			spriteWidth,
 			spriteHeight
 			);
-	cxt.restore();
+	this.cxt.restore();
 };

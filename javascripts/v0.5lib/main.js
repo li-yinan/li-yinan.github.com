@@ -6,6 +6,7 @@ function main(){
 	var evtMgr = new EventManager();
 	animation = new Animation();
 	animation.loadImg();
+	stateMachine = new StateMachine();
 	world.addSprite(new Sprite());
 	world.addSprite(new Sprite());
 	//world.addSprite(new Sprite());
