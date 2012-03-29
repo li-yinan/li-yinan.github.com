@@ -106,7 +106,7 @@ Ticker = function(freq){
 		clearInterval(_tickptr);
 	}
 
-	this.addTimeEvent(10,Number.MAX_VALUE,function(){
+	this.addTimeEvent(100,Number.MAX_VALUE,function(){
 		_this.clearEvent();
 	});
 };

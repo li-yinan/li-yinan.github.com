@@ -4,10 +4,8 @@ Algorithm.calElasticSpeed = function(sprite1,sprite2){
 	var vector2 = sprite2.anchor;
 	var sx = vector1.x;
 	var sy = vector1.y;
-	var sr = sprite1.r;
 	var dx = vector2.x;
 	var dy = vector2.y;
-	var dr = sprite2.r;
 	var m1 = sprite1.mass;
 	var m2 = sprite2.mass;
 	//var sqrtdist = Math.sqrt(distance);
@@ -45,10 +43,10 @@ Collision.circleCircle = function(sprite1,sprite2,t){
 	var vector2 = sprite2.anchor;
 	var sx = vector1.x;
 	var sy = vector1.y;
-	var sr = sprite1.r;
+	var sr = sprite1.shape.r;
 	var dx = vector2.x;
 	var dy = vector2.y;
-	var dr = sprite2.r;
+	var dr = sprite2.shape.r;
 	var collision = false;
 	var distance = (sx-dx)*(sx-dx)+(sy-dy)*(sy-dy);
 	if((sr+dr)*(sr+dr)>distance){
@@ -63,9 +61,9 @@ Collision.circleCircle = function(sprite1,sprite2,t){
 Collision.circleEdge = function(sprite){
 	//var vector = sprite.anchor.addVNew(sprite.velocity.mulNew(t/1000));
 	var vector = sprite.anchor;
-	var r = sprite.r;
-	var sx = vector.x;
-	var sy = vector.y;
+	var r = sprite.shape.r;
+	var x = vector.x;
+	var y = vector.y;
 	var reduction = 0.95;
 	
 
@@ -73,23 +71,26 @@ Collision.circleEdge = function(sprite){
 	var height = resource.world.height;
 	var collision = false;
 	// left collide
-	if(sx-r<0){
+	if(x-r<0){
 		collision = true;
 		sprite.velocity.negativeX();
 		sprite.velocity.mulX(reduction);
 	// right collide
-	} else if(width-sx<r){
+	} else if(width-x<r){
 		collision = true;
 		sprite.velocity.negativeX();
 		sprite.velocity.mulX(reduction);
 	// up collide
-	}else if(sy-r<0){
+	}else if(y-r<0){
 	// down collide
-	}else if(height-sy<r){
+	}else if(height-y<r){
 		collision = true;
 		//sprite.velocity.setZero();
-		sprite.collidable = false;
 		sprite.setSleep();
+		if(sprite.type == 2){
+			sprite.collidable = false;
+			sprite.condition = 6;
+		}
 		//sprite.velocity.negativeY();
 		//sprite.velocity.mulY(reduction);
 	}
