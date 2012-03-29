@@ -55,12 +55,31 @@ World.prototype.frameCtrl = function(t){
 	//	}
 	//});
 
+	//collision controll
+	var arr = this.spriteList.concat(this.effectList);
+	for(var i=0;i<arr.length;i++){
+		//add gravity
+		arr[i].velocity.addV(this.velocity.mulNew(t/1000));
+		Collision.circleEdge(arr[i],t);
+		if(!arr[i].collidable){
+			continue;
+		}
+		for(var j=0;j<arr.length;j++){
+			if(i==j){
+				continue;
+			}
+			if(!arr[j].collidable){
+				continue;
+			}
+			if((arr[i].mask&arr[j].group)==0){
+				continue;
+			}
+			Collision.circleCircle(arr[i],arr[j],t);
+		}
+	}
 	//sprite
 	for(var i=0;i<this.spriteList.length;i++){
 		var sprite = this.spriteList[i];
-		if(!sprite.sleep){
-			sprite.velocity.addV(this.velocity.mulNew(t/1000));
-		}
 		sprite.frameCtrl(t);
 		resource.stateMachine.transfer(sprite);
 		resource.animation.play(sprite);
@@ -68,9 +87,6 @@ World.prototype.frameCtrl = function(t){
 	//effect
 	for(var i=0;i<this.effectList.length;i++){
 		var sprite = this.effectList[i];
-		if(!sprite.sleep){
-			sprite.velocity.addV(this.velocity.mulNew(t/1000));
-		}
 		sprite.frameCtrl(t);
 		resource.stateMachine.transfer(sprite);
 		resource.animation.play(sprite);
@@ -95,22 +111,6 @@ World.prototype.frameCtrl = function(t){
 	////		Collision.circleCircle(this.effectList[i],this.spriteList[j],t);
 	////	}
 	////}
-	var arr = this.spriteList.concat(this.effectList);
-	for(var i=0;i<arr.length;i++){
-		Collision.circleEdge(arr[i]);
-		if(!arr[i].collidable){
-			continue;
-		}
-		for(var j=0;j<i;j++){
-			if(!arr[j].collidable){
-				continue;
-			}
-			if((arr[i].mask&arr[j].group)==0){
-				continue;
-			}
-			Collision.circleCircle(arr[i],arr[j],t);
-		}
-	}
 };
 
 World.prototype.pointOnSprite = function(x,y){

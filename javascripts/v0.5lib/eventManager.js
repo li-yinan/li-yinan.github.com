@@ -29,9 +29,13 @@ EventManager = function(){
 		if(evt.button == 2){
 			//right button
 			//console.log("right click");
-			rightClickEvt(coordX,coordY);
+			if(rightClickEvt){
+				rightClickEvt(coordX,coordY);
+			}
 		}else{
-			leftClickEvt(coordX,coordY);
+			if(leftClickEvt){
+				leftClickEvt(coordX,coordY);
+			}
 		}
 	}
 	this.addRightClickEvent= function(callback){

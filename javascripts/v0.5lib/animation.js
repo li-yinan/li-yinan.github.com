@@ -18,7 +18,9 @@ Animation.prototype.play = function(sprite){
 	this.cxt.save();
 	//rotate test
 	this.cxt.translate(anchor.x,anchor.y);
-	this.cxt.rotate(radian+this.radianFix);
+	if(sprite.type!=1){
+		this.cxt.rotate(radian+this.radianFix);
+	}
 	this.cxt.drawImage.apply(this.cxt,config);
 	//this.cxt.drawImage(
 	//		this.img["sprite3"],

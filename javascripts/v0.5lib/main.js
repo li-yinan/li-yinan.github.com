@@ -6,13 +6,14 @@ function main(){
 	//animation.loadImg();
 	resource.stateMachine = new StateMachine();
 	var sprite1 = new Sprite();
+	sprite1.config = [resource.img.sprite3,224,0,32,32,-16,-16,32,32];
 	var sprite2 = new Sprite();
+	sprite2.config = [resource.img.sprite3,224,0,32,32,-16,-16,32,32];
 	var sprite3 = new Sprite();
-	resource.ticker.addTimeEvent(2000,Number.MAX_VALUE,function(){
-		sprite1.doAttack();
-		sprite2.doAttack();
-		sprite3.doAttack();
-	});
+	sprite3.config = [resource.img.sprite3,224,0,32,32,-16,-16,32,32];
+	sprite1.doAttack();
+	sprite2.doAttack();
+	sprite3.doAttack();
 	resource.world.addSprite(sprite1);
 	resource.world.addSprite(sprite2);
 	resource.world.addSprite(sprite3);
@@ -47,11 +48,11 @@ function main(){
 
 window.onload = function(){
 	var imgresource = {
-		sprite1:"resource/spriteimg/012-Lancer04.png",
-		sprite2:"resource/spriteimg/040-Mage08.png",
-		sprite3:"resource/spriteimg/chr01_01_02_1.png",
-		world1:"resource/worldimg/011-PortTown01.jpg",
-		effect1:"resource/effectimg/Sword2.png"
+		//world1:"resource/worldimg/011-PortTown01.jpg",
+		//effect1:"resource/effectimg/Sword2.png",
+		//sprite1:"resource/spriteimg/012-Lancer04.png",
+		//sprite2:"resource/spriteimg/040-Mage08.png",
+		sprite3:"resource/spriteimg/chr01_01_02_1.png"
 	};
 	new ImgLoader(imgresource,function(images){
 		resource = {};

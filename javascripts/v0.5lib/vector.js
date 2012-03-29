@@ -7,6 +7,7 @@
  * @return 
  */
 var Vector2 = function(x, y){
+	this.threshold = 5;
 	this.x = x;
 	this.y = y;
 };
@@ -224,4 +225,17 @@ Vector2.prototype.getRadian = function(){
  */
 Vector2.prototype.copy = function(){
 	return new Vector2(this.x, this.y);
+};
+
+/**
+ * @brief equal to another vector
+ *
+ * @return 
+ */
+Vector2.prototype.equalV = function(v){
+	if(Math.abs(this.x-v.x)<this.threshold && Math.abs(this.y-v.y)<this.threshold){
+		return true;
+	}else{
+		return false;
+	}
 };

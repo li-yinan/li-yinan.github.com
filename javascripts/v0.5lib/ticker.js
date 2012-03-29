@@ -42,9 +42,23 @@ Ticker = function(freq){
 	 */
 	this.addTimeEvent = function(duration,execTimes,evt){
 		var now = (new Date()).valueOf();
-		_timeEvtList.push([duration+_timeStamp,duration,execTimes,function(t){
+		// delay none after add event
+		_timeEvtList.push([now,duration,execTimes,function(t){
 			evt(t);
-		}]);
+		},now]);
+		// delay duration after add event
+		//_timeEvtList.push([now+duration,duration,execTimes,function(t){
+		//	evt(t);
+		//},now]);
+		return now;
+	};
+
+	this.removeTimeEvent = function(ptr){
+		for(var i=0;i<_timeEvtList.length;i++){
+			if(_timeEvtList[i]&&_timeEvtList[i][4]==ptr){
+				_timeEvtList[i] = undefined;
+			}
+		}
 	};
 
 	this.clearEvent = function(){

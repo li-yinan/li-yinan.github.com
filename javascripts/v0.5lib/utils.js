@@ -58,9 +58,9 @@ Collision.circleCircle = function(sprite1,sprite2,t){
 	return collision;
 };
 
-Collision.circleEdge = function(sprite){
-	//var vector = sprite.anchor.addVNew(sprite.velocity.mulNew(t/1000));
-	var vector = sprite.anchor;
+Collision.circleEdge = function(sprite,t){
+	var vector = sprite.anchor.addVNew(sprite.velocity.mulNew(t/1000));
+	//var vector = sprite.anchor;
 	var r = sprite.shape.r;
 	var x = vector.x;
 	var y = vector.y;
@@ -85,9 +85,9 @@ Collision.circleEdge = function(sprite){
 	// down collide
 	}else if(height-y<r){
 		collision = true;
-		//sprite.velocity.setZero();
-		sprite.setSleep();
-		if(sprite.type == 2){
+		if(sprite.type == 1){
+			sprite.velocity.setZeroY();
+		}else if(sprite.type == 2){
 			sprite.collidable = false;
 			sprite.condition = 6;
 		}

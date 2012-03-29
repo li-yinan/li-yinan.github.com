@@ -6,8 +6,6 @@
 	this.shape = new Shape.Circle(16);
 	this.selected = false;
 	this.collidable = true;
-	this.sleep = false;
-	this.sleepable = true;
 	this.group = 1;
 	//this.mask = 1+2+4+8+16+32+64+128;
 	this.mask = 0;
@@ -22,35 +20,47 @@
 
 Sprite.prototype.draw = function(){
 	this.shape.draw(this);
-	if(this.selected){
-		this.cxt.beginPath();
-		this.cxt.arc(this.anchor.x,this.anchor.y,10,0,Math.PI*2,true);
-		this.cxt.closePath();
-		this.cxt.stroke();
-	}
+	//if(this.selected){
+	//	this.cxt.beginPath();
+	//	this.cxt.arc(this.anchor.x,this.anchor.y,10,0,Math.PI*2,true);
+	//	this.cxt.closePath();
+	//	this.cxt.stroke();
+	//}
 };
 
 Sprite.prototype.frameCtrl = function(t){
 	this.move(t);
-	this.draw();
+	//this.draw();
 };
 
 Sprite.prototype.move = function(t){
-	if(!this.sleep){
-		this.anchor.addV(this.velocity.mulNew(t/1000));
-	}
+	this.anchor.addV(this.velocity.mulNew(t/1000));
+	//this.anchor.add(this.velocity.mulNew(t/1000).x,0);
 };
 
-Sprite.prototype.setSleep = function(t){
-	if(this.sleepable){
-		this.sleep = true;
-	}
-};
 Sprite.prototype.doAttack = function(){
-	var effect = new Sprite();
-	effect.anchor.set(this.anchor.x,this.anchor.y-5);
-	effect.velocity.set(100+Math.random()*50,-100+Math.random()*50);
-	effect.group = 2;
-	effect.mask = 4+8+16+32+64+128;
-	resource.world.addEffect(effect);
+	var _this = this;
+	// if attacking then do nothing
+	// prevent lose ptr
+	if(this.ptr){
+		return;
+	}
+	this.ptr = resource.ticker.addTimeEvent(2000,Number.MAX_VALUE,function(){
+		resource.ticker.addTimeEvent(200,3,function(){
+			var effect = new Sprite();
+			effect.anchor.set(_this.anchor.x,_this.anchor.y-5);
+			effect.velocity.set(100+Math.random()*50,-100+Math.random()*50);
+			effect.velocity.addV(_this.velocity);
+			effect.group = 2;
+			effect.mask = 4+8+16+32+64+128;
+			resource.world.addEffect(effect);
+			//_this.stopAttack();
+		});
+	});
+};
+Sprite.prototype.stopAttack = function(){
+	if(this.ptr){
+		resource.ticker.removeTimeEvent(this.ptr);
+		this.ptr = 0;
+	}
 };
