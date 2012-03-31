@@ -40,7 +40,7 @@ StateMachine.prototype.transfer = function(sprite){
 	var newState = this.stateMatrix[condition][state];
 	if(newState){
 		sprite.state = newState;
-		console.log("transfer from "+state+" to "+newState);
+		console.log("sprite "+sprite.no+" type "+sprite.type+" transfer from "+state+" to "+newState);
 	}
 };
 

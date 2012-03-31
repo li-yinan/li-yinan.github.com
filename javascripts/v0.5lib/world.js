@@ -14,6 +14,7 @@ World = function(){
 
 World.prototype.addEffect = function(sprite){
 	sprite.type = 2;
+	sprite.no = this.effectList.length;
 	this.effectList.push(sprite);
 	return sprite;
 };
