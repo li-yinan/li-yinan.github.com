@@ -35,6 +35,7 @@ Sprite.prototype.doAttack = function(){
 			effect.anchor.set(_this.anchor.x,_this.anchor.y-5);
 			effect.velocity.set(100+Math.random()*50,-100+Math.random()*50);
 			effect.velocity.addV(_this.velocity);
+			effect.state = 2;
 			effect.group = 2;
 			effect.mask = 4+8+16+32+64+128;
 			resource.world.addEffect(effect);
@@ -56,7 +57,6 @@ Sprite.prototype.draw = function(){
 Sprite.prototype.frameCtrl = function(t){
 	switch(this.state){
 		case 1: //stop
-			//this.velocity.setZero();
 			break;
 		case 2: //moving
 			this.move(t);
@@ -81,6 +81,7 @@ Sprite.prototype.move = function(t){
 
 	if(v.equalZero()){
 		this.condition = 2;//stop
+		this.velocity.setZero();
 		return;
 	}
 	this.anchor.addV(v);

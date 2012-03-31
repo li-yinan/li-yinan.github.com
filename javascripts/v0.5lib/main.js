@@ -6,10 +6,10 @@ function main(){
 	//animation.loadImg();
 	resource.stateMachine = new StateMachine();
 	var sprite1 = new Sprite();
-	sprite1.config = [resource.img.sprite3,224,0,32,32,-16,-16,32,32];
 	var sprite2 = new Sprite();
-	sprite2.config = [resource.img.sprite3,224,0,32,32,-16,-16,32,32];
 	var sprite3 = new Sprite();
+	sprite1.config = [resource.img.sprite3,224,0,32,32,-16,-16,32,32];
+	sprite2.config = [resource.img.sprite3,224,0,32,32,-16,-16,32,32];
 	sprite3.config = [resource.img.sprite3,224,0,32,32,-16,-16,32,32];
 	sprite1.condition = 3;
 	sprite2.condition = 3;
@@ -38,6 +38,7 @@ function main(){
 	resource.evtMgr.addRightClickEvent(function(x,y){
 		if(resource.world.selectedSprite){
 			var sprite = resource.world.selectedSprite;
+			sprite.condition = 1;
 			var sx = sprite.anchor.x;
 			var sy = sprite.anchor.y;
 			resource.world.selectedSprite.velocity.add((x-sx)/3,(y-sy)/3);
