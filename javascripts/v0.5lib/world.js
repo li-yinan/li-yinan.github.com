@@ -81,15 +81,11 @@ World.prototype.frameCtrl = function(t){
 	for(var i=0;i<this.spriteList.length;i++){
 		var sprite = this.spriteList[i];
 		sprite.frameCtrl(t);
-		resource.stateMachine.transfer(sprite);
-		resource.animation.play(sprite);
 	}
 	//effect
 	for(var i=0;i<this.effectList.length;i++){
 		var sprite = this.effectList[i];
 		sprite.frameCtrl(t);
-		resource.stateMachine.transfer(sprite);
-		resource.animation.play(sprite);
 	}
 	//collision controll
 	//var arr = this.spriteList.concat(this.effectList);

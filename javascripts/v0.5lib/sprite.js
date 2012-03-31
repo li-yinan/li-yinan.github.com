@@ -18,26 +18,6 @@
 	//this.cxt.transform(10,0,0,10,0,0);
 };
 
-Sprite.prototype.draw = function(){
-	this.shape.draw(this);
-	//if(this.selected){
-	//	this.cxt.beginPath();
-	//	this.cxt.arc(this.anchor.x,this.anchor.y,10,0,Math.PI*2,true);
-	//	this.cxt.closePath();
-	//	this.cxt.stroke();
-	//}
-};
-
-Sprite.prototype.frameCtrl = function(t){
-	this.move(t);
-	//this.draw();
-};
-
-Sprite.prototype.move = function(t){
-	this.anchor.addV(this.velocity.mulNew(t/1000));
-	//this.anchor.add(this.velocity.mulNew(t/1000).x,0);
-};
-
 Sprite.prototype.doAttack = function(){
 	var _this = this;
 	// if attacking then do nothing
@@ -46,6 +26,10 @@ Sprite.prototype.doAttack = function(){
 		return;
 	}
 	this.ptr = resource.ticker.addTimeEvent(2000,Number.MAX_VALUE,function(){
+		if(_this.state!=3){
+			_this.stopAttack();
+			return;
+		}
 		resource.ticker.addTimeEvent(200,3,function(){
 			var effect = new Sprite();
 			effect.anchor.set(_this.anchor.x,_this.anchor.y-5);
@@ -58,6 +42,51 @@ Sprite.prototype.doAttack = function(){
 		});
 	});
 };
+
+Sprite.prototype.draw = function(){
+	this.shape.draw(this);
+	//if(this.selected){
+	//	this.cxt.beginPath();
+	//	this.cxt.arc(this.anchor.x,this.anchor.y,10,0,Math.PI*2,true);
+	//	this.cxt.closePath();
+	//	this.cxt.stroke();
+	//}
+};
+
+Sprite.prototype.frameCtrl = function(t){
+	switch(this.state){
+		case 1: //stop
+			//this.velocity.setZero();
+			break;
+		case 2: //moving
+			this.move(t);
+			break;
+		case 3: //attacking
+			this.doAttack();
+			this.move(t);
+			break;
+		case 4: //negative effect
+			break;
+		case 5: //dead
+			//do nothing here
+			//deleted in world.js,clearSprite function
+	}
+	resource.stateMachine.transfer(this);
+	resource.animation.play(this);
+	//this.draw();
+};
+
+Sprite.prototype.move = function(t){
+	var v = this.velocity.mulNew(t/1000);
+
+	if(v.equalZero()){
+		this.condition = 2;//stop
+		return;
+	}
+	this.anchor.addV(v);
+	//this.anchor.add(this.velocity.mulNew(t/1000).x,0);
+};
+
 Sprite.prototype.stopAttack = function(){
 	if(this.ptr){
 		resource.ticker.removeTimeEvent(this.ptr);

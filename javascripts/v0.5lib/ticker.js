@@ -92,8 +92,15 @@ Ticker = function(freq){
 		}
 		for(var i=0;i<_timeEvtList.length;i++){
 			if(_timeEvtList[i] && _timeEvtList[i][0]<now && _timeEvtList[i][2]){
+				//execute function
 				_timeEvtList[i][3](_timeEvtList[i][1]);
+				//whether this evt is removed in execution
+				if(!_timeEvtList[i]){
+					continue;
+				}
+				//calculate next timestamp
 				_timeEvtList[i][0] = _timeEvtList[i][1]+_timeStamp;
+				//execute time --
 				_timeEvtList[i][2]--;
 				if(_timeEvtList[i][2]==0){
 					_timeEvtList[i] = undefined;

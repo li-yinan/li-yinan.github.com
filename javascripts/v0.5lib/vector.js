@@ -7,7 +7,7 @@
  * @return 
  */
 var Vector2 = function(x, y){
-	this.threshold = 5;
+	this.threshold = 0.3;
 	this.x = x;
 	this.y = y;
 };
@@ -234,6 +234,18 @@ Vector2.prototype.copy = function(){
  */
 Vector2.prototype.equalV = function(v){
 	if(Math.abs(this.x-v.x)<this.threshold && Math.abs(this.y-v.y)<this.threshold){
+		//console.log("true");
+		return true;
+	}else{
+		//console.log("false");
+		return false;
+	}
+};
+
+Vector2.prototype.equalZero = function(){
+	if(this.equalV(new Vector2(0.0,0.0))){
+		//this.setZero();
+		//console.log(this);
 		return true;
 	}else{
 		return false;

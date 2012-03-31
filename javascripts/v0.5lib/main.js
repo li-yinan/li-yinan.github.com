@@ -11,13 +11,12 @@ function main(){
 	sprite2.config = [resource.img.sprite3,224,0,32,32,-16,-16,32,32];
 	var sprite3 = new Sprite();
 	sprite3.config = [resource.img.sprite3,224,0,32,32,-16,-16,32,32];
-	sprite1.doAttack();
-	sprite2.doAttack();
-	sprite3.doAttack();
+	sprite1.condition = 3;
+	sprite2.condition = 3;
+	sprite3.condition = 3;
 	resource.world.addSprite(sprite1);
 	resource.world.addSprite(sprite2);
 	resource.world.addSprite(sprite3);
-	//world.addSprite(new Sprite());
 	resource.ticker.addTickEvent(function(t){
 	//ticker.addTimeEvent(200,10,function(t){
 		resource.world.frameCtrl(t);
