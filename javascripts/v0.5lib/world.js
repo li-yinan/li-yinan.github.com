@@ -28,7 +28,7 @@ World.prototype.addSprite = function(sprite){
 World.prototype.clearSprite = function(){
 	var temp = [];
 	for(var i=0;i<this.spriteList.length;i++){
-		if(this.spriteList[i].state!=5){
+		if(!this.spriteList[i].dead){
 			temp.push(this.spriteList[i]);
 		}
 	}
@@ -36,7 +36,7 @@ World.prototype.clearSprite = function(){
 
 	temp = [];
 	for(var i=0;i<this.effectList.length;i++){
-		if(this.effectList[i].state!=5){
+		if(!this.effectList[i].dead){
 			temp.push(this.effectList[i]);
 		}
 	}

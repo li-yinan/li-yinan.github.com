@@ -53,6 +53,12 @@ Sprite.prototype.draw = function(){
 	//	this.cxt.stroke();
 	//}
 };
+Sprite.prototype.revive = function(){
+	if(this.deathptr){
+		resource.ticker.removeTimeEvent(this.deathptr);
+		this.deathptr = 0;
+	}
+}
 
 Sprite.prototype.frameCtrl = function(t){
 	switch(this.state){
@@ -68,6 +74,17 @@ Sprite.prototype.frameCtrl = function(t){
 		case 4: //negative effect
 			break;
 		case 5: //dead
+			if(this.type==1){
+				var _this = this;
+				this.condition = 6;
+				this.deathptr = resource.ticker.addDelayTimeEvent(3000,1,function(){
+					if(_this){
+						_this.dead = true;
+					}
+				});
+			}else{
+				this.dead = true;
+			}
 			//do nothing here
 			//deleted in world.js,clearSprite function
 	}

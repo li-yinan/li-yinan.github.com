@@ -13,7 +13,7 @@ function main(){
 	sprite3.config = [resource.img.sprite3,224,0,32,32,-16,-16,32,32];
 	sprite1.condition = 3;
 	sprite2.condition = 3;
-	sprite3.condition = 3;
+	sprite3.condition = 6;
 	resource.world.addSprite(sprite1);
 	resource.world.addSprite(sprite2);
 	resource.world.addSprite(sprite3);
