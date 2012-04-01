@@ -62,6 +62,7 @@ World.prototype.frameCtrl = function(t){
 		//add gravity
 		arr[i].velocity.addV(this.velocity.mulNew(t/1000));
 		Collision.circleEdge(arr[i],t);
+		arr[i].detectEnemy(this.spriteList);
 		if(!arr[i].collidable){
 			continue;
 		}

@@ -52,6 +52,10 @@ Collision.circleCircle = function(sprite1,sprite2,t){
 	if((sr+dr)*(sr+dr)>distance){
 		collision = true;
 		Algorithm.calElasticSpeed(sprite1,sprite2);
+		// if this sprite is weapon(arrow), it dead when collide
+		if(sprite1.type==2){
+			sprite1.condition = 6;
+		}
 		//Algorithm.calInelasticSpeed(sprite1,sprite2);
 		console.log("collision");
 	}

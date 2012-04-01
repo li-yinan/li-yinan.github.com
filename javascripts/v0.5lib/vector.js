@@ -7,7 +7,7 @@
  * @return 
  */
 var Vector2 = function(x, y){
-	this.threshold = 0.3;
+	this.threshold = 0.1;
 	this.x = x;
 	this.y = y;
 };

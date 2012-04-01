@@ -14,14 +14,14 @@ Animation.prototype.play = function(sprite){
 	}else{
 		radian = Math.atan(velocity.y/velocity.x)+Math.PI;
 	}
-	config[0] = resource.img["sprite3"];
+	//config[0] = resource.img["sprite3"];
 	this.cxt.save();
 	//rotate test
 	this.cxt.translate(anchor.x,anchor.y);
 	if(sprite.type!=1){
 		this.cxt.rotate(radian+this.radianFix);
 	}
-	this.cxt.drawImage.apply(this.cxt,config);
+	this.cxt.drawImage.apply(this.cxt,config[sprite.state]);
 	//this.cxt.drawImage(
 	//		this.img["sprite3"],
 	//		//_this.imgRegionLeft,

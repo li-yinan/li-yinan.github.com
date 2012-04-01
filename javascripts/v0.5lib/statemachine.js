@@ -24,7 +24,7 @@ StateMachine = function(){
 	this.stateMatrix = [];
 	this.stateMatrix[0] = [0,0,0,0,0,0];
 	this.stateMatrix[1] = [0,2,0,2,0,0];
-	this.stateMatrix[2] = [0,0,1,0,0,0];
+	this.stateMatrix[2] = [0,0,1,1,0,0];
 	this.stateMatrix[3] = [0,3,3,0,0,0];
 	this.stateMatrix[4] = [0,0,0,0,0,1];
 	this.stateMatrix[5] = [0,0,0,0,1,0];
@@ -40,7 +40,9 @@ StateMachine.prototype.transfer = function(sprite){
 	var newState = this.stateMatrix[condition][state];
 	if(newState){
 		sprite.state = newState;
-		console.log("sprite "+sprite.no+" type "+sprite.type+" transfer from "+state+" to "+newState);
+		if(sprite.type==1){
+			console.log("sprite "+sprite.no+" type "+sprite.type+" transfer from "+state+" to "+newState);
+		}
 	}
 };
 
