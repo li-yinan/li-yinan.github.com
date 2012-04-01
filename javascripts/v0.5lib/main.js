@@ -23,9 +23,9 @@ function main(){
 	sprite1.config = resource.config.sprite1.mapping;
 	sprite2.config = resource.config.sprite1.mapping;
 	sprite3.config = resource.config.sprite1.mapping;
-	sprite1.setDestX(30);
-	sprite2.setDestX(60);	
-	sprite3.setDestX(90);
+	sprite1.setDestX(550+30);
+	sprite2.setDestX(550+60);	
+	sprite3.setDestX(550+90);
 	//sprite3.condition = 6;
 	resource.world.addSprite(sprite1);
 	resource.world.addSprite(sprite2);
