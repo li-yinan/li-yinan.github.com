@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="javascripts/v0.7lib/matrix.js"></script>
+<title></title>
+<style>
+#instruction{
+position:absolute;
+left:18em;
+top:10px;
+}
+#left{
+float:left;
+position:relative;
+width:40em;
+}
+#result{
+float:left;
+}
+#inputMap{
+width:20em;
+height:20em;
+}
+.col{
+width:2em;
+}
+.choosen{
+background-color:red;
+}
+</style>
+</head>
+<body>
+<canvas id="canvas" width="400" height="300"></canvas>
+<script>
+function example(){
+    var stringMat = 
+    	"3  1  0  0  0  0  0  0\n"+
+    	"0  3  3  3  0  0  0  0\n"+
+    	"0  3  0  0  0  3  0  0\n"+
+    	"0  0  0  3  3  0  0  0\n"+
+    	"0  3  3  0  0  0  0  0\n"+
+    	"0  3  0  0  3  0  0  0\n"+
+    	"0  3  0  0  3  3  0  0\n"+
+    	"0  0  0  2  0  0  0  0"
+    ;
+    var inputMap = document.getElementById("inputMap");
+    inputMap.value = stringMat;
+}
+function go(){
+    console.log("go");
+    var stringMat1 = document.getElementById("inputMap").value;
+    var astar = new Astar();
+    astar.solve(stringMat1);
+    document.getElementById("result").innerHTML = astar;
+}
+</script>
+<div id="left">
+    <textarea id="inputMap"></textarea>
+    <button id="example" onclick="example();" >example</button>
+    <button id="go" onclick="go();" >go</button>
+    <div id="instruction">
+    Astar算法演示<br/>
+    0代表可行路径<br/>
+    1代表起点<br/>
+    2代表终点<br/>
+    3代表障碍物<br/>
+          红色代表从起点到终点的最短路径<br/>
+    </div>
+</div>
+<div id="result"></div>
+</body>
+</html>
