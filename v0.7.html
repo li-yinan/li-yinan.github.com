@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script type="text/javascript" src="javascripts/v0.7lib/matrix.js"></script>
+<script src="js/matrix.js"></script>
 <title></title>
 <style>
 #instruction{
@@ -31,18 +31,17 @@ background-color:red;
 </style>
 </head>
 <body>
-<canvas id="canvas" width="400" height="300"></canvas>
 <script>
 function example(){
     var stringMat = 
-    	"3  1  0  0  0  0  0  0\n"+
-    	"0  3  3  3  0  0  0  0\n"+
-    	"0  3  0  0  0  3  0  0\n"+
-    	"0  0  0  3  3  0  0  0\n"+
-    	"0  3  3  0  0  0  0  0\n"+
-    	"0  3  0  0  3  0  0  0\n"+
-    	"0  3  0  0  3  3  0  0\n"+
-    	"0  0  0  2  0  0  0  0"
+    	"3  1  0  0  0  0  0  0  0\n"+
+    	"0  3  3  3  0  0  0  0  0\n"+
+    	"0  3  0  0  0  3  3  3  0\n"+
+    	"0  0  0  3  3  0  0  0  0\n"+
+    	"0  3  3  0  0  0  0  0  0\n"+
+    	"0  3  0  0  3  0  0  0  0\n"+
+    	"0  3  0  0  3  3  0  0  0\n"+
+    	"0  0  0  2  0  0  0  0  0"
     ;
     var inputMap = document.getElementById("inputMap");
     inputMap.value = stringMat;

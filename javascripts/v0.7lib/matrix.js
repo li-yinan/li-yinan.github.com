@@ -14,9 +14,9 @@ var Matrix = function(){
     };
     
     Matrix.prototype.stringToInt = function(){
-        for(var i=0;i<_mat.length;i++){
-            for(var j=0;j<_mat[i].length;j++){
-                _mat[i][j] = parseInt(_mat[i][j]);
+        for(var j=0;j<_mat.length;j++){
+            for(var i=0;i<_mat[j].length;i++){
+                _mat[j][i] = parseInt(_mat[j][i]);
             }
         }
     };
@@ -36,11 +36,11 @@ var Matrix = function(){
     };
     
     Matrix.prototype.set = function(value,x,y){
-        _mat[x][y] = value;
+        _mat[y][x] = value;
     };
     
     Matrix.prototype.get = function(x,y){
-        return _mat[x][y];
+        return _mat[y][x];
     };
     
     Matrix.prototype.getWidth = function(){
@@ -52,8 +52,8 @@ var Matrix = function(){
     };
     
     Matrix.prototype.mapReduce = function(func){
-        for(var i=0;i<_mat.length;i++){
-            for(var j=0;j<_mat[i].length;j++){
+        for(var j=0;j<_mat.length;j++){
+            for(var i=0;i<_mat[j].length;i++){
                 func(i,j);
             }
         }
@@ -194,6 +194,7 @@ var Astar = function(){
         var diry = state.y + path[direction][1];
         if(dirx >= _mat.getWidth() || dirx < 0 || diry >= _mat.getHeight() || diry < 0)
             return null;
+        //console.log("dirx:"+dirx+" _mat.getWidth():"+_mat.getWidth()+" diry:"+diry+" _mat.getHeight():"+_mat.getHeight());
         if(_mat.get(dirx, diry)==-1)
             return null;
         var newState = new State();
