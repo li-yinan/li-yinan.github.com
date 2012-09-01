@@ -60,11 +60,24 @@ var Matrix = function(){
     };
 };
 
-var Queue = function(){
+var Queue = function(className){
+    if(className==undefined){
+    	throw new Error("quene constructor needs a argument\n" +
+    			"argument 1:type of insert element");
+    };
+    if(typeof(className)!="function"){
+    	throw new Error("type of argument1 is "+typeof(className)+ "\n" + 
+    			"quene construct needs a className\n");
+    };
     var _q = [];
+    var _class = className;
     
     Queue.prototype.add = function(element){
-        _q.push(element);
+        if(element instanceof _class){
+        	_q.push(element);
+        }else{
+            throw new Error("insert wrong type");
+        }
     };
     
     Queue.prototype.put = function(element){
@@ -109,7 +122,7 @@ var State = function(){
 var Astar = function(){
     var _mat = new Matrix();
     var _stringMap = "";
-    var _q = new Queue();
+    var _q = new Queue(State);
     var _sx=0,_sy=0,_dx=0,_dy=0;
     var _startState;
     var _finishState=null;
