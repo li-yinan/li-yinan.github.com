@@ -34,35 +34,154 @@
                 type: 'graph',
                 layout: 'force',
                 animation: false,
+                symbolSize: 30,
                 label: {
                     normal: {
                         position: 'right',
-                        formatter: '{b}'
+                        show: true,
+                        formatter: '{b}\n{c}'
                     }
                 },
                 draggable: true,
                 data: [
                     {
-                        "name": "node1",
-                        "id": "node1",
-                        "value": 1
+                        "name": "李毅楠的技能树",
+                        "id": "tree",
+                        "value": ""
                     },
                     {
-                        "name": "node2",
-                        "id": "node2",
-                        "value": 1
+                        "name": "开发语言",
+                        "id": "language",
+                        "value": ""
+                    },
+                    {
+                        "name": "css",
+                        "id": "css",
+                        "value": "熟练"
+                    },
+                    {
+                        "name": "javascript",
+                        "id": "javascript",
+                        "value": "精通"
+                    },
+                    {
+                        "name": "html",
+                        "id": "html",
+                        "value": "熟练"
+                    },
+                    {
+                        "name": "项目构建",
+                        "id": "build",
+                        "value": ""
+                    },
+                    {
+                        "name": "edp",
+                        "id": "edp",
+                        "value": "熟练"
+                    },
+                    {
+                        "name": "gulp",
+                        "id": "gulp",
+                        "value": "熟练"
+                    },
+                    {
+                        "name": "安全",
+                        "id": "safety",
+                        "value": ""
+                    },
+                    {
+                        "name": "csrf",
+                        "id": "csrf",
+                        "value": "掌握"
+                    },
+                    {
+                        "name": "xss",
+                        "id": "xss",
+                        "value": "掌握"
+                    },
+                    {
+                        "name": "开发工具",
+                        "id": "tools",
+                        "value": ""
+                    },
+                    {
+                        "name": "vim",
+                        "id": "vim",
+                        "value": "精通"
+                    },
+                    {
+                        "name": "git",
+                        "id": "git",
+                        "value": "熟练"
+                    },
+                    {
+                        "name": "svn",
+                        "id": "svn",
+                        "value": "熟练"
                     }
                 ],
-                // force: {
-                //     edgeLength: 5,
-                //     repulsion: 20
-                // },
                 edges: [
                     {
-                        source: 'node1',
-                        target: 'node2'
+                        source: 'tree',
+                        target: 'language'
+                    },
+                    {
+                        source: 'language',
+                        target: 'css'
+                    },
+                    {
+                        source: 'language',
+                        target: 'html'
+                    },
+                    {
+                        source: 'language',
+                        target: 'javascript'
+                    },
+                    {
+                        source: 'tree',
+                        target: 'build'
+                    },
+                    {
+                        source: 'build',
+                        target: 'edp'
+                    },
+                    {
+                        source: 'build',
+                        target: 'gulp'
+                    },
+                    {
+                        source: 'tree',
+                        target: 'safety'
+                    },
+                    {
+                        source: 'safety',
+                        target: 'csrf'
+                    },
+                    {
+                        source: 'safety',
+                        target: 'xss'
+                    },
+                    {
+                        source: 'tree',
+                        target: 'tools'
+                    },
+                    {
+                        source: 'tools',
+                        target: 'vim'
+                    },
+                    {
+                        source: 'tools',
+                        target: 'svn'
+                    },
+                    {
+                        source: 'tools',
+                        target: 'git'
                     }
-                ]
+                ],
+                force: {
+                    edgeLength: 80,
+                    repulsion: 500,
+                }
             }]
         };
 
