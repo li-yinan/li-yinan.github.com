@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>技能树</title>
+        <!-- 引入 echarts.js -->
+        <script src="javascripts/echarts/echarts.min.js"></script>
+        <style>
+            html,
+            body,
+            #main {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div id="main"></div>
+        <script type="text/javascript">
+        var main = document.getElementById('main');
+        main.style.height = main.clientHeight + 'px';
+        main.style.width = main.clientWidth + 'px';
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(main);
+
+        // 指定图表的配置项和数据
+        var option = {
+            legend: {
+                data: ['HTMLElement', 'WebGL', 'SVG', 'CSS', 'Other']
+            },
+            series: [{
+                type: 'graph',
+                layout: 'force',
+                animation: false,
+                label: {
+                    normal: {
+                        position: 'right',
+                        formatter: '{b}'
+                    }
+                },
+                draggable: true,
+                data: [
+                    {
+                        "name": "node1",
+                        "id": "node1",
+                        "value": 1
+                    },
+                    {
+                        "name": "node2",
+                        "id": "node2",
+                        "value": 1
+                    }
+                ],
+                // force: {
+                //     edgeLength: 5,
+                //     repulsion: 20
+                // },
+                edges: [
+                    {
+                        source: 'node1',
+                        target: 'node2'
+                    }
+                ]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        </script>
+    </body>
+</html>
