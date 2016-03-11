@@ -1,0 +1,66 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <base target="_blank"/>
+    <title>在线咨询</title>
+    <script src="http://s1.bdstatic.com/r/www/cache/static/jquery/jquery-1.10.2.min_f2fb5194.js"></script>
+    <script src="http://s1.bdstatic.com/r/www/cache/ecom/esl/1-8-2/esl.js"></script>
+    <script>
+        require.config({
+            'baseUrl': 'src'
+        });
+    </script>
+</head>
+<body>
+    <script>
+        require(['im-core'], function(core) {
+                var options = {
+                    // 认证token
+                    authToken: "bridge",
+                    // 鉴权类型
+                    authType: 4,
+                    // 固定访客id，全数字
+                    bid: (+new Date()),
+                    // 站点id，申请商桥账号的时候可以知道商家id，
+                    // 填错了会导致建立沟通到不知道哪个网站的客服，一定要填对
+                    siteid: "7957817",
+                    // 业务类型
+                    server: 3,
+                    // 商家id，申请商桥账号时候可以知道商家id
+                    eid: "8171386",
+                    // 是否跨域，决定请求是jsonp还是ajax
+                    crossDomain: true,
+                    // 这个是会话id，保持默认值
+                    sid: "-100",
+                    // 这个参数影响是否拉取当次会话的历史，已经在沟通中，打开第二个页面的时候会用到
+                    syncSessionHistory: true,
+                    // 目标id，跟谁聊填谁，-1代表自动分配，跟客服聊就填客服id，跟群组聊就填群组id
+                    tid: "-1",
+                    // 4是跟机器人沟通
+                    ttype: 4
+                };
+                
+                // 接收到消息会触发message事件
+                core.on('message', function (message) {
+                    console.log(message);
+                });
+
+                // 沟通建立成功会触发connected事件
+                core.on('connected', function () {
+                    var cnt = 0;
+                    setInterval(function () {
+                        // 发送消息
+                        core.send({
+                            id: "msg" + +new Date,
+                            text: 'hello' + cnt++,
+                            type: "text"
+                        });
+                    }, 3000);
+                });
+
+                core.init(options);
+                core.connect(options.ttype, options);
+        });
+    </script>
+</body>
+</html>
