@@ -47,15 +47,12 @@
 
                 // 沟通建立成功会触发connected事件
                 core.on('connected', function () {
-                    var cnt = 0;
-                    setInterval(function () {
-                        // 发送消息
-                        core.send({
-                            id: "msg" + +new Date,
-                            text: 'hello' + cnt++,
-                            type: "text"
-                        });
-                    }, 3000);
+                    // 发送消息
+                    core.send({
+                        id: "msg" + +new Date,
+                        text: 'hello',
+                        type: "text"
+                    });
                 });
 
                 core.init(options);
