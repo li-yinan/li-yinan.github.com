@@ -1,7 +1,7 @@
 import React from 'react';
 
 class WbCanvas extends React.Component {
-    static defaultProps = {
+    static defaultprops = {
         width: 200,
         height: 100
     }

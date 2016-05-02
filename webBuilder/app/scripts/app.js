@@ -1,8 +1,10 @@
 import React from 'react';
-// var React = window.React = require('react'),
 import ReactDOM from "react-dom";
+import { Provider } from 'react-redux';
 import Timer from "./ui/Timer";
-import WbCanvas from "./ui/wbCanvas";
+import WbCanvas from "./ui/WbCanvas";
+import Toolbar from "./ui/Toolbar";
+import store from "./ui/Store";
 
 var mountNode = document.getElementById("app");
 
@@ -30,6 +32,7 @@ var TodoApp = React.createClass({
   render: function() {
     return (
       <div>
+        <Toolbar></Toolbar>
         <h3>TODO</h3>
         <TodoList items={this.state.items} />
         <form onSubmit={this.handleSubmit}>
@@ -44,5 +47,10 @@ var TodoApp = React.createClass({
 });
 
 
-ReactDOM.render(<TodoApp />, mountNode);
+ReactDOM.render(
+    <Provider store={store}>
+        <TodoApp />
+    </Provider>,
+    mountNode
+);
 
