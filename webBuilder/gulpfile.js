@@ -97,16 +97,6 @@ gulp.task('images', function() {
         .pipe($.size());
 });
 
-// Fonts
-gulp.task('fonts', function() {
-    
-    return gulp.src(require('main-bower-files')({
-            filter: '**/*.{eot,svg,ttf,woff,woff2}'
-        }).concat('app/fonts/**/*'))
-        .pipe(gulp.dest('dist/fonts'));
-    
-});
-
 // Clean
 gulp.task('clean', function(cb) {
     $.cache.clearAll();
@@ -114,7 +104,7 @@ gulp.task('clean', function(cb) {
 });
 
 // Bundle
-gulp.task('bundle', ['styles', 'scripts', 'bower'], function() {
+gulp.task('bundle', ['styles', 'scripts'], function() {
     return gulp.src('./app/*.html')
         .pipe($.useref.assets())
         .pipe($.useref.restore())
@@ -122,7 +112,7 @@ gulp.task('bundle', ['styles', 'scripts', 'bower'], function() {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('buildBundle', ['styles', 'buildScripts', 'moveLibraries', 'bower'], function() {
+gulp.task('buildBundle', ['styles', 'buildScripts', 'moveLibraries'], function() {
     return gulp.src('./app/*.html')
         .pipe($.useref.assets())
         .pipe($.useref.restore())
@@ -139,14 +129,6 @@ gulp.task('moveLibraries',['clean'], function(){
 });
 
 
-// Bower helper
-gulp.task('bower', function() {
-    gulp.src('app/bower_components/**/*.js', {
-            base: 'app/bower_components'
-        })
-        .pipe(gulp.dest('dist/bower_components/'));
-
-});
 
 gulp.task('json', function() {
     gulp.src('app/scripts/json/**/*.json', {
@@ -163,7 +145,7 @@ gulp.task('extras', function() {
 });
 
 // Watch
-gulp.task('watch', ['html', 'fonts', 'bundle'], function() {
+gulp.task('watch', ['html', 'bundle'], function() {
 
     browserSync({
         notify: false,
@@ -190,7 +172,7 @@ gulp.task('watch', ['html', 'fonts', 'bundle'], function() {
 });
 
 // Build
-gulp.task('build', ['html', 'buildBundle', 'images', 'fonts', 'extras'], function() {
+gulp.task('build', ['html', 'buildBundle', 'images', 'extras'], function() {
     gulp.src('dist/scripts/app.js')
         .pipe($.uglify())
         .pipe($.stripDebug())

@@ -1,8 +1,10 @@
+import React from 'react';
+// var React = window.React = require('react'),
+import ReactDOM from "react-dom";
+import Timer from "./ui/Timer";
+import WbCanvas from "./ui/wbCanvas";
 
-var React = window.React = require('react'),
-    ReactDOM = require("react-dom"),
-    Timer = require("./ui/Timer"),
-    mountNode = document.getElementById("app");
+var mountNode = document.getElementById("app");
 
 var TodoList = React.createClass({
   render: function() {
@@ -35,6 +37,7 @@ var TodoApp = React.createClass({
           <button>{'Add #' + (this.state.items.length + 1)}</button>
         </form>
         <Timer />
+        <WbCanvas/>
       </div>
     );
   }
