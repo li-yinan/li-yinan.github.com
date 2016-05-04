@@ -1,7 +1,9 @@
-export default function reducer(state, action)  {
+export default function (state, action)  {
     switch (action.type) {
-        case 'a':
-            return state + 1;
+        case 'ADD':
+            return {
+                value: state.value + 1
+            };
         case 'b':
             return state + 1;
         default:
