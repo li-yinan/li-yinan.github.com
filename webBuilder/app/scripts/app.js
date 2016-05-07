@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from "react-dom";
 import { Provider, connect } from 'react-redux';
 import Timer from "./ui/Timer";
-import WbCanvas from "./ui/WbCanvas";
-import Toolbar from "./ui/Toolbar";
-import store from "./ui/Store";
-import propsMap from "./ui/propsMap";
-import {addTodo} from "./ui/action";
+import WbCanvas from "./ui/wbCanvas/WbCanvas";
+import Toolbar from "./ui/toolbar/Toolbar";
+import store from "./ui/redux/Store";
+import propsMap from "./ui/redux/propsMap";
+import {addTodo} from "./ui/redux/action";
 
 var mountNode = document.getElementById("app");
 

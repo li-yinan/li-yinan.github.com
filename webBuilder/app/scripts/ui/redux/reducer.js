@@ -4,8 +4,10 @@ export default function (state, action)  {
             return {
                 value: state.value + 1
             };
-        case 'b':
-            return state + 1;
+        case 'MATRIX_CHANGED':
+            return {
+                matrix: action.value
+            };
         default:
             return state;
     }
