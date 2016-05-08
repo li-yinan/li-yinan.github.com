@@ -1,5 +1,5 @@
 import React from 'react';
-import { matrixChanged } from "../redux/action";
+import { backup, matrixChanged } from "../redux/action";
 import { connect } from 'react-redux';
 
 var PicSelector = React.createClass({
@@ -15,7 +15,9 @@ var PicSelector = React.createClass({
                 canvas.height = img.height;
                 context.drawImage(img, 0, 0);
                 var matrix = context.getImageData(0, 0, img.width, img.height);
+                var backupMatrix = context.getImageData(0, 0, img.width, img.height);
                 _this.props.dispatch(matrixChanged(matrix));
+                _this.props.dispatch(backup(backupMatrix));
             };
             img.src = URL.createObjectURL(file);
         }

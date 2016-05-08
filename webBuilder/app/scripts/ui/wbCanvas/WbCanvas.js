@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { matrixChanged } from "../redux/action";
-import sobel from '../../algorithm/sobel';
 
 class WbCanvas extends React.Component {
     static defaultProps = {
@@ -13,8 +12,8 @@ class WbCanvas extends React.Component {
     }
 
     renderCanvas() {
-        this.sobel();
         let matrix = this.props.matrix;
+        console.log(matrix);
         if (matrix instanceof ImageData) {
             let canvas = this.refs.canvas;
             let context = canvas.getContext('2d');
@@ -30,12 +29,6 @@ class WbCanvas extends React.Component {
     // 数据更新
     componentDidUpdate() {
         this.renderCanvas();
-    }
-
-    sobel() {
-        var props = this.props;
-        var matrix = props.matrix;
-        sobel(matrix);
     }
 
     render() {

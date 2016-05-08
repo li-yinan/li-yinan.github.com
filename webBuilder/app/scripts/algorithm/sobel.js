@@ -80,6 +80,7 @@ function sobel(imgData) {
         }
     }
     console.log('梯度计算完成');
+    return new ImageData(data, width);
 }
 
 export default sobel;
