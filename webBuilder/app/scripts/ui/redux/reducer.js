@@ -3,31 +3,31 @@ import sobel from '../../algorithm/sobel';
 export default function (state, action)  {
     switch (action.type) {
         case 'ADD':
-            return {
+            return Object.assign({}, state, {
                 value: state.value + 1
-            };
+            });
 
         case 'MATRIX_CHANGED':
-            return {
+            return Object.assign({}, state, {
                 matrix: action.value
-            };
+            });
 
         case 'BACKUP':
-            return {
+            return Object.assign({}, state, {
                 backup: action.value
-            };
+            });
 
         case 'SOBEL':
             var matrix = sobel(state.matrix);
-            return {
+            return Object.assign({}, state, {
                 matrix: matrix
-            };
+            });
 
         case 'RECOVER':
             let matrix = state.backup;
-            return {
-                matrix: new ImageData(matrix.data, matrix.width)
-            };
+            return Object.assign({}, state, {
+                matrix: new ImageData(matrix.data.slice(), matrix.width)
+            });
 
         default:
             return state;

@@ -37,7 +37,6 @@ var TodoApp = React.createClass({
     const {value} = this.props;
     return (
       <div>
-        <Toolbar></Toolbar>
         <h3>TODO</h3>
         <h3>{value}</h3>
         <TodoList items={this.state.items} />
@@ -46,7 +45,6 @@ var TodoApp = React.createClass({
           <button>{'Add #' + (this.state.items.length + 1)}</button>
         </form>
         <Timer />
-        <WbCanvas/>
       </div>
     );
   }
@@ -58,7 +56,10 @@ var TodoApp = connect(propsMap)(TodoApp);
 
 ReactDOM.render(
     <Provider store={store}>
-        <TodoApp/>
+        <div>
+            <Toolbar></Toolbar>
+            <WbCanvas/>
+        </div>
     </Provider>,
     mountNode
 );
