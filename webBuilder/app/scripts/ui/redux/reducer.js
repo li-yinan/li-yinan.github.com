@@ -1,4 +1,5 @@
 import sobel from '../../algorithm/sobel';
+import lineFitting from '../../algorithm/lineFitting';
 
 export default function (state, action)  {
     switch (action.type) {
@@ -17,7 +18,7 @@ export default function (state, action)  {
                 backup: action.value
             });
 
-        case 'SOBEL':
+        case 'EDGE_DETECTION':
             var matrix = sobel(state.matrix);
             return Object.assign({}, state, {
                 matrix: matrix
@@ -27,6 +28,19 @@ export default function (state, action)  {
             let matrix = state.backup;
             return Object.assign({}, state, {
                 matrix: new ImageData(matrix.data.slice(), matrix.width)
+            });
+
+        case 'AREA_SELECTED':
+            var posInfo = action.value;
+            lineFitting(
+                state.matrix,
+                posInfo.x,
+                posInfo.y,
+                posInfo.x + posInfo.width,
+                posInfo.y + posInfo.height,
+            );
+            return Object.assign({}, state, {
+                selectedArea: action.value
             });
 
         default:

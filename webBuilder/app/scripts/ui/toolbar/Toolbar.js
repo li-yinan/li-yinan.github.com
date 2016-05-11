@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PicSelector from "./PicSelector";
-import { sobelAction, recover } from "../redux/action";
+import { edgeDetection, recover } from "../redux/action";
 
-var SobelButton = React.createClass({
+var EdgeDetectionButton = React.createClass({
     sobel: function () {
-        this.props.dispatch(sobelAction());
+        this.props.dispatch(edgeDetection());
     },
     render: function () {
         return <button onClick={this.sobel}>边缘检测</button>;
     }
 });
 
-SobelButton = connect(function (state) {
+EdgeDetectionButton = connect(function (state) {
     return {};
-})(SobelButton);
+})(EdgeDetectionButton);
 
 var RecoverButton = React.createClass({
     recover: function () {
@@ -33,7 +33,7 @@ class Toolbar extends React.Component {
     render() {
         return <div>
             <PicSelector></PicSelector>
-            <SobelButton></SobelButton>
+            <EdgeDetectionButton></EdgeDetectionButton>
             <RecoverButton></RecoverButton>
         </div>;
     }

@@ -31,11 +31,20 @@ class WbCanvas extends React.Component {
         this.renderCanvas();
     }
 
+    styles() {
+        return {
+            container: {
+                position: 'absolute'
+            }
+        }
+    }
+
     render() {
         return <canvas
             ref="canvas"
             width={this.props.matrix.width}
             height={this.props.matrix.height}
+            style={this.styles().container}
             >
             </canvas>;
     }

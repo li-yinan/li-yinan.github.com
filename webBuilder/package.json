@@ -20,6 +20,7 @@
         "gulp-util": "~3.0.1",
         "gulp-webserver": "latest",
         "react": "latest",
+        "reactcss": "latest",
         "react-dom": "latest",
         "react-tools": "latest",
         "reactify": "latest",

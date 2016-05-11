@@ -18,14 +18,21 @@ export const backup = (matrix) => {
     };
 }
 
-export const sobelAction = () => {
+export const edgeDetection = () => {
     return {
-        type: 'SOBEL'
+        type: 'EDGE_DETECTION'
     };
 }
 
 export const recover = () => {
     return {
         type: 'RECOVER'
+    };
+}
+
+export const areaSelected = (posInfo) => {
+    return {
+        type: 'AREA_SELECTED',
+        value: posInfo
     };
 }
