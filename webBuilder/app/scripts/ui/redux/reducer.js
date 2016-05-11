@@ -32,7 +32,7 @@ export default function (state, action)  {
 
         case 'AREA_SELECTED':
             var posInfo = action.value;
-            lineFitting(
+            var matrix = lineFitting(
                 state.matrix,
                 posInfo.x,
                 posInfo.y,
@@ -40,7 +40,7 @@ export default function (state, action)  {
                 posInfo.y + posInfo.height,
             );
             return Object.assign({}, state, {
-                selectedArea: action.value
+                matrix: new ImageData(matrix.data.slice(), matrix.width)
             });
 
         default:
