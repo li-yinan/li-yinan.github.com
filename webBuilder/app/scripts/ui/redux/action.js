@@ -36,3 +36,10 @@ export const areaSelected = (posInfo) => {
         value: posInfo
     };
 }
+
+export const toleranceChange = (tolerance) => {
+    return {
+        type: 'TOLERANCE_CHANGE',
+        value: tolerance
+    };
+}

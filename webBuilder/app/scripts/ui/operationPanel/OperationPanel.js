@@ -46,6 +46,7 @@ let OperationPanel = React.createClass({
         this.dom.style.top = e.pageY + 'px';
         this.dom.style.width = '0px';
         this.dom.style.height = '0px';
+        this.dom.style.display = '';
         document.body.addEventListener('mousemove', this.mouseMove, false);
         function mouseupCallback(e) {
 
@@ -61,6 +62,7 @@ let OperationPanel = React.createClass({
                 width: _this.endPoint.x - _this.startPoint.x,
                 height: _this.endPoint.y - _this.startPoint.y,
             }));
+            _this.dom.style.display = 'none';
             document.body.removeEventListener('mousemove', _this.mouseMove, false);
             document.body.removeEventListener('mouseup', mouseupCallback, false);
         };

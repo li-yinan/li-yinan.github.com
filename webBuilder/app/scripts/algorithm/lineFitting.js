@@ -114,6 +114,11 @@ function lineFitting(imgData, x1, y1, x2, y2, tolerance = 3) {
                 setPixelAt(x, ymean, 2, 255);
                 setPixelAt(x, ymean, 3, 255);
             }
+
+            return {
+                x: -1,
+                y: ymean - tolerance + top
+            }
         }
         else {
             // 竖线
@@ -123,6 +128,11 @@ function lineFitting(imgData, x1, y1, x2, y2, tolerance = 3) {
                 setPixelAt(xmean, y, 1, 0);
                 setPixelAt(xmean, y, 2, 255);
                 setPixelAt(xmean, y, 3, 255);
+            }
+
+            return {
+                x: xmean - tolerance + left,
+                y: -1
             }
         }
 
@@ -136,7 +146,10 @@ function lineFitting(imgData, x1, y1, x2, y2, tolerance = 3) {
 
     }
 
-    return imgData;
+    return {
+        x: -1,
+        y: -1
+    };
 };
 
 export default lineFitting;

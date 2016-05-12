@@ -13,7 +13,6 @@ class WbCanvas extends React.Component {
 
     renderCanvas() {
         let matrix = this.props.matrix;
-        console.log(matrix);
         if (matrix instanceof ImageData) {
             let canvas = this.refs.canvas;
             let context = canvas.getContext('2d');

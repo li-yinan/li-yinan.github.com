@@ -1,5 +1,5 @@
 import sobel from '../../algorithm/sobel';
-import lineFitting from '../../algorithm/lineFitting';
+import recFitting from '../../algorithm/recFitting';
 
 export default function (state, action)  {
     switch (action.type) {
@@ -32,15 +32,22 @@ export default function (state, action)  {
 
         case 'AREA_SELECTED':
             var posInfo = action.value;
-            var matrix = lineFitting(
-                state.matrix,
+            var matrix = state.matrix;
+            var result = recFitting(
+                matrix,
                 posInfo.x,
                 posInfo.y,
                 posInfo.x + posInfo.width,
                 posInfo.y + posInfo.height,
+                state.tolerance || 10,
             );
             return Object.assign({}, state, {
                 matrix: new ImageData(matrix.data.slice(), matrix.width)
+            });
+
+        case 'TOLERANCE_CHANGE':
+            return Object.assign({}, state, {
+                tolerance: action.value
             });
 
         default:
