@@ -37,11 +37,10 @@ let OperationPanel = React.createClass({
         this.operating = true;
         var container = this.refs.container;
         var coord = container.getBoundingClientRect();
-        var pageX = e.pageX;
-        var pageY = e.pageY;
+        var body = document.body;
         this.startPoint = {
-            x: pageX - coord.left,
-            y: pageY - coord.top
+            x: e.pageX - (coord.left + body.scrollLeft),
+            y: e.pageY - (coord.top + body.scrollTop)
         };
         this.dom.style.left = e.pageX + 'px';
         this.dom.style.top = e.pageY + 'px';
@@ -52,8 +51,8 @@ let OperationPanel = React.createClass({
 
             _this.operating = false;
             _this.endPoint = {
-                x: e.pageX - coord.left,
-                y: e.pageY - coord.top
+                x: e.pageX - (coord.left + body.scrollLeft),
+                y: e.pageY - (coord.top + body.scrollTop)
             };
 
             _this.props.dispatch(areaSelected({
@@ -72,11 +71,12 @@ let OperationPanel = React.createClass({
             return;
         }
 
+        var body = document.body;
         var container = this.refs.container;
         var coord = container.getBoundingClientRect();
         var curPoint = {
-            x: e.pageX - coord.left,
-            y: e.pageY - coord.top
+            x: e.pageX - (coord.left + body.scrollLeft),
+            y: e.pageY - (coord.top + body.scrollTop)
         };
 
         this.dom.style.width = Math.abs(curPoint.x - this.startPoint.x) + 'px';
