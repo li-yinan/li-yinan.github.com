@@ -72,6 +72,9 @@ function sobel(imgData) {
             let magnitude = Math.sqrt(pixelX * pixelX + pixelY * pixelY) >>> 0;
 
             // 回写数据
+            if (x === 0 || y === 0 || x === (width - 1) || y === (height - 1)) {
+                magnitude = 255;
+            }
             var start = (y * width + x) * 4;
             data[start] = magnitude;
             data[start + 1] = magnitude;
@@ -79,6 +82,7 @@ function sobel(imgData) {
             data[start + 3] = 255;
         }
     }
+
     console.log('梯度计算完成');
     return new ImageData(data, width);
 }
