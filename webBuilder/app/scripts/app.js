@@ -4,6 +4,7 @@ import { Provider, connect } from 'react-redux';
 import Timer from "./ui/Timer";
 import WbCanvas from "./ui/wbCanvas/WbCanvas";
 import OperationPanel from "./ui/operationPanel/OperationPanel";
+import Preview from "./ui/preview/Preview";
 import Toolbar from "./ui/toolbar/Toolbar";
 import store from "./ui/redux/Store";
 import propsMap from "./ui/redux/propsMap";
@@ -22,6 +23,7 @@ let App = React.createClass({
             <Toolbar></Toolbar>
             <div style={this.styles().container}>
                 <WbCanvas/>
+                <Preview/>
                 <OperationPanel/>
             </div>
         </div>;

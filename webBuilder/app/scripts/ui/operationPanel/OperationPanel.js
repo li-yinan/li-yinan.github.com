@@ -12,7 +12,7 @@ let OperationPanel = React.createClass({
         return {
             container: {
                 position: 'absolute',
-                zIndex: 1,
+                zIndex: 10,
                 height: this.props.matrix.height || 0,
                 width: this.props.matrix.width || 0
             }

@@ -108,30 +108,30 @@ function lineFitting(imgData, x1, y1, x2, y2, tolerance = 3) {
         if (dx > dy) {
             // 横线
             // 测试，看看选中的位置对不对
-            for (var x = 0; x < subMatrixWidth; x++) {
-                setPixelAt(x, ymean, 0, 0);
-                setPixelAt(x, ymean, 1, 0);
-                setPixelAt(x, ymean, 2, 255);
-                setPixelAt(x, ymean, 3, 255);
-            }
+            // for (var x = 0; x < subMatrixWidth; x++) {
+            //     setPixelAt(x, ymean, 0, 0);
+            //     setPixelAt(x, ymean, 1, 0);
+            //     setPixelAt(x, ymean, 2, 255);
+            //     setPixelAt(x, ymean, 3, 255);
+            // }
 
             return {
                 x: -1,
-                y: ymean - tolerance + top
+                y: ymean + top
             }
         }
         else {
             // 竖线
 
-            for (var y = 0; y < subMatrixHeight; y++) {
-                setPixelAt(xmean, y, 0, 0);
-                setPixelAt(xmean, y, 1, 0);
-                setPixelAt(xmean, y, 2, 255);
-                setPixelAt(xmean, y, 3, 255);
-            }
+            // for (var y = 0; y < subMatrixHeight; y++) {
+            //     setPixelAt(xmean, y, 0, 0);
+            //     setPixelAt(xmean, y, 1, 0);
+            //     setPixelAt(xmean, y, 2, 255);
+            //     setPixelAt(xmean, y, 3, 255);
+            // }
 
             return {
-                x: xmean - tolerance + left,
+                x: xmean + left,
                 y: -1
             }
         }

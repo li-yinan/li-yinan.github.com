@@ -1,5 +1,6 @@
 import sobel from '../../algorithm/sobel';
 import recFitting from '../../algorithm/recFitting';
+import {get, reset, insert} from '../../algorithm/domTreeBuilder';
 
 export default function (state, action)  {
     switch (action.type) {
@@ -26,8 +27,10 @@ export default function (state, action)  {
 
         case 'RECOVER':
             let matrix = state.backup;
+            reset();
             return Object.assign({}, state, {
-                matrix: new ImageData(matrix.data.slice(), matrix.width)
+                matrix: new ImageData(matrix.data.slice(), matrix.width),
+                virtualNode: get()
             });
 
         case 'AREA_SELECTED':
@@ -41,8 +44,10 @@ export default function (state, action)  {
                 posInfo.y + posInfo.height,
                 state.tolerance || 10,
             );
+            insert(result);
             return Object.assign({}, state, {
-                matrix: new ImageData(matrix.data.slice(), matrix.width)
+                matrix: new ImageData(matrix.data.slice(), matrix.width),
+                virtualNode: get()
             });
 
         case 'TOLERANCE_CHANGE':
