@@ -13,6 +13,7 @@ let Preview = React.createClass({
             container: {
                 position: 'absolute',
                 zIndex: 1,
+                opacity: 0.3,
                 height: this.props.matrix.height || 0,
                 width: this.props.matrix.width || 0
             }
@@ -20,28 +21,37 @@ let Preview = React.createClass({
     },
     componentWillMount: function () {
     },
-    render: function () {
-        var root = this.props.virtualNode || {};
-        var children = root.children || [];
-        var nodes = [];
-        for (var i = 0; i < children.length; i++) {
-            let {top, left, width, height} = children[i];
-            let style = {
-                top: top + 'px',
-                left: left + 'px',
-                width: width + 'px',
-                height: height + 'px',
-                position: 'absolute',
-                backgroundColor: 'blue',
-                opacity: 0.3
-            };
-            nodes.push(<div style={style} key={'key' + i}></div>);
+    renderOne: function (node) {
+        if (!node) {
+            return ;
         }
+        let {top, left, width, height, level} = node;
+        let parentNode = node.parentNode || {};
+        let pTop = parentNode.top || 0;
+        let pLeft = parentNode.left || 0;
+        let style = {
+            top: top - pTop + 'px',
+            left: left - pLeft + 'px',
+            width: width + 'px',
+            height: height + 'px',
+            position: 'absolute',
+            backgroundColor: `#${level*3}${level*3}${level*3}`,
+            zIndex: level
+        };
+        var nodes = [];
+        var children = node.children;
+        for (var i = 0; i < children.length; i++) {
+            nodes.push(this.renderOne(children[i]));
+        }
+        return <div style={style} key={'key' + Math.random() * 10000}>{nodes}</div>;
+    },
+    render: function () {
+        var root = this.props.virtualNode;
         return <div 
             ref="container"
             style={this.styles().container} 
         >
-            {nodes}
+            {this.renderOne(root)}
         </div>;
     }
 });
