@@ -1,17 +1,13 @@
-function build() {
-}
-
-let root = null;
-
 class Node {
     parentNode = null;
     children = [];
 
-    constructor(x1 = 0, y1 = 0, x2 = 10000, y2 = 100000) {
+    constructor(x1 = 0, y1 = 0, x2 = 10000, y2 = 100000, root) {
         this.top = y1;
         this.left = x1;
         this.width = x2 - x1;
         this.height = y2 - y1;
+        this.root = root;
         this.parentNode = this.getParent();
         if (this.parentNode) {
             this.parentNode.append(this);
@@ -23,7 +19,7 @@ class Node {
     }
 
     append(node) {
-        this.children.push(node);
+        this.children = [...this.children, node];
     }
 
     /**
@@ -71,31 +67,22 @@ class Node {
     }
 
     getParent() {
-        if (!root) {
+        if (!this.root) {
             return null;
         }
-        var parentNode = this.inside(root); 
+        var parentNode = this.inside(this.root); 
 
-        console.log(root);
 
         return parentNode;
     }
 }
 
-export function insert(options) {
+export function insert(root, options) {
     var {x1, y1, x2, y2} = options;
     if (!root) {
         root = new Node();
     }
-    let node = new Node(x1, y1, x2, y2);
-}
+    let node = new Node(x1, y1, x2, y2, root);
 
-export function reset() {
-    root = null;
-}
-
-export function get() {
     return root;
 }
-
-export default build;

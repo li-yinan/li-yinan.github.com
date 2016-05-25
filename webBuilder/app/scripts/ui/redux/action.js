@@ -43,3 +43,10 @@ export const toleranceChange = (tolerance) => {
         value: tolerance
     };
 }
+
+export const rollback = (state) => {
+    return {
+        type: 'ROLLBACK',
+        value: state
+    };
+}

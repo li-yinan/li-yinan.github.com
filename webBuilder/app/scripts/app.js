@@ -4,6 +4,7 @@ import { Provider, connect } from 'react-redux';
 import Timer from "./ui/Timer";
 import WbCanvas from "./ui/wbCanvas/WbCanvas";
 import OperationPanel from "./ui/operationPanel/OperationPanel";
+import Undo from "./ui/undo/Undo";
 import Preview from "./ui/preview/Preview";
 import Toolbar from "./ui/toolbar/Toolbar";
 import store from "./ui/redux/Store";
@@ -21,6 +22,7 @@ let App = React.createClass({
     render: function () {
         return <div>
             <Toolbar></Toolbar>
+            <Undo></Undo>
             <div style={this.styles().container}>
                 <WbCanvas/>
                 <Preview/>

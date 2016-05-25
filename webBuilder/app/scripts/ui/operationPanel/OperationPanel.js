@@ -60,7 +60,7 @@ let OperationPanel = React.createClass({
                 x: _this.startPoint.x,
                 y: _this.startPoint.y,
                 width: _this.endPoint.x - _this.startPoint.x,
-                height: _this.endPoint.y - _this.startPoint.y,
+                height: _this.endPoint.y - _this.startPoint.y
             }));
             _this.dom.style.display = 'none';
             document.body.removeEventListener('mousemove', _this.mouseMove, false);
