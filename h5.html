@@ -10,8 +10,8 @@
             <script>
                 navigator.geolocation.getCurrentPosition(function (geo) {
                     let geoPre = document.getElementById('geo');
-                    geoPre.innerHTML = 'accuracy: ' + geo.coords.accuracy
-                        + 'latitude: ' + geo.coords.latitude
+                    geoPre.innerHTML = 'accuracy: ' + geo.coords.accuracy + '\n'
+                        + 'latitude: ' + geo.coords.latitude + '\n'
                         + 'longitude: ' + geo.coords.longitude;
                 });
             </script>
