@@ -1,0 +1,17 @@
+<html>
+		<head>
+            <title>h5能力测验</title>
+            <meta charset="utf-8"/>
+		</head>
+		<body>
+            <p>h5 能力测验</p>
+            <div>地理位置</div>
+            <pre id="geo"></pre>
+            <script>
+                navigator.geolocation.getCurrentPosition(function (geo) {
+                    let geoPre = document.getElementById('geo');
+                    geoPre.innerHTML = JSON.stringify(geo, null, 4);
+                });
+            </script>
+		</body>
+</html>
