@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <script src="./captcha.js"></script>
+        <style>
+            #validStr {
+                word-break: break-all;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="captcha">
+        </div>
+        <div id="validStr">
+        </div>
+        <script>
+            var validStr = '';
+            function copy(text) {
+                let el = document.createElement('div');
+                el.style.position = 'fixed';
+                el.style.left = '-10000px';
+                el.style.top = '-10000px';
+                document.body.appendChild(el);
+                el.innerHTML = text;
+                let selection = window.getSelection();
+                let range = document.createRange();
+                range.selectNodeContents(el);
+                selection.removeAllRanges();
+                selection.addRange(range);
+                return document.execCommand('copy');
+                document.body.removeChild(el);
+            }
+            initNECaptcha({
+                captchaId: 'e5179e080c06499d8f1f9373930b42cc',
+                element: '#captcha',
+                mode: 'embed',
+                width: '320px',
+                onVerify: function (err, data) {
+                    if(err){
+                    }else if(data && data.validate){
+                        console.log(data.validate);
+                        validStr = data.validate;
+                        let el = document.getElementById('validStr');
+                        el.innerHTML = data.validate;
+                        let res = copy(data.validate);
+                        if (res) {
+                            console.log('success');
+                        }
+                        else {
+                            console.log('fail');
+                        }
+                    }
+                }
+            }, function  onload (instance) {
+                // console.log(instance);
+            }, function  onerror (err) {
+                // console.log(err);
+            });
+        </script>
+    </body>
+</html>
