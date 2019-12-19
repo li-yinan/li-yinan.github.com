@@ -1,0 +1,48 @@
+<!--
+<html manifest="demo.manifest">
+		-->
+<html xmlns:wb="https://open.weibo.com/wb">
+		<head>
+			<meta charset="utf-8"/>
+				<title>canvas</title>
+				<script type="text/javascript" src="javascripts/v0.3lib/toolkit.js"></script>
+				<script type="text/javascript" src="javascripts/v0.3lib/resource.js"></script>
+				<script type="text/javascript" src="javascripts/v0.3lib/snake.js"></script>
+				<script type="text/javascript" src="javascripts/v0.3lib/scorer.js"></script>
+				<script type="text/javascript" src="javascripts/v0.3lib/fruit.js"></script>
+				<script type="text/javascript" src="javascripts/v0.3lib/screen.js"></script>
+                <script src="https://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+				<link rel="stylesheet" type="text/css" href="stylesheets/snakestyle.css"/>
+				<!--
+				<link rel="apple-touch-icon-precomposed" href="favicon.ico" />
+				-->
+
+		</head>
+		<body>
+				<!--
+				<div id="instruction">input space to play~~~</div>
+				-->
+				<canvas id="canvas" width="800px" height="600px"></canvas>
+				<div id="scoretab">
+                    <wb:share-button addition="simple" type="icon"></wb:share-button>
+					<ul id="scorer">
+					</ul>
+					<h3>说明：</h3>
+					<h4>利用上下左右4个方向键控制蛇移动<br/>吃到果实加10分<br/>身体每增长一节吃到果实多1分<br/>死亡不扣分<br/>你控制snake0</h4>
+					<h4>
+						<span>其他演示</span><br/><br/>
+						<a href="v0.7.html" target="_blank">ASTAR demo</a><br/><br/>
+						<a href="v0.1.html" target="_blank">贪吃蛇v0.1</a><br/><br/>
+						<a href="v0.2.html" target="_blank">贪吃蛇v0.2</a><br/><br/>
+						<a href="v0.3.html" target="_blank">贪吃蛇v0.3</a><br/><br/>
+						<a href="v0.4.html" target="_blank">ARPG demo</a><br/><br/>
+						<a href="v0.5.html" target="_blank">ACT demo</a><br/><br/>
+						<a href="skill.html" target="_blank">技能树</a><br/><br/>
+					</h4>
+				</div>
+                <script type="text/javascript">
+                var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F3be44c135c263dc596f269f11759d9af' type='text/javascript'%3E%3C/script%3E"));
+                </script>
+		</body>
+</html>
