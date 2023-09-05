@@ -8,11 +8,30 @@
         </style>
     </head>
     <body>
+        <div>url id参数可以更换captchaId, 当前id为d7a0e925d21e41df9680622ac96778b0</div>
+        <div>
+          <form action="">
+            <input id="captchaId" name="id">
+            <input type="submit" value="更换id">
+          </form>
+        </div>
         <div id="captcha">
         </div>
         <div id="validStr">
         </div>
         <script>
+            var el = document.getElementById('captchaId');
+            var queryStr = location.search.slice(1);
+            var queries = queryStr.split('&').reduce((obj, query) => {
+              var [key, value] = query.split('=');
+              if (key) {
+                obj[key] = decodeURIComponent(value);
+              }
+              return obj;
+            }, {});
+            console.log(queries);
+            var captchaId = queries.id;
+            el.value = captchaId;
             var validStr = '';
             function copy(text) {
                 let el = document.createElement('div');
@@ -30,7 +49,7 @@
                 document.body.removeChild(el);
             }
             initNECaptcha({
-                captchaId: 'e5179e080c06499d8f1f9373930b42cc',
+                captchaId: captchaId || 'd7a0e925d21e41df9680622ac96778b0',
                 element: '#captcha',
                 mode: 'embed',
                 width: '320px',
